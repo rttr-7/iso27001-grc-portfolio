@@ -8,7 +8,7 @@ I build and audit information security management systems. This repository shows
 
 Explore the risk heat map before and after treatment, all 93 Annex A controls, audit findings and management review results.
 
-New to ISO 27001? Read **[How to explain this project](HOW-TO-EXPLAIN.md)** for a plain-English walkthrough.
+New to ISO 27001? Read the **[Project Guide](PROJECT-GUIDE.md)** for a plain-English walkthrough and FAQ.
 
 ---
 
@@ -54,7 +54,7 @@ A simulated 210-person B2B payments SaaS company goes from no ISMS to certificat
 │   └── build.py                       Combines the template with the documents and data
 ├── docs/                              Built website, published by GitHub Pages
 │   └── index.html
-└── HOW-TO-EXPLAIN.md                  Plain-English guide to presenting the project
+└── PROJECT-GUIDE.md                   Plain-English walkthrough and FAQ
 ```
 
 To rebuild the website after editing a document, the CSV data or the template:
