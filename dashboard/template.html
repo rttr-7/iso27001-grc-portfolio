@@ -1,0 +1,1360 @@
+<title>Halcyon Ledger ISMS</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="ISO/IEC 27001:2022 implementation case study by Amay Chivate: scope, risk assessment, Statement of Applicability, internal audit and management review for a simulated payments company.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a formal ISMS report on screen. Serif headings, sans body, thin rules, one navy accent; summary first, evidence below, documents one click away. */
+:root {
+  --paper: #ffffff;
+  --panel: #ffffff;
+  --sunk: #f6f7f9;
+  --ink: #000000;
+  --text: #1c1f24;
+  --muted: #5d6470;
+  --line: #dfe2e7;
+  --line-strong: #c4c9d1;
+  --accent: #1f3a5f;
+  --accent-hover: #162b47;
+  --accent-soft: #eef2f7;
+  --crit: #8f1d14; --crit-bg: #f7dcd8;
+  --high: #8a3f00; --high-bg: #fbe5cf;
+  --med: #6b5100; --med-bg: #fbf0c9;
+  --low: #1d5b33; --low-bg: #dcefe1;
+  --na: #555c68; --na-bg: #eceef1;
+  --font-head: "Times New Roman", Times, "Liberation Serif", serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --radius: 4px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--text); font: 15px/1.6 var(--font-body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, h4 { font-family: var(--font-head); color: var(--ink); margin: 0; text-wrap: balance; font-weight: 700; letter-spacing: 0; }
+h2 { font-size: clamp(1.55rem, 3vw, 2.05rem); line-height: 1.2; }
+h3 { font-size: 1.22rem; line-height: 1.3; }
+p { margin: 0; }
+a { color: var(--accent); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--font-mono); font-size: 0.86em; }
+.eyebrow { font: 600 0.74rem/1.2 var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.lede { color: var(--muted); max-width: 70ch; font-size: 1rem; }
+.count { font-size: 0.85rem; color: var(--muted); }
+body:not(.presenting) .presenter-only { display: none !important; }
+
+/* Header */
+header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--paper); border-bottom: 1px solid var(--line); }
+.head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; padding-block: 14px 10px; }
+.brand { display: grid; gap: 2px; min-width: 0; }
+.brand h1 { font-size: 1.7rem; line-height: 1.1; }
+.brand .by { font-size: 0.84rem; color: var(--muted); }
+.head-tools { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.cert { display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600; color: var(--low); background: var(--low-bg); padding: 5px 11px; border-radius: 999px; white-space: nowrap; }
+.cert::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+nav.tabs { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; margin-bottom: -1px; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 9px 14px 11px; cursor: pointer; color: var(--muted); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
+nav.tabs button:hover { color: var(--text); }
+nav.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+
+main { padding-block: 32px 64px; }
+section.tab { display: grid; gap: 30px; }
+.sec-head { display: grid; gap: 10px; }
+.sec-head .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line-strong); background: var(--panel); color: var(--text); border-radius: var(--radius); padding: 7px 13px; font-weight: 500; font-size: 0.86rem; cursor: pointer; text-decoration: none; line-height: 1.3; }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #ffffff; }
+.btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #ffffff; }
+.btn .ic { font-size: 0.95em; line-height: 1; }
+.btn[disabled] { cursor: default; opacity: 0.55; }
+
+/* Panels and tables */
+.panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); padding: 20px; display: grid; gap: 14px; min-width: 0; }
+.panel-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+.grid2 > * { min-width: 0; }
+.tbl-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 600; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); background: var(--sunk); }
+tbody tr:last-child td { border-bottom: 0; }
+td.num { text-align: center; font-variant-numeric: tabular-nums; }
+tbody tr.clickable { cursor: pointer; }
+tbody tr.clickable:hover, tbody tr.sel { background: var(--accent-soft); }
+
+/* Intro strip at the top of each step */
+.intro { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
+.intro > div { padding: 14px 18px 16px 0; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.intro > div + div { padding-left: 18px; border-left: 1px solid var(--line); }
+.intro .say { background: var(--accent-soft); padding-left: 18px; }
+.intro .say p { font-style: italic; }
+.ref { font: 500 0.78rem var(--font-mono); color: var(--muted); }
+
+/* Summary figures */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); border: 1px solid var(--line); border-radius: var(--radius); }
+.tile { padding: 18px 20px; display: grid; gap: 6px; align-content: start; background: var(--panel); border: 0; text-align: left; cursor: default; min-width: 0; }
+.tiles .tile + .tile { border-left: 1px solid var(--line); }
+button.tile { cursor: pointer; }
+button.tile:hover { background: var(--sunk); }
+.tile .big { font: 600 2rem/1.1 var(--font-body); color: var(--ink); font-variant-numeric: tabular-nums; }
+.tile .big small { font-size: 0.95rem; font-weight: 500; color: var(--muted); }
+.tile .sub { font-size: 0.84rem; color: var(--muted); }
+.tile .go { font-size: 0.8rem; font-weight: 600; color: var(--accent); }
+@media (max-width: 700px) { .tiles .tile + .tile { border-left: 0; border-top: 1px solid var(--line); } }
+
+/* Journey */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 12px; counter-reset: step; }
+.steps button { counter-increment: step; text-align: left; cursor: pointer; border: 1px solid var(--line); border-top: 3px solid var(--accent); background: var(--panel); border-radius: var(--radius); padding: 14px 16px 16px; display: grid; gap: 6px; align-content: start; }
+.steps button::before { content: "Step " counter(step); font: 600 0.74rem var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.steps button:hover { background: var(--sunk); }
+.steps b { font-family: var(--font-head); font-size: 1.12rem; color: var(--ink); }
+.steps span { font-size: 0.86rem; color: var(--muted); }
+
+/* Pills and chips */
+.pill { display: inline-block; font: 600 0.75rem/1.2 var(--font-body); padding: 3px 7px; border-radius: 3px; white-space: nowrap; }
+.r-crit { color: var(--crit); background: var(--crit-bg); }
+.r-high { color: var(--high); background: var(--high-bg); }
+.r-med { color: var(--med); background: var(--med-bg); }
+.r-low { color: var(--low); background: var(--low-bg); }
+.r-na { color: var(--na); background: var(--na-bg); }
+.chip { display: inline-flex; align-items: center; gap: 4px; font: 500 0.78rem var(--font-body); padding: 2px 7px; border-radius: 3px; border: 1px solid var(--line-strong); background: var(--panel); cursor: pointer; color: var(--text); text-align: left; }
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.8rem; color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; background: var(--c); border: 1px solid rgba(0,0,0,0.12); }
+
+/* Timeline */
+.tl-scroll { overflow-x: auto; }
+.tl { display: grid; grid-template-columns: 170px repeat(12, minmax(48px, 1fr)); min-width: 760px; font-size: 0.8rem; }
+.tl .m { color: var(--muted); font: 500 0.72rem var(--font-mono); padding: 4px 0 8px 4px; border-left: 1px solid var(--line); }
+.tl .lbl { padding: 5px 10px 5px 0; align-self: center; }
+.tl .lbl.ph { font: 600 0.72rem var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 12px; }
+.tl .track { grid-column: 2 / -1; position: relative; height: 26px; background-image: repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px calc(100% / 12)); }
+.tl .seg { position: absolute; top: 7px; height: 12px; border-radius: 2px; background: var(--accent); }
+.tl .seg.check { background: #6b7f99; }
+.tl .seg.cert { background: var(--low); }
+.tl .ms { position: absolute; top: 6px; width: 12px; height: 12px; transform: translateX(-6px) rotate(45deg); background: var(--ink); }
+.tl .today { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--crit); }
+
+/* Risk */
+.formula { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.formula .box { border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 5px 10px; font-weight: 600; font-size: 0.9rem; }
+.bands { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; }
+.bands div { border-radius: var(--radius); padding: 10px 12px; font-size: 0.86rem; display: grid; gap: 2px; }
+.bands b { font-size: 0.92rem; }
+.seg-ctl { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; }
+.seg-ctl button { background: var(--panel); border: 0; padding: 6px 12px; cursor: pointer; font-weight: 500; font-size: 0.84rem; color: var(--muted); }
+.seg-ctl button + button { border-left: 1px solid var(--line-strong); }
+.seg-ctl button[aria-pressed="true"] { background: var(--accent); color: #ffffff; }
+.hm-ctl { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; }
+.hm-ctl input[type="range"] { width: 100%; accent-color: var(--accent); }
+.hm-ctl .when { font: 500 0.86rem var(--font-mono); min-width: 8ch; text-align: right; }
+.hm-stats { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.hm-stats b { color: var(--ink); }
+.heat-wrap { display: grid; grid-template-columns: auto 1fr; gap: 8px; }
+.y-lab { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-size: 0.74rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.x-lab { text-align: center; font-size: 0.74rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; grid-column: 2; }
+.heat { display: grid; grid-template-columns: 24px repeat(5, 1fr); gap: 3px; }
+.heat .ax { font: 500 0.74rem var(--font-mono); color: var(--muted); display: flex; align-items: center; justify-content: center; }
+.cell { min-height: 70px; border-radius: 3px; padding: 6px; display: flex; flex-direction: column; gap: 4px; }
+.cell .sc { font: 500 0.7rem var(--font-mono); opacity: 0.8; }
+.cell .ids { display: flex; flex-wrap: wrap; gap: 3px; }
+.cell.c-crit { background: var(--crit-bg); color: var(--crit); }
+.cell.c-high { background: var(--high-bg); color: var(--high); }
+.cell.c-med { background: var(--med-bg); color: var(--med); }
+.cell.c-low { background: var(--low-bg); color: var(--low); }
+.rid { font: 600 0.72rem var(--font-mono); padding: 2px 5px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.15); background: #ffffff; color: var(--ink); cursor: pointer; }
+.rid.sel { background: var(--ink); color: #ffffff; border-color: var(--ink); }
+.rid.new { background: var(--accent); color: #ffffff; border-color: var(--accent); }
+.detail { border-left: 3px solid var(--accent); background: var(--sunk); padding: 14px 16px; display: grid; gap: 10px; }
+.detail dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 0; font-size: 0.88rem; }
+.detail dt { color: var(--muted); }
+.detail dd { margin: 0; min-width: 0; }
+.shift { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.rt { font-weight: 600; }
+.rt small { display: block; font-weight: 400; color: var(--muted); font-size: 0.82rem; }
+.calc { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.calc > * { min-width: 0; }
+.calc label { display: grid; gap: 6px; font-weight: 600; font-size: 0.86rem; }
+.calc input[type="text"] { font: inherit; font-weight: 400; padding: 8px 10px; border-radius: var(--radius); border: 1px solid var(--line-strong); background: var(--panel); color: var(--text); width: 100%; }
+.calc input[type="range"] { width: 100%; accent-color: var(--accent); }
+.calc .desc { font-weight: 400; color: var(--muted); font-size: 0.82rem; }
+.calc .val { font: 500 0.86rem var(--font-mono); }
+.verdict .score { font: 600 2.4rem/1 var(--font-body); color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* Controls */
+.filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.filters input, .filters select { font: inherit; font-size: 0.88rem; padding: 7px 10px; border-radius: var(--radius); border: 1px solid var(--line-strong); background: var(--panel); color: var(--text); }
+.filters input { flex: 1 1 220px; min-width: 0; }
+.soa-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 3px; }
+.soa-strip button { aspect-ratio: 1; max-width: 100%; border: 1px solid rgba(0,0,0,0.06); border-radius: 2px; cursor: pointer; font: 500 0.62rem var(--font-mono); padding: 0; }
+.soa-strip button:hover { outline: 2px solid var(--accent); outline-offset: 0; }
+.soa-strip .grp { grid-column: 1 / -1; font: 600 0.72rem var(--font-body); color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; padding-top: 8px; }
+
+/* Audit */
+.clause-strip { display: flex; flex-wrap: wrap; gap: 4px; }
+.clause-strip span { font: 500 0.74rem var(--font-mono); padding: 5px 7px; border-radius: 2px; }
+.nc { border: 1px solid var(--line); border-left: 3px solid var(--high); border-radius: var(--radius); background: var(--panel); padding: 16px 18px; display: grid; gap: 12px; }
+.nc .top { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.nc .top h4 { font-size: 1.08rem; }
+.nc .reg { display: grid; gap: 8px; font-size: 0.9rem; margin: 0; }
+.nc .reg div { display: grid; grid-template-columns: 130px 1fr; gap: 12px; }
+.nc .reg dt { color: var(--muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; padding-top: 2px; }
+.nc .reg dd { margin: 0; }
+.quiz-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.q-score { font: 500 0.88rem var(--font-mono); }
+.q-list { display: grid; gap: 10px; }
+.q { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; display: grid; gap: 10px; }
+.q.right { border-left: 3px solid var(--low); }
+.q.wrong { border-left: 3px solid var(--high); }
+.q .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.q .opts button[disabled] { opacity: 0.5; }
+.q .opts button.picked { opacity: 1; border-color: var(--ink); }
+.q .opts button.answer { opacity: 1; background: var(--low-bg); border-color: var(--low); color: var(--low); }
+.q .why { font-size: 0.88rem; color: var(--text); }
+
+/* Review */
+.obj { display: grid; gap: 16px; }
+.obj-row { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; font-size: 0.9rem; }
+.obj-row .meter { grid-column: 1 / -1; position: relative; height: 8px; background: var(--sunk); border: 1px solid var(--line); border-radius: 2px; }
+.obj-row .meter span { position: absolute; inset: 0 auto 0 0; }
+.obj-row .meter i { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--ink); }
+.obj-row .v { font-variant-numeric: tabular-nums; font-weight: 600; }
+.obj-row .t { grid-column: 1 / -1; font-size: 0.8rem; color: var(--muted); }
+.trend td.a { color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.trend td.b { font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+ol.decisions, ul.plain { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; font-size: 0.92rem; }
+
+/* Overview story */
+.story { display: grid; gap: 0; }
+.story-block { display: grid; gap: 12px; padding-block: 26px; border-top: 1px solid var(--line); }
+.story-block:first-child { border-top: 2px solid var(--ink); }
+.story-block > p { max-width: 75ch; font-size: 1rem; }
+
+/* Documents list and glossary */
+.doc-list td:first-child { width: 3.2em; color: var(--muted); font-family: var(--font-mono); }
+.doc-list td:last-child { text-align: right; white-space: nowrap; }
+details.gloss-box { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 18px; }
+details.gloss-box summary { cursor: pointer; font-weight: 600; }
+details.gloss-box[open] summary { margin-bottom: 12px; }
+.gloss { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0 28px; margin: 0; }
+.gloss div { padding-block: 8px; border-bottom: 1px solid var(--line); }
+.gloss dt { font-weight: 600; color: var(--ink); }
+.gloss dd { margin: 0; color: var(--muted); font-size: 0.88rem; }
+.pitch { font-size: 1rem; line-height: 1.7; max-width: 75ch; font-style: italic; }
+.notice { font-size: 0.82rem; color: var(--muted); }
+
+/* Document viewer */
+.viewer { position: fixed; inset: 0; z-index: 50; background: rgba(15,20,30,0.45); display: flex; justify-content: center; padding: calc(16px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.viewer .sheet { background: var(--paper); width: min(980px, 100%); height: 100%; border-radius: var(--radius); display: grid; grid-template-rows: auto 1fr; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.viewer .bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 12px 18px; border-bottom: 1px solid var(--line); background: var(--sunk); }
+.viewer .bar .t { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; color: var(--ink); min-width: 0; }
+.viewer .bar .nav { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.viewer .scroll { overflow: auto; padding: 28px clamp(18px, 5vw, 56px) 56px; }
+.doc { max-width: 860px; margin: 0 auto; font-size: 0.95rem; }
+.doc > * + * { margin-top: 14px; }
+.doc h1 { font-size: 1.9rem; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+.doc h2 { font-size: 1.4rem; margin-top: 30px; }
+.doc h3 { font-size: 1.15rem; margin-top: 22px; }
+.doc p, .doc li { max-width: 75ch; }
+.doc ul, .doc ol { padding-left: 1.4em; }
+.doc li + li { margin-top: 4px; }
+.doc blockquote { margin: 14px 0; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--sunk); color: var(--text); }
+.doc blockquote p { max-width: none; }
+.doc table { display: block; overflow-x: auto; border: 1px solid var(--line); }
+.doc th, .doc td { border: 1px solid var(--line); }
+.doc code { font-family: var(--font-mono); font-size: 0.86em; background: var(--sunk); padding: 1px 4px; border-radius: 2px; }
+.doc pre { background: var(--sunk); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; overflow-x: auto; }
+.doc pre code { background: none; padding: 0; }
+.doc .mermaid { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; overflow-x: auto; text-align: center; }
+.doc hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
+.doc a.repo-only { color: var(--muted); text-decoration: underline dotted; cursor: help; }
+
+footer { border-top: 1px solid var(--line); padding-block: 18px 26px; font-size: 0.84rem; color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+/* Presenter guide: ANU */
+main { padding-block-end: 160px; }
+.guide { position: fixed; z-index: 40; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 10px; pointer-events: none; }
+.guide > * { pointer-events: auto; }
+.guide.moved { right: auto; bottom: auto; }
+.guide.left { flex-direction: row; }
+.bot { width: 92px; height: 92px; padding: 0; border: 0; background: none; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; flex: none; filter: drop-shadow(0 8px 10px rgba(31,58,95,0.25)); }
+.bot svg { width: 100%; height: 100%; display: block; pointer-events: none; }
+.bot.dragging { cursor: grabbing; }
+.bot .eyes, .bot .pupils { transform-box: fill-box; transform-origin: center; }
+.bot .tilt { transform-box: view-box; transform-origin: 60px 104px; }
+.bot .beak { transform-box: fill-box; transform-origin: 50% 0%; }
+.bubble { width: min(360px, calc(100vw - 32px - 102px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px))); background: var(--paper); border: 1px solid var(--line-strong); border-radius: 8px; padding: 14px 16px; display: grid; gap: 10px; box-shadow: 0 14px 40px -12px rgba(15,25,40,0.35); margin-bottom: 26px; }
+.bubble .who { display: flex; justify-content: space-between; align-items: center; gap: 8px; font: 600 0.74rem var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.bubble .x { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 1rem; line-height: 1; padding: 2px 4px; }
+.bubble .x:hover { color: var(--ink); }
+.bubble .txt { font-size: 0.92rem; line-height: 1.55; min-height: 3em; }
+.bubble .ctrls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bubble .ctrls .btn { padding: 5px 11px; font-size: 0.82rem; }
+.bubble .prog { margin-left: auto; font: 500 0.76rem var(--font-mono); color: var(--muted); }
+.bubble .bar { height: 3px; background: var(--sunk); overflow: hidden; }
+.bubble .bar span { display: block; height: 100%; background: var(--accent); transition: width 0.3s; }
+.spot { position: relative; z-index: 2; outline: 3px solid var(--accent); outline-offset: 6px; border-radius: var(--radius); }
+@media (prefers-reduced-motion: no-preference) {
+  .bot { animation: float 4.5s ease-in-out infinite; }
+  .bot.dragging { animation: none; }
+  .bot .eyes { animation: blink 5s infinite; }
+  .bot .pupils { animation: look 6s ease-in-out infinite; }
+  .bot .tilt { animation: tilt 5s ease-in-out infinite; }
+  .bot.talking .beak { animation: beak 0.17s ease-in-out infinite alternate; }
+  .guide.flying { transition: left 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), top 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  @keyframes float { 50% { transform: translateY(-6px); } }
+  @keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+  @keyframes look { 0%, 30%, 100% { transform: translateX(0); } 40%, 55% { transform: translateX(-3px); } 65%, 85% { transform: translateX(3px); } }
+  @keyframes tilt { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+  @keyframes beak { to { transform: scaleY(1.45); } }
+}
+@media (max-width: 560px) {
+  .bot { width: 70px; height: 70px; }
+  .bubble { width: calc(100vw - 32px - 80px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)); margin-bottom: 18px; }
+  .nc .reg div { grid-template-columns: 1fr; gap: 2px; }
+  .intro > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .intro .say { padding-left: 12px; }
+  .cell { min-height: 56px; padding: 4px; }
+}
+</style>
+
+<header class="site">
+  <div class="wrap">
+    <div class="head-row">
+      <div class="brand">
+        <h1>Halcyon Ledger ISMS</h1>
+        <span class="by">ISO/IEC 27001:2022 implementation case study · Amay Chivate</span>
+      </div>
+      <div class="head-tools">
+        <span class="cert">Certified · 16 Oct 2026</span>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" id="t-overview" data-tab="overview" aria-selected="true">Overview</button>
+      <button role="tab" id="t-scope" data-tab="scope">1. Scope</button>
+      <button role="tab" id="t-risks" data-tab="risks">2. Risk</button>
+      <button role="tab" id="t-soa" data-tab="soa">3. Controls</button>
+      <button role="tab" id="t-audit" data-tab="audit">4. Internal audit</button>
+      <button role="tab" id="t-review" data-tab="review">5. Management review</button>
+      <button role="tab" id="t-documents" data-tab="documents">Documents</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- OVERVIEW -->
+<section class="tab" id="overview" role="tabpanel" aria-labelledby="t-overview">
+  <div class="sec-head">
+    <span class="eyebrow">Portfolio case study · Amay Chivate</span>
+    <h2>Taking a payments company from no security management system to ISO/IEC 27001 certification in 11 months</h2>
+    <div class="actions">
+      <button class="btn primary" data-doc="00-case-study-brief"><span class="ic">▤</span> Read the case study</button>
+      <button class="btn" id="present-start">Present it</button>
+    </div>
+  </div>
+
+  <div class="story">
+    <div class="story-block" id="problem">
+      <span class="eyebrow">The problem</span>
+      <h3>Security existed, but no one could prove it was managed</h3>
+      <p>Halcyon Ledger, a fictional 210-person payments company, had security tools but no risk owners, no measurements and no evidence an auditor could rely on. Three enterprise customers refused to sign without ISO 27001, leaving £4.2m of annual revenue on hold.</p>
+      <div><button class="btn" data-doc="00-case-study-brief" data-anchor="2-problem-statement">Read the problem statement</button></div>
+    </div>
+
+    <div class="story-block">
+      <span class="eyebrow">What we did</span>
+      <h3>Built and tested an ISMS in five steps</h3>
+      <div class="steps">
+        <button data-goto="scope"><b>Define the scope</b><span>The whole HalcyonPay service: both offices, the cloud and key suppliers.</span></button>
+        <button data-goto="risks"><b>Assess the risks</b><span>47 risks scored; treatment planned for the 12 significant ones.</span></button>
+        <button data-goto="soa"><b>Select controls</b><span>All 93 Annex A controls reviewed and justified.</span></button>
+        <button data-goto="audit"><b>Audit the ISMS</b><span>Every clause tested with real samples; findings corrected.</span></button>
+        <button data-goto="review"><b>Review with leadership</b><span>Results reviewed and certification approved.</span></button>
+      </div>
+    </div>
+
+    <div class="story-block">
+      <span class="eyebrow">What we achieved</span>
+      <h3>Certified on 16 October 2026</h3>
+      <div class="tiles" id="tiles"></div>
+    </div>
+  </div>
+
+  <div class="panel presenter-only">
+    <div class="panel-head"><h3>60-second summary</h3><button class="btn" id="copy-pitch">Copy text</button></div>
+    <p class="pitch" id="pitch">I built an ISO 27001 case study for a simulated payments company called Halcyon Ledger, which needed certification to win large customers. First I defined what the security system covers: the whole HalcyonPay product, both offices, the cloud and key suppliers. Then I ran a risk assessment and found 12 significant risks, such as fraudsters changing bank details or ransomware. For each one I chose controls and named an owner, which brought every risk within appetite. I went through all 93 Annex A controls and recorded which apply and why in the Statement of Applicability. Next I ran an internal audit, found 3 minor nonconformities, identified the root cause of each and corrected them. Finally, leadership reviewed the results and approved going for certification.</p>
+  </div>
+
+  <p class="notice">Halcyon Ledger Ltd is a fictional organisation. All names, figures and findings are simulated to demonstrate how ISO/IEC 27001 is applied in practice.</p>
+</section>
+
+<!-- SCOPE -->
+<section class="tab" id="scope" role="tabpanel" aria-labelledby="t-scope" hidden>
+  <div class="sec-head">
+    <span class="eyebrow">Step 1 · Clauses 4.1, 4.2, 4.3</span>
+    <h2>The ISMS covers the entire HalcyonPay service</h2>
+    <div class="actions"><button class="btn" data-doc="03-isms-scope"><span class="ic">▤</span> Open document: ISMS scope</button><button class="btn" data-doc="04-context-and-interested-parties"><span class="ic">▤</span> Open document: Context and interested parties</button></div>
+  </div>
+  <div class="intro">
+    <div><span class="eyebrow">Purpose</span><p>The scope defines what the ISMS protects: which services, locations, people and systems are included.</p></div>
+    <div><span class="eyebrow">What ISO 27001 requires</span><p>The organisation must understand its context and stakeholders, and document a scope with its boundaries and dependencies. The scope appears on the certificate.</p></div>
+    <div class="say presenter-only"><span class="eyebrow">Say it like this</span><p>"We covered everything customers rely on, not just one office. A narrow scope is easier to certify but tells customers nothing."</p></div>
+  </div>
+  <div class="detail">
+    <span class="eyebrow">Scope statement</span>
+    <p>The information security management system supporting the design, development, operation, hosting and customer support of the HalcyonPay accounts-payable automation and payouts platform, delivered from Leeds (UK), Kraków (Poland) and remote locations, in accordance with Statement of Applicability version 1.2.</p>
+  </div>
+  <div class="tbl-scroll" id="scope-table"><table>
+    <thead><tr><th>Area</th><th>Included</th><th>Excluded, with reason</th></tr></thead>
+    <tbody>
+      <tr><td><b>Product</b></td><td>HalcyonPay web application, API, mobile approver app, supplier portal</td><td>Legacy expenses product, decommissioned March 2026</td></tr>
+      <tr><td><b>Locations</b></td><td>Leeds head office, Kraków engineering hub, home offices</td><td>London co-working desks: no equipment or records kept there</td></tr>
+      <tr><td><b>People</b></td><td>All 210 employees and 22 contractors</td><td>None</td></tr>
+      <tr><td><b>Systems</b></td><td>AWS production, staging and disaster recovery; Microsoft 365, Okta, GitHub, Slack and other SaaS; company devices</td><td>Personal devices, which are blocked from production</td></tr>
+      <tr><td><b>Processes</b></td><td>Development, operations, customer support, HR, supplier management</td><td>Marketing events and the public website (no customer data)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Internal and external issues</h3>
+      <div class="tbl-scroll"><table><thead><tr><th>Issue</th><th>Type</th></tr></thead><tbody id="issues"></tbody></table></div>
+    </div>
+    <div class="panel">
+      <h3>Interested parties and their requirements</h3>
+      <div class="tbl-scroll"><table><thead><tr><th>Party</th><th>Requirement</th></tr></thead><tbody id="parties"></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- RISKS -->
+<section class="tab" id="risks" role="tabpanel" aria-labelledby="t-risks" hidden>
+  <div class="sec-head">
+    <span class="eyebrow">Step 2 · Clauses 6.1.2, 6.1.3, 8.2, 8.3</span>
+    <h2>Six risks exceeded appetite; treatment brought all of them within it</h2>
+    <div class="actions"><button class="btn" data-doc="05-risk-assessment-methodology"><span class="ic">▤</span> Open document: Risk methodology</button><button class="btn" data-doc="06-risk-register-and-treatment-plan"><span class="ic">▤</span> Open document: Risk register and treatment plan</button></div>
+  </div>
+  <div class="intro">
+    <div><span class="eyebrow">Purpose</span><p>Identify what could harm the confidentiality, integrity or availability of information, score it, and decide how to treat it.</p></div>
+    <div><span class="eyebrow">What ISO 27001 requires</span><p>A defined, repeatable risk assessment process with acceptance criteria, a treatment plan, and risk owners' approval of residual risk.</p></div>
+    <div class="say presenter-only"><span class="eyebrow">Say it like this</span><p>"We found 12 significant risks. Six scored 12 or more and had to be treated. After treatment, none were above that line."</p></div>
+  </div>
+
+  <div class="panel">
+    <h3>Scoring method</h3>
+    <div class="formula"><span class="box">Likelihood 1–5</span><span>×</span><span class="box">Impact 1–5</span><span>=</span><span class="box">Risk score 1–25</span></div>
+    <div class="bands">
+      <div class="r-crit"><b>15–25 · Critical</b>Treat immediately and report to the board. Only the CEO can accept.</div>
+      <div class="r-high"><b>12–14 · High</b>Treat within 90 days. Executive sign-off required.</div>
+      <div class="r-med"><b>7–10 · Medium</b>Treat within 6 months, or accept with written justification.</div>
+      <div class="r-low"><b>1–6 · Low</b>Acceptable. Monitor.</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Risk heat map</h3>
+        <div class="seg-ctl" role="group" aria-label="Jump to">
+          <button id="hm-before" aria-pressed="true">Before treatment</button>
+          <button id="hm-after" aria-pressed="false">After treatment</button>
+        </div>
+      </div>
+      <p class="count">Each number is a risk. Play the timeline to see each risk move as its treatment is delivered.</p>
+      <div class="hm-ctl">
+        <button class="btn" id="hm-play">Play</button>
+        <input type="range" id="hm-date" min="0" max="12" step="1" value="0" aria-label="Month">
+        <span class="when" id="hm-when">Jan 2026</span>
+      </div>
+      <div class="hm-stats" id="hm-stats" aria-live="polite"></div>
+      <div class="heat-wrap">
+        <div class="y-lab">Likelihood</div>
+        <div class="heat" id="heat"></div>
+        <div></div>
+        <div class="x-lab">Impact</div>
+      </div>
+    </div>
+    <div class="panel" id="risk-detail" aria-live="polite"></div>
+  </div>
+
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Risk</th><th>Owner</th><th>Before</th><th>After</th><th>Due</th><th>Status</th></tr></thead>
+    <tbody id="risk-rows"></tbody>
+  </table></div>
+
+  <div class="panel">
+    <div class="sec-head" style="gap:4px">
+      <h3>Score a new risk</h3>
+      <p class="count">Apply the methodology to a new scenario. The result shows the rating, the required action and who may accept it.</p>
+    </div>
+    <div class="calc">
+      <div style="display:grid;gap:14px">
+        <label for="c-s">Risk scenario
+          <input type="text" id="c-s" value="A phishing email compromises a support agent and customer tickets are exported">
+        </label>
+        <label for="c-l">Likelihood <span class="val" id="c-l-v"></span>
+          <input type="range" id="c-l" min="1" max="5" step="1" value="3">
+          <span class="desc" id="c-l-d"></span>
+        </label>
+        <label for="c-i">Impact <span class="val" id="c-i-v"></span>
+          <input type="range" id="c-i" min="1" max="5" step="1" value="3">
+          <span class="desc" id="c-i-d"></span>
+        </label>
+      </div>
+      <div class="verdict detail" id="c-out" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROLS -->
+<section class="tab" id="soa" role="tabpanel" aria-labelledby="t-soa" hidden>
+  <div class="sec-head">
+    <span class="eyebrow">Step 3 · Clause 6.1.3 d · Annex A</span>
+    <h2>91 of 93 Annex A controls apply; 2 are excluded with evidence</h2>
+    <div class="actions"><button class="btn" data-doc="07-statement-of-applicability"><span class="ic">▤</span> Open document: Statement of Applicability</button></div>
+  </div>
+  <div class="intro">
+    <div><span class="eyebrow">Purpose</span><p>The Statement of Applicability (SoA) lists all 93 Annex A controls and records whether each applies, why, and its implementation status.</p></div>
+    <div><span class="eyebrow">What ISO 27001 requires</span><p>Compare selected controls with Annex A so none are overlooked, and justify every inclusion and exclusion.</p></div>
+    <div class="say presenter-only"><span class="eyebrow">Say it like this</span><p>"We use 91 of 93 controls, each linked to a risk, a law, a contract or good practice. We excluded two, and can prove why."</p></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h3>All 93 controls</h3><span class="count">Select a control to view its justification</span></div>
+    <div class="soa-strip" id="soa-strip"></div>
+    <div class="legend"><span style="--c:var(--low-bg)">Implemented</span><span style="--c:var(--med-bg)">Partially implemented</span><span style="--c:var(--na-bg)">Excluded</span></div>
+  </div>
+  <div class="filters">
+    <input id="soa-q" type="search" placeholder="Search controls, for example backup, password or 8.13" aria-label="Search controls">
+    <select id="soa-theme" aria-label="Theme">
+      <option value="">All themes</option><option value="5">5 Organizational (37)</option><option value="6">6 People (8)</option><option value="7">7 Physical (14)</option><option value="8">8 Technological (34)</option>
+    </select>
+    <select id="soa-status" aria-label="Status">
+      <option value="">Any status</option><option value="Implemented">Implemented</option><option value="Partially implemented">Partially implemented</option><option value="Not applicable">Excluded</option>
+    </select>
+    <button class="btn" id="soa-clear">Clear</button>
+    <span class="count" id="soa-count"></span>
+  </div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Control</th><th>Justification</th><th>Implementation</th><th>Status</th></tr></thead>
+    <tbody id="soa-rows"></tbody>
+  </table></div>
+</section>
+
+<!-- AUDIT -->
+<section class="tab" id="audit" role="tabpanel" aria-labelledby="t-audit" hidden>
+  <div class="sec-head">
+    <span class="eyebrow">Step 4 · Clause 9.2 · ISO 19011</span>
+    <h2>No major nonconformities; three minor findings, all corrected</h2>
+    <div class="actions"><button class="btn" data-doc="00-case-study-brief" data-anchor="8-why-an-internal-audit-was-needed"><span class="ic">▤</span> Why this audit was needed</button><button class="btn" data-doc="08-internal-audit-checklist"><span class="ic">▤</span> Open document: Internal audit checklist and report</button></div>
+  </div>
+  <div class="intro">
+    <div><span class="eyebrow">Purpose</span><p>An internal audit checks the ISMS against ISO 27001 and the organisation's own rules before the certification body arrives.</p></div>
+    <div><span class="eyebrow">What ISO 27001 requires</span><p>A planned audit programme, objective auditors, and reported results. Nonconformities need root cause analysis and corrective action.</p></div>
+    <div class="say presenter-only"><span class="eyebrow">Say it like this</span><p>"No major findings and three minor ones. For each, we found the root cause and fixed it so it won't recur."</p></div>
+  </div>
+  <div class="bands">
+    <div class="r-crit"><b>Major nonconformity</b>A requirement is not met at all, or the system is failing.</div>
+    <div class="r-high"><b>Minor nonconformity</b>An isolated lapse. The system still works.</div>
+    <div class="r-na"><b>Opportunity for improvement</b>The requirement is met, but could be met better.</div>
+  </div>
+  <div class="tiles" id="audit-tiles"></div>
+  <div class="panel">
+    <div class="panel-head"><h3>Result by clause</h3><span class="count">Hover over or select a clause for its title</span></div>
+    <div class="clause-strip" id="clause-strip"></div>
+    <div class="legend"><span style="--c:var(--low-bg)">Conforms</span><span style="--c:var(--high-bg)">Minor nonconformity</span><span style="--c:var(--na-bg)">Opportunity for improvement</span></div>
+  </div>
+  <h3>Nonconformities and corrective actions</h3>
+  <div style="display:grid;gap:12px" id="ncs"></div>
+  <div class="panel">
+    <h3>Opportunities for improvement</h3>
+    <div class="tbl-scroll"><table><thead><tr><th>Ref</th><th>Observation</th><th>Action</th><th>Status</th></tr></thead><tbody id="ofis"></tbody></table></div>
+  </div>
+  <div class="panel">
+    <div class="quiz-head">
+      <div class="sec-head" style="gap:4px">
+        <h3>Grade the finding</h3>
+        <p class="count">Six audit observations. Classify each as a major nonconformity, a minor nonconformity or an opportunity for improvement.</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center"><span class="q-score" id="q-score"></span><button class="btn" id="q-reset">Reset</button></div>
+    </div>
+    <div class="q-list" id="q-list"></div>
+  </div>
+</section>
+
+<!-- REVIEW -->
+<section class="tab" id="review" role="tabpanel" aria-labelledby="t-review" hidden>
+  <div class="sec-head">
+    <span class="eyebrow">Step 5 · Clause 9.3 · 11 August 2026</span>
+    <h2>Top management judged the ISMS effective and approved certification</h2>
+    <div class="actions"><button class="btn" data-doc="09-management-review-report"><span class="ic">▤</span> Open document: Management review report</button></div>
+  </div>
+  <div class="intro">
+    <div><span class="eyebrow">Purpose</span><p>Top management reviews objectives, risks, audit results and stakeholder feedback, then decides on changes and resources.</p></div>
+    <div><span class="eyebrow">What ISO 27001 requires</span><p>Reviews at planned intervals covering the inputs in 9.3.2 (a–g), with documented decisions on improvement and changes.</p></div>
+    <div class="say presenter-only"><span class="eyebrow">Say it like this</span><p>"The CEO and directors reviewed everything, agreed the system works, and funded the last two treatments."</p></div>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="panel-head"><h3>Information security objectives</h3><span class="count">Line marks the target</span></div>
+      <div class="obj" id="objectives"></div>
+    </div>
+    <div class="panel">
+      <h3>Control performance, February to July 2026</h3>
+      <div class="tbl-scroll"><table class="trend"><thead><tr><th>Measure</th><th style="text-align:right">Feb</th><th style="text-align:right">Jul</th></tr></thead><tbody id="trend"></tbody></table></div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Feedback from interested parties</h3>
+      <ul class="plain">
+        <li><b>Customers:</b> security questionnaires answered in 4 days instead of 12</li>
+        <li><b>Payment partner:</b> quarterly security attestation accepted with no findings</li>
+        <li><b>Staff:</b> 82% know how to report a concern, up from 49%</li>
+        <li><b>Insurer:</b> cyber insurance premium reduced by 15%</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Decisions</h3>
+      <ol class="decisions">
+        <li>The ISMS is suitable, adequate and effective; proceed to the Stage 1 audit</li>
+        <li>Confirm Statement of Applicability v1.2 and risk treatment plan v1.2</li>
+        <li>Approve £85k for an additional security engineer (risk R-12)</li>
+        <li>Approve £40k for a public bug bounty programme (risk R-04)</li>
+        <li>Update the incident procedure for 4-hour notice to EU banking customers</li>
+        <li>Propose 2027 objectives by November, aligned with SOC 2 Type II</li>
+        <li>Assess the scope impact of the planned launch in Ireland</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+
+<!-- DOCUMENTS -->
+<section class="tab" id="documents" role="tabpanel" aria-labelledby="t-documents" hidden>
+  <div class="sec-head">
+    <span class="eyebrow">Evidence</span>
+    <h2>Ten formal documents support every stage of the ISMS</h2>
+    <p class="lede">Each activity, the ISO/IEC 27001 requirement it meets, and the document that proves it. Open any document to read it in full.</p>
+  </div>
+
+  <div class="panel">
+    <h3>ISMS documents</h3>
+    <div class="tbl-scroll"><table class="doc-list"><tbody id="doc-rows"></tbody></table></div>
+  </div>
+
+  <div class="panel">
+    <h3>Scope of work and evidence</h3>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Activity</th><th>ISO/IEC 27001</th><th>Evidence</th></tr></thead>
+      <tbody id="work-rows"></tbody>
+    </table></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h3>Programme timeline</h3><span class="count">November 2025 to October 2026 · red line marks today</span></div>
+    <div class="tl-scroll"><div class="tl" id="timeline"></div></div>
+  </div>
+
+  <details class="gloss-box">
+    <summary>New to ISO 27001? Key terms</summary>
+    <dl class="gloss" id="gloss"></dl>
+  </details>
+</section>
+
+</main>
+<footer><div class="wrap"><span>Portfolio case study by Amay Chivate</span><span>Simulated organisation · ISO/IEC 27001:2022</span></div></footer>
+
+<!-- Document viewer -->
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="v-title" hidden>
+  <div class="sheet">
+    <div class="bar">
+      <span class="t" id="v-title"></span>
+      <div class="nav">
+        <button class="btn" id="v-prev">Previous</button>
+        <button class="btn" id="v-next">Next</button>
+        <button class="btn primary" id="v-close">Close</button>
+      </div>
+    </div>
+    <div class="scroll" id="v-scroll"><article class="doc" id="v-doc"></article></div>
+  </div>
+</div>
+
+<!-- Presenter guide -->
+<div class="guide" aria-live="polite">
+  <button class="bot" id="bot" aria-label="ANU, presentation guide: select for a tip">
+    <svg viewBox="0 0 120 120" aria-hidden="true">
+      <defs><linearGradient id="hoot-body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f3a5f"/><stop offset="1" stop-color="#3d5f8f"/></linearGradient></defs>
+      <g class="tilt">
+        <path d="M30 34 L34 12 L48 28 Z" fill="#1f3a5f"/><path d="M90 34 L86 12 L72 28 Z" fill="#2c4b75"/>
+        <ellipse cx="60" cy="66" rx="37" ry="42" fill="url(#hoot-body)"/>
+        <ellipse cx="60" cy="84" rx="23" ry="22" fill="#eef2f7"/>
+        <path d="M50 78 l3 3 l3 -3 M60 78 l3 3 l3 -3 M55 88 l3 3 l3 -3 M65 88 l3 3 l3 -3" stroke="#b6c3d6" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <g class="eyes"><circle cx="45" cy="50" r="12" fill="#ffffff"/><circle cx="75" cy="50" r="12" fill="#ffffff"/>
+          <g class="pupils"><circle cx="46" cy="51" r="5.5" fill="#111111"/><circle cx="76" cy="51" r="5.5" fill="#111111"/><circle cx="48" cy="49" r="1.6" fill="#ffffff"/><circle cx="78" cy="49" r="1.6" fill="#ffffff"/></g></g>
+        <circle cx="45" cy="50" r="14.5" stroke="#111111" stroke-width="3" fill="none"/><circle cx="75" cy="50" r="14.5" stroke="#111111" stroke-width="3" fill="none"/>
+        <path d="M59.5 49 Q60 46 60.5 49" stroke="#111111" stroke-width="3" fill="none"/>
+        <path class="beak" d="M55 63 L65 63 L60 72 Z" fill="#e0a526"/>
+        <ellipse cx="49" cy="108" rx="6" ry="3" fill="#e0a526"/><ellipse cx="71" cy="108" rx="6" ry="3" fill="#e0a526"/>
+        <g transform="rotate(10 88 88)"><rect x="76" y="74" width="24" height="30" rx="3" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+          <rect x="83" y="71" width="10" height="6" rx="2" fill="#111111"/>
+          <path d="M80 84 l3 3 l5 -6 M80 95 l3 3 l5 -6" stroke="#1d5b33" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M91 83 h5 M91 94 h5" stroke="#c4c9d1" stroke-width="2" stroke-linecap="round"/></g>
+      </g>
+    </svg>
+  </button>
+  <div class="bubble" id="bubble" role="dialog" aria-label="Presentation guide" hidden>
+    <div class="who"><span>ANU · Presentation guide</span><button class="x" id="b-close" aria-label="Close guide">✕</button></div>
+    <p class="txt" id="b-txt"></p>
+    <div class="bar" hidden><span id="b-bar"></span></div>
+    <div class="ctrls" id="b-ctrls"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>
+const SOA = __SOA_DATA__;
+const DOCS = __DOCS_DATA__;
+
+const GLOSSARY = [
+  ["ISO/IEC 27001", "The international standard for information security management systems. Organisations can be certified against it."],
+  ["ISMS", "Information security management system: the policies, people, processes and controls an organisation uses to manage information risk."],
+  ["Scope", "The boundary of the ISMS: which services, locations, people and systems it covers."],
+  ["Interested parties", "Stakeholders with security requirements, such as customers, regulators, staff and partners."],
+  ["Risk", "The effect of uncertainty on information security, scored here as likelihood × impact."],
+  ["Risk treatment", "The response to a risk: modify it with controls, avoid it, share it, or retain it."],
+  ["Residual risk", "The risk remaining after treatment, which the risk owner must accept."],
+  ["Control", "A measure that modifies risk, such as multi-factor authentication, backups or training."],
+  ["Annex A", "The reference list of 93 controls in ISO/IEC 27001:2022, grouped into organizational, people, physical and technological themes."],
+  ["Statement of Applicability", "The document recording which Annex A controls apply, the justification, and implementation status."],
+  ["Internal audit", "An objective check of the ISMS against ISO 27001 and the organisation's own requirements."],
+  ["Nonconformity", "A requirement that is not met. Major: absent or systemic. Minor: an isolated lapse."],
+  ["Opportunity for improvement", "An observation where the requirement is met but practice could be better."],
+  ["Root cause", "The underlying reason a nonconformity occurred, which corrective action must address."],
+  ["Management review", "A periodic review by top management of ISMS performance, leading to decisions and actions."],
+  ["Stage 1 and Stage 2", "The two parts of a certification audit: documentation review, then assessment of implementation."]
+];
+
+const WORK = [
+  ["Framed the business problem, objectives and approach", "4.1, 5.1, 6.2", ["00-case-study-brief"]],
+  ["Defined the ISMS scope, context and interested parties", "4.1, 4.2, 4.3", ["03-isms-scope", "04-context-and-interested-parties"]],
+  ["Planned the programme from gap analysis to certification", "4.4, 6.3", ["02-implementation-roadmap"]],
+  ["Designed the risk assessment methodology and acceptance criteria", "6.1.2", ["05-risk-assessment-methodology"]],
+  ["Assessed risks, planned treatment and obtained residual risk sign-off", "6.1.3, 8.2, 8.3", ["06-risk-register-and-treatment-plan"]],
+  ["Selected and justified all 93 Annex A controls", "6.1.3 d, Annex A", ["07-statement-of-applicability"]],
+  ["Planned and conducted the internal audit; graded findings", "9.2, 10.2", ["08-internal-audit-checklist"]],
+  ["Prepared the management review, objectives and KPIs", "6.2, 9.1, 9.3", ["09-management-review-report"]]
+];
+
+const RISKS = [
+  { id: "R-01", title: "Supplier bank details changed by fraudsters", s: "An attacker takes over a customer account, or uses business email compromise, to change where a supplier's payment is sent.", owner: "COO", L: 4, I: 5, rL: 2, rI: 4, t: "Out-of-band call-back for every bank-detail change; 24-hour hold on payments to changed details; MFA for all customer administrators; anomaly alerts.", c: ["5.14","5.17","8.5","8.16"], due: "31 Mar 2026", st: "Complete" },
+  { id: "R-02", title: "Ransomware encrypts production and backups", s: "Malware on an engineer's laptop steals cloud credentials and encrypts live systems and backups.", owner: "CTO", L: 3, I: 5, rL: 1, rI: 5, t: "EDR on all endpoints; hardware security keys for engineers; just-in-time administrator access; immutable backups; quarterly restore tests.", c: ["8.2","8.5","8.7","8.13","8.18"], due: "30 Apr 2026", st: "Complete" },
+  { id: "R-03", title: "Customer data exposed by cloud misconfiguration", s: "A storage bucket or database snapshot is publicly readable.", owner: "CTO", L: 3, I: 4, rL: 1, rI: 4, t: "Organisation-wide block on public storage; infrastructure as code with policy checks; automated configuration alerts.", c: ["5.23","8.9","8.16","8.27"], due: "31 Mar 2026", st: "Complete" },
+  { id: "R-04", title: "Application flaw exposes another tenant's data", s: "An access-control defect lets one customer read another customer's invoices.", owner: "VP Engineering", L: 3, I: 4, rL: 2, rI: 4, t: "Security testing in the build pipeline; tenant-isolation tests; annual penetration test; public bug bounty.", c: ["8.8","8.25","8.26","8.28","8.29"], due: "15 Dec 2026", st: "In progress" },
+  { id: "R-05", title: "Prolonged cloud region outage", s: "An extended outage of the primary AWS region stops payments beyond the service level.", owner: "CTO", L: 2, I: 4, rL: 2, rI: 2, t: "Warm standby in a second region; recovery within 4 hours; failover tested every 6 months.", c: ["5.29","5.30","8.14"], due: "30 Jun 2026", st: "Complete" },
+  { id: "R-06", title: "Leavers retain system access", s: "A former employee or contractor can still sign in to company systems.", owner: "Head of People", L: 4, I: 3, rL: 2, rI: 2, t: "HR system removes access automatically on the last day; quarterly access reviews by managers.", c: ["5.15","5.18","6.5"], due: "30 Apr 2026", st: "Complete" },
+  { id: "R-07", title: "Sub-processor breach exposes invoices", s: "The third party that processes invoice images is breached.", owner: "Data Protection Officer", L: 3, I: 3, rL: 2, rI: 3, t: "Supplier due diligence; contractual 24-hour breach notice; deletion of images after 30 days.", c: ["5.19","5.20","5.21","5.22"], due: "31 May 2026", st: "Complete" },
+  { id: "R-08", title: "Insider alters payment instructions", s: "A privileged engineer changes payment data directly in the production database.", owner: "CTO", L: 2, I: 5, rL: 1, rI: 5, t: "No standing database access; two-person approval for data fixes; tamper-evident audit logs.", c: ["5.3","8.2","8.15"], due: "31 May 2026", st: "Complete" },
+  { id: "R-09", title: "Credentials leaked in source code", s: "A password or API key is committed to the code repository.", owner: "VP Engineering", L: 4, I: 3, rL: 2, rI: 2, t: "Secret scanning that blocks commits; secrets held in a managed vault; automatic rotation.", c: ["5.17","8.4","8.24"], due: "31 Mar 2026", st: "Complete" },
+  { id: "R-10", title: "Lost or stolen laptop", s: "A laptop holding customer data is lost or stolen.", owner: "Head of IT", L: 4, I: 2, rL: 4, rI: 1, t: "Full-disk encryption; remote wipe; customer data cannot be downloaded to unmanaged devices.", c: ["7.9","8.1","8.12"], due: "28 Feb 2026", st: "Complete" },
+  { id: "R-11", title: "Personal data retained too long", s: "Personal data is kept longer than data protection law allows.", owner: "Data Protection Officer", L: 3, I: 3, rL: 2, rI: 2, t: "Agreed retention schedule; automated deletion; annual retention audit.", c: ["5.33","5.34","8.10"], due: "30 Jun 2026", st: "Complete" },
+  { id: "R-12", title: "Loss of key security staff", s: "With a three-person team, one departure would weaken monitoring and incident response.", owner: "Head of Security", L: 3, I: 3, rL: 2, rI: 3, t: "24/7 managed security operations centre; documented runbooks; cross-training; one additional hire.", c: ["5.24","6.1","6.3"], due: "31 Jan 2027", st: "In progress" }
+];
+
+const ISSUES = [
+  ["Payment fraud through business email compromise is rising", "External"],
+  ["Ransomware groups target software-as-a-service providers", "External"],
+  ["EU financial customers pass DORA requirements to suppliers", "External"],
+  ["UK and EU GDPR apply to customer and staff data", "External"],
+  ["Enterprise customers require ISO 27001 before signing", "External"],
+  ["Dependence on a single cloud provider and payment partner", "External"],
+  ["Climate change (Amendment 1:2024): assessed as low relevance", "External"],
+  ["35% headcount growth; inconsistent onboarding", "Internal"],
+  ["Engineering culture sees security as a blocker", "Internal"],
+  ["Security team of three people", "Internal"]
+];
+const PARTIES = [
+  ["Customers", "Secure, accurate and available payments; 99.9% uptime"],
+  ["Regulated EU customers", "ISO 27001 certificate, audit rights, rapid incident notice"],
+  ["Payees", "Bank details kept confidential and unaltered"],
+  ["Payment partner", "Fraud and anti-money-laundering controls; incident reporting"],
+  ["Data protection regulators", "GDPR compliance; breach notice within 72 hours"],
+  ["Board and investors", "Avoid breach losses; certification on schedule"],
+  ["Cyber insurer", "MFA, endpoint protection and protected backups"],
+  ["Employees", "Clear policies, protected HR data, secure remote working"]
+];
+
+const CLAUSES = [
+  ["4.1","C","Understanding the organization and its context"],["4.2","C","Needs of interested parties"],["4.3","C","Scope of the ISMS"],["4.4","C","Information security management system"],
+  ["5.1","C","Leadership and commitment"],["5.2","C","Policy"],["5.3","C","Roles, responsibilities and authorities"],
+  ["6.1.1","C","Actions to address risks and opportunities"],["6.1.2","C","Information security risk assessment"],["6.1.3","OFI","Information security risk treatment"],["6.2","C","Information security objectives"],["6.3","C","Planning of changes"],
+  ["7.1","C","Resources"],["7.2","C","Competence"],["7.3","NC","Awareness"],["7.4","C","Communication"],["7.5","NC","Documented information"],
+  ["8.1","C","Operational planning and control"],["8.2","C","Risk assessment"],["8.3","C","Risk treatment"],
+  ["9.1","OFI","Monitoring, measurement, analysis and evaluation"],["9.2","C","Internal audit"],["9.3","C","Management review"],
+  ["10.1","C","Continual improvement"],["10.2","C","Nonconformity and corrective action"]
+];
+
+const NCS = [
+  { id: "NC-01", title: "Security awareness training not completed", ref: "Clause 7.3 · Annex A 6.3", rule: "New starters must complete security awareness training within 30 days of joining.", found: "9 of 40 sampled staff had not completed it. All 9 were contractors in Kraków.", why: "Contractors were onboarded through an agency, outside the HR system, so training was never assigned.", fix: "All 9 trained. Contractors now onboarded through the HR system; managers receive a weekly overdue-training report." },
+  { id: "NC-02", title: "Obsolete procedure in use", ref: "Clause 7.5.3", rule: "Obsolete documented information must be prevented from unintended use.", found: "Customer Support was using a superseded data export procedure that omitted the encryption step.", why: "No step existed to withdraw old copies when a new version was published.", fix: "Old copies removed. A single controlled document repository, checked quarterly." },
+  { id: "NC-03", title: "Emergency changes not approved retrospectively", ref: "Annex A 8.32", rule: "Emergency changes must receive retrospective approval within 2 working days.", found: "2 of 25 sampled emergency changes had no retrospective approval.", why: "Approval depended on individuals remembering; nothing tracked it.", fix: "Ticketing automation now flags unapproved emergency changes after 24 hours and escalates to the VP Engineering." }
+];
+const OFIS = [
+  ["OFI-1", "Some residual-risk approvals were recorded only by email", "Record all approvals in the GRC tool", "Complete"],
+  ["OFI-2", "KPI dashboard compiled manually from five sources", "Automate data collection", "Planned"],
+  ["OFI-3", "Low adoption of information classification labels", "Apply default labels by location", "Planned"],
+  ["OFI-4", "Supplier review evidence held in three places", "Maintain one record per supplier", "Planned"],
+  ["OFI-5", "Data loss prevention in monitor-only mode", "Enable blocking for restricted data", "Planned"]
+];
+
+const OBJECTIVES = [
+  { name: "No risk above appetite left untreated", val: 100, label: "0 remaining", target: 100, tlabel: "Target: 0 risks scoring 12 or more by July 2026", ok: "Met" },
+  { name: "New starters trained within 30 days", val: 87, label: "87%", target: 100, tlabel: "Target: 100% · reached 100% in July after NC-01 was corrected", ok: "Not met" },
+  { name: "Phishing simulation click rate", val: 4.1, label: "4.1%", target: 5, tlabel: "Target: below 5% · baseline 18% in January", ok: "Met", lowerBetter: true, scale: 20 },
+  { name: "Critical vulnerabilities fixed within 7 days", val: 97, label: "97%", target: 95, tlabel: "Target: at least 95%", ok: "Met" },
+  { name: "Platform availability", val: 99.96, label: "99.96%", target: 99.9, tlabel: "Target: at least 99.9%", ok: "Met", min: 99.5 },
+  { name: "Leaver access removed on last day", val: 98.5, label: "98.5%", target: 100, tlabel: "Target: 100% · 2 of 134 removed one day late", ok: "On track" }
+];
+const TREND = [
+  ["Staff using phishing-resistant MFA", "12%", "100%"],
+  ["Endpoints with EDR active", "71%", "100%"],
+  ["Cloud security posture score", "62%", "94%"],
+  ["Open critical and high vulnerabilities", "41", "3"],
+  ["Serious incidents per month", "1", "0"]
+];
+
+const PLAN = [
+  ["Plan"],
+  ["Gap analysis", "2025-11-03", "2025-12-01"],
+  ["Scope, context, policy", "2025-12-01", "2026-01-09"],
+  ["Risk assessment", "2026-01-12", "2026-02-16"],
+  ["Treatment plan and SoA", "2026-02-09", "2026-02-23"],
+  ["Do"],
+  ["Control implementation", "2026-02-16", "2026-06-22"],
+  ["Awareness training", "2026-03-02", "2026-05-25"],
+  ["Supplier reviews", "2026-03-16", "2026-05-25"],
+  ["Check and act"],
+  ["Operate and measure", "2026-04-01", "2026-08-19", "check"],
+  ["Internal audit", "2026-06-15", "2026-06-27", "check"],
+  ["Corrective actions", "2026-06-29", "2026-08-05", "check"],
+  ["Management review", "2026-08-11", null, "ms"],
+  ["Certify"],
+  ["Stage 1 audit", "2026-08-25", "2026-08-27", "cert"],
+  ["Stage 2 audit", "2026-09-22", "2026-09-26", "cert"],
+  ["Certificate issued", "2026-10-16", null, "ms"]
+];
+
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const rating = s => s >= 15 ? ["Critical", "crit"] : s >= 12 ? ["High", "high"] : s >= 7 ? ["Medium", "med"] : ["Low", "low"];
+const pill = s => { const [n, k] = rating(s); return `<span class="pill r-${k}">${s} ${n}</span>`; };
+const soaById = Object.fromEntries(SOA.map(r => [r[0], r]));
+const riskById = Object.fromEntries(RISKS.map(r => [r.id, r]));
+const docById = Object.fromEntries(DOCS.map(d => [d.id, d]));
+const REDUCED = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* Tabs */
+const TABS = ["overview", "scope", "risks", "soa", "audit", "review", "documents"];
+function show(tab, push = true) {
+  if (!TABS.includes(tab)) tab = "overview";
+  TABS.forEach(t => { $("#" + t).hidden = t !== tab; $("#t-" + t).setAttribute("aria-selected", t === tab); });
+  if (push) { try { history.replaceState(null, "", "#" + tab); } catch (e) {} }
+  window.scrollTo({ top: 0 });
+  if (window.onTabChange) window.onTabChange(tab);
+}
+document.querySelectorAll("nav.tabs button").forEach(b => b.addEventListener("click", () => show(b.dataset.tab)));
+
+/* Overview */
+function renderOverview() {
+  const appl = SOA.filter(r => r[2] === "Yes").length;
+  const before = RISKS.filter(r => r.L * r.I >= 12).length;
+  $("#tiles").innerHTML = `
+    <button class="tile" data-goto="risks"><span class="eyebrow">Risks above appetite</span><span class="big">${before} → 0</span><span class="sub">Scoring 12 or more, before and after treatment</span><span class="go">View risk →</span></button>
+    <button class="tile" data-goto="soa"><span class="eyebrow">Annex A controls</span><span class="big">${appl}<small> of 93 applied</small></span><span class="sub">2 exclusions, each evidenced</span><span class="go">View controls →</span></button>
+    <button class="tile" data-goto="audit"><span class="eyebrow">Internal audit</span><span class="big">0 · 3<small> major · minor</small></span><span class="sub">All findings corrected and verified</span><span class="go">View audit →</span></button>
+    <button class="tile" data-goto="review"><span class="eyebrow">Phishing click rate</span><span class="big">18% → 4.1%</span><span class="sub">January to June 2026</span><span class="go">View review →</span></button>`;
+  const docBtn = id => `<button class="btn" data-doc="${id}"><span class="ic">▤</span> ${esc(docById[id] ? docById[id].short : id)}</button>`;
+  $("#work-rows").innerHTML = WORK.map(([a, c, d]) => `<tr><td>${esc(a)}</td><td class="mono" style="white-space:nowrap">${esc(c)}</td><td><div class="chips">${d.map(docBtn).join("")}</div></td></tr>`).join("");
+  $("#doc-rows").innerHTML = DOCS.map(d => `<tr><td>${esc(d.num)}</td><td><b>${esc(d.short)}</b><br><span class="count">${esc(d.clause)}</span></td><td><button class="btn" data-doc="${d.id}">Open</button></td></tr>`).join("");
+  $("#gloss").innerHTML = GLOSSARY.map(([t, d]) => `<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join("");
+}
+$("#copy-pitch").addEventListener("click", async e => {
+  const btn = e.currentTarget;
+  try { await navigator.clipboard.writeText($("#pitch").textContent); btn.textContent = "Copied"; }
+  catch (err) { const r = document.createRange(); r.selectNodeContents($("#pitch")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected: press Ctrl/Cmd+C"; }
+  setTimeout(() => { btn.textContent = "Copy text"; }, 2200);
+});
+
+function renderTimeline() {
+  const start = new Date("2025-11-01"), end = new Date("2026-11-01");
+  const pct = d => ((new Date(d) - start) / (end - start) * 100).toFixed(2);
+  const months = ["Nov 25", "Dec", "Jan 26", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+  let h = `<div></div>` + months.map(m => `<div class="m">${m}</div>`).join("");
+  const today = new Date("2026-10-22");
+  PLAN.forEach(p => {
+    if (p.length === 1) { h += `<div class="lbl ph">${p[0]}</div><div class="track" style="height:12px;background:none"></div>`; return; }
+    const [name, a, b, kind] = p;
+    const mark = kind === "ms"
+      ? `<span class="ms" style="left:${pct(a)}%" title="${esc(name)}: ${a}"></span>`
+      : `<span class="seg ${kind || ""}" style="left:${pct(a)}%;width:max(4px, ${pct(b) - pct(a)}%)" title="${esc(name)}: ${a} to ${b}"></span>`;
+    h += `<div class="lbl">${esc(name)}</div><div class="track">${mark}<span class="today" style="left:${pct(today)}%"></span></div>`;
+  });
+  $("#timeline").innerHTML = h;
+}
+
+function renderScope() {
+  $("#issues").innerHTML = ISSUES.map(([i, t]) => `<tr><td>${esc(i)}</td><td>${t}</td></tr>`).join("");
+  $("#parties").innerHTML = PARTIES.map(([p, r]) => `<tr><td><b>${esc(p)}</b></td><td>${esc(r)}</td></tr>`).join("");
+}
+
+/* Risk: each risk moves to its residual position at the end of the month its treatment is due */
+const MON = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+const MON_NAMES = Object.keys(MON);
+RISKS.forEach(r => { const [, m, y] = r.due.split(" "); r.dueIdx = (Number(y) - 2026) * 12 + MON[m]; });
+const monthLabel = i => `${MON_NAMES[i % 12]} ${2026 + Math.floor(i / 12)}`;
+const treatedBy = (r, i) => r.dueIdx <= i;
+const posAt = (r, i) => treatedBy(r, i) ? [r.rL, r.rI] : [r.L, r.I];
+
+let hmMonth = 0, selRisk = "R-01", newRisk = null, playTimer = null;
+function renderHeat() {
+  let h = "";
+  for (let L = 5; L >= 1; L--) {
+    h += `<div class="ax">${L}</div>`;
+    for (let I = 1; I <= 5; I++) {
+      const s = L * I, k = rating(s)[1];
+      const here = RISKS.filter(r => { const [pl, pi] = posAt(r, hmMonth); return pl === L && pi === I; });
+      const nw = newRisk && newRisk.L === L && newRisk.I === I ? `<span class="rid new" title="${esc(newRisk.s)}">NEW</span>` : "";
+      h += `<div class="cell c-${k}"><span class="sc">${s}</span><span class="ids">${here.map(r => `<button class="rid${r.id === selRisk ? " sel" : ""}" data-risk="${r.id}" title="${esc(r.title)}" aria-label="${r.id}: ${esc(r.title)}">${r.id.slice(2)}</button>`).join("")}${nw}</span></div>`;
+    }
+  }
+  h += `<div></div>` + [1, 2, 3, 4, 5].map(i => `<div class="ax">${i}</div>`).join("");
+  $("#heat").innerHTML = h;
+  $("#hm-date").value = hmMonth;
+  $("#hm-when").textContent = monthLabel(hmMonth);
+  $("#hm-before").setAttribute("aria-pressed", hmMonth === 0);
+  $("#hm-after").setAttribute("aria-pressed", hmMonth === 12);
+  const scores = RISKS.map(r => { const [a, b] = posAt(r, hmMonth); return a * b; });
+  const done = RISKS.filter(r => treatedBy(r, hmMonth)).length;
+  $("#hm-stats").innerHTML = `<span>Treatments delivered <b>${done} of ${RISKS.length}</b></span><span>Risks above appetite <b>${scores.filter(s => s >= 12).length}</b></span>`;
+}
+function setMonth(i) { hmMonth = Math.max(0, Math.min(12, i)); renderHeat(); }
+function stopPlay() { clearInterval(playTimer); playTimer = null; $("#hm-play").textContent = "Play"; }
+$("#hm-play").addEventListener("click", () => {
+  if (playTimer) { stopPlay(); return; }
+  if (hmMonth >= 12) setMonth(0);
+  $("#hm-play").textContent = "Pause";
+  playTimer = setInterval(() => { if (hmMonth >= 12) { stopPlay(); return; } setMonth(hmMonth + 1); }, 750);
+});
+$("#hm-date").addEventListener("input", e => { stopPlay(); setMonth(Number(e.target.value)); });
+$("#hm-before").addEventListener("click", () => { stopPlay(); setMonth(0); });
+$("#hm-after").addEventListener("click", () => { stopPlay(); setMonth(12); });
+
+function renderRiskDetail() {
+  const r = riskById[selRisk], b = r.L * r.I, a = r.rL * r.rI;
+  $("#risk-detail").innerHTML = `
+    <div class="panel-head"><h3><span style="color:var(--muted);font-family:var(--font-mono);font-size:0.8em;font-weight:500">${r.id}</span> ${esc(r.title)}</h3><span class="pill ${r.st === "Complete" ? "r-low" : "r-med"}">${r.st}</span></div>
+    <div class="shift"><span class="count">Score</span> ${pill(b)} <span aria-hidden="true">→</span> ${pill(a)} <span class="count">after treatment</span></div>
+    <div class="detail"><dl>
+      <dt>Scenario</dt><dd>${esc(r.s)}</dd>
+      <dt>Treatment</dt><dd>${esc(r.t)}</dd>
+      <dt>Risk owner</dt><dd>${esc(r.owner)}</dd>
+      <dt>Due</dt><dd>${esc(r.due)}</dd>
+      <dt>Controls</dt><dd class="chips">${r.c.map(c => `<button class="chip" data-ctrl="${c}">${c} ${esc(soaById[c] ? soaById[c][1] : "")}</button>`).join("")}</dd>
+    </dl></div>
+    ${a >= 7 ? `<p class="count">Residual impact remains high because the consequence would still be serious; treatment reduces likelihood. Accepted in writing by the ${esc(r.owner)}.</p>` : ""}`;
+}
+function renderRiskRows() {
+  $("#risk-rows").innerHTML = RISKS.slice().sort((x, y) => y.L * y.I - x.L * x.I).map(r => `
+    <tr class="clickable${r.id === selRisk ? " sel" : ""}" data-risk="${r.id}" tabindex="0">
+      <td class="rt"><span class="mono" style="color:var(--muted);font-weight:400">${r.id}</span> ${esc(r.title)}<small>${esc(r.s)}</small></td><td>${esc(r.owner)}</td>
+      <td>${pill(r.L * r.I)}</td><td>${pill(r.rL * r.rI)}</td><td style="white-space:nowrap">${esc(r.due)}</td>
+      <td><span class="pill ${r.st === "Complete" ? "r-low" : "r-med"}">${r.st}</span></td></tr>`).join("");
+}
+function selectRisk(id) { selRisk = id; renderHeat(); renderRiskDetail(); renderRiskRows(); }
+
+const L_SCALE = ["Rare: less than once in 10 years", "Unlikely: once in 3–10 years", "Possible: once in 1–3 years", "Likely: once or more a year", "Almost certain: several times a year"];
+const I_SCALE = ["Negligible: under £10k; no data affected", "Minor: £10k–£100k; fewer than 10 customers affected", "Moderate: £100k–£500k; reportable data breach", "Major: £500k–£2m; data of 100+ customers exposed", "Severe: over £2m; threat to the business"];
+const ACCEPT = {
+  crit: ["Treat immediately; treatment plan within 30 days; report to the board.", "CEO only"],
+  high: ["Treat within 90 days.", "Executive risk owner"],
+  med: ["Treat within 6 months, or accept with written justification.", "Department head"],
+  low: ["Accept and monitor.", "Risk owner"]
+};
+function renderCalc() {
+  const L = Number($("#c-l").value), I = Number($("#c-i").value), s = L * I, [name, k] = rating(s);
+  $("#c-l-v").textContent = L; $("#c-i-v").textContent = I;
+  $("#c-l-d").textContent = L_SCALE[L - 1]; $("#c-i-d").textContent = I_SCALE[I - 1];
+  const placed = newRisk && newRisk.L === L && newRisk.I === I;
+  $("#c-out").innerHTML = `
+    <span class="eyebrow">Result</span>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="score">${s}</span><span class="pill r-${k}">${name}</span><span class="mono">${L} × ${I}</span></div>
+    <dl><dt>Required action</dt><dd>${ACCEPT[k][0]}</dd><dt>May be accepted by</dt><dd>${ACCEPT[k][1]}</dd></dl>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn primary" id="c-add">${placed ? "Shown on heat map" : "Add to heat map"}</button>
+      ${newRisk ? `<button class="btn" id="c-clear">Remove</button>` : ""}
+    </div>`;
+}
+["#c-l", "#c-i"].forEach(s => $(s).addEventListener("input", renderCalc));
+$("#c-out").addEventListener("click", e => {
+  if (e.target.id === "c-add") newRisk = { L: Number($("#c-l").value), I: Number($("#c-i").value), s: $("#c-s").value || "New risk" };
+  else if (e.target.id === "c-clear") newRisk = null;
+  else return;
+  renderHeat(); renderCalc();
+  if (newRisk) $("#heat").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "center" });
+});
+
+/* Controls */
+const statusKey = s => s === "Implemented" ? "low" : s === "Partially implemented" ? "med" : "na";
+const statusShort = s => s === "Implemented" ? "Implemented" : s === "Partially implemented" ? "Partial" : "Excluded";
+function plainWhy(code) {
+  if (code === "-") return `<span class="count">Excluded; see justification</span>`;
+  return code.split(",").map(x => x.trim()).map(x =>
+    /^R-\d\d$/.test(x) ? `<button class="chip" data-goto-risk="${x}" title="${esc(riskById[x].title)}">${x} ${esc(riskById[x].title)}</button>`
+    : x === "R" ? `<span class="pill r-na">Several risks</span>`
+    : x === "L" ? `<span class="pill r-na">Legal or regulatory</span>`
+    : x === "C" ? `<span class="pill r-na">Contractual</span>`
+    : x === "BP" ? `<span class="pill r-na">Good practice</span>` : esc(x)).join(" ");
+}
+function renderStrip() {
+  const names = { 5: "5 Organizational · 37", 6: "6 People · 8", 7: "7 Physical · 14", 8: "8 Technological · 34" };
+  let h = "", cur = "";
+  SOA.forEach(r => {
+    const t = r[0].split(".")[0];
+    if (t !== cur) { cur = t; h += `<span class="grp">${names[t]}</span>`; }
+    h += `<button data-ctrl="${r[0]}" title="${r[0]} ${esc(r[1])}: ${statusShort(r[5])}" style="background:var(--${statusKey(r[5])}-bg);color:var(--${statusKey(r[5])})">${r[0]}</button>`;
+  });
+  $("#soa-strip").innerHTML = h;
+}
+function renderSoa() {
+  const q = $("#soa-q").value.trim().toLowerCase(), th = $("#soa-theme").value, st = $("#soa-status").value;
+  const rows = SOA.filter(r =>
+    (!th || r[0].split(".")[0] === th) && (!st || r[5] === st) &&
+    (!q || (/^\d\.\d+$/.test(q) ? r[0] === q : r.join(" ").toLowerCase().includes(q))));
+  $("#soa-count").textContent = `${rows.length} of 93 controls`;
+  $("#soa-rows").innerHTML = rows.map(r => `
+    <tr><td class="rt" style="min-width:200px"><span class="mono" style="color:var(--muted);font-weight:400">${r[0]}</span> ${esc(r[1])}</td>
+    <td style="min-width:180px"><span class="chips">${plainWhy(r[3])}</span></td>
+    <td style="min-width:240px">${esc(r[4])}</td><td><span class="pill r-${statusKey(r[5])}">${statusShort(r[5])}</span></td></tr>`).join("")
+    || `<tr><td colspan="4">No controls match. Select Clear to show all.</td></tr>`;
+}
+function openControl(id) {
+  show("soa");
+  $("#soa-q").value = id; $("#soa-theme").value = ""; $("#soa-status").value = "";
+  renderSoa();
+  $("#soa-rows").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "center" });
+}
+["#soa-q", "#soa-theme", "#soa-status"].forEach(s => $(s).addEventListener("input", renderSoa));
+$("#soa-clear").addEventListener("click", () => { $("#soa-q").value = ""; $("#soa-theme").value = ""; $("#soa-status").value = ""; renderSoa(); });
+
+/* Audit */
+function renderAudit() {
+  const c = CLAUSES.filter(x => x[1] === "C").length;
+  $("#audit-tiles").innerHTML = `
+    <div class="tile"><span class="eyebrow">Major nonconformities</span><span class="big">0</span></div>
+    <div class="tile"><span class="eyebrow">Minor nonconformities</span><span class="big">3</span><span class="sub">Corrected and verified by 5 Aug 2026</span></div>
+    <div class="tile"><span class="eyebrow">Opportunities for improvement</span><span class="big">5</span><span class="sub">1 complete, 4 planned</span></div>
+    <div class="tile"><span class="eyebrow">Clauses conforming</span><span class="big">${c}<small> of ${CLAUSES.length}</small></span></div>`;
+  const bg = { C: "low", NC: "high", OFI: "na" }, word = { C: "Conforms", NC: "Minor nonconformity", OFI: "Opportunity for improvement" };
+  $("#clause-strip").innerHTML = CLAUSES.map(([n, r, d]) => `<span title="${n} ${esc(d)}: ${word[r]}" style="color:var(--${bg[r]});background:var(--${bg[r]}-bg)">${n}</span>`).join("");
+  $("#ncs").innerHTML = NCS.map(n => `
+    <article class="nc">
+      <div class="top"><h4>${n.id} · ${esc(n.title)}</h4><span class="pill r-high">Minor</span><span class="ref">${esc(n.ref)}</span><span class="pill r-low" style="margin-left:auto">Closed</span></div>
+      <dl class="reg">
+        <div><dt>Requirement</dt><dd>${esc(n.rule)}</dd></div>
+        <div><dt>Evidence</dt><dd>${esc(n.found)}</dd></div>
+        <div><dt>Root cause</dt><dd>${esc(n.why)}</dd></div>
+        <div><dt>Corrective action</dt><dd>${esc(n.fix)}</dd></div>
+      </dl>
+    </article>`).join("");
+  $("#ofis").innerHTML = OFIS.map(o => `<tr><td class="mono">${o[0]}</td><td>${esc(o[1])}</td><td>${esc(o[2])}</td><td><span class="pill ${o[3] === "Complete" ? "r-low" : "r-na"}">${o[3]}</span></td></tr>`).join("");
+}
+
+const QUIZ = [
+  { q: "There is no documented risk assessment process. Risks are discussed informally at leadership meetings and nothing is recorded.", a: "Major", why: "Clause 6.1.2 requires a defined risk assessment process. It is absent, and the SoA and treatment plan depend on it." },
+  { q: "1 of 30 sampled leavers retained Slack access for 3 days. The other 29 were removed on their last day.", a: "Minor", why: "The control exists and operated in 29 of 30 cases. This is an isolated lapse." },
+  { q: "Quarterly access reviews are completed on time and signed off, but each manager uses a separate spreadsheet.", a: "OFI", why: "The requirement is met with evidence. A central tool would be more efficient." },
+  { q: "The last management review was held 20 months ago. The ISMS manual requires one every 12 months.", a: "Major", why: "Clause 9.3 requires reviews at planned intervals. An 8-month overrun is a systemic failure of leadership oversight." },
+  { q: "2 of 50 sampled laptops had disk encryption disabled after an operating system reinstall.", a: "Minor", why: "Encryption is implemented and monitored. Two devices slipped through a specific gap that needs correction." },
+  { q: "The SoA excludes 8.30 Outsourced development, but the mobile app is built by an external agency.", a: "Major", why: "Clause 6.1.3 d requires valid justification for exclusions. Here it is false and a needed control is missing. Some auditors would grade this minor; most treat an invalid exclusion as serious." }
+];
+let answers = {};
+function renderQuiz() {
+  const n = Object.keys(answers).length, right = QUIZ.filter((x, i) => answers[i] === x.a).length;
+  const label = { Major: "major nonconformity", Minor: "minor nonconformity", OFI: "opportunity for improvement" };
+  $("#q-score").textContent = n === QUIZ.length ? `${right} of ${QUIZ.length} correct` : `${n} of ${QUIZ.length} answered`;
+  $("#q-list").innerHTML = QUIZ.map((x, i) => {
+    const pick = answers[i], done = pick !== undefined, ok = pick === x.a;
+    const opt = (v, t) => `<button class="btn${done && v === pick ? " picked" : ""}${done && v === x.a ? " answer" : ""}" data-q="${i}" data-v="${v}" ${done ? "disabled" : ""}>${t}</button>`;
+    return `<div class="q${done ? (ok ? " right" : " wrong") : ""}">
+      <p><span class="mono" style="color:var(--muted)">${i + 1}.</span> ${esc(x.q)}</p>
+      <div class="opts">${opt("Major", "Major")}${opt("Minor", "Minor")}${opt("OFI", "Opportunity for improvement")}</div>
+      ${done ? `<p class="why"><b>${ok ? "Correct" : "Incorrect"}: ${label[x.a]}.</b> ${esc(x.why)}</p>` : ""}
+    </div>`;
+  }).join("");
+}
+$("#q-list").addEventListener("click", e => {
+  const b = e.target.closest("button[data-q]");
+  if (!b || b.disabled) return;
+  answers[b.dataset.q] = b.dataset.v; renderQuiz();
+});
+$("#q-reset").addEventListener("click", () => { answers = {}; renderQuiz(); });
+
+/* Review */
+function renderReview() {
+  $("#objectives").innerHTML = OBJECTIVES.map(o => {
+    let w, tw;
+    if (o.lowerBetter) { w = 100 - o.val / o.scale * 100; tw = 100 - o.target / o.scale * 100; }
+    else if (o.min) { w = (o.val - o.min) / (100 - o.min) * 100; tw = (o.target - o.min) / (100 - o.min) * 100; }
+    else { w = o.val; tw = o.target; }
+    const k = o.ok === "Met" ? "low" : o.ok === "On track" ? "med" : "high";
+    return `<div class="obj-row"><span>${esc(o.name)}</span><span class="v">${o.label} <span class="pill r-${k}">${o.ok}</span></span>
+      <div class="meter" role="img" aria-label="${esc(o.name)}: ${o.label}. ${esc(o.tlabel)}"><span style="width:${w}%;background:var(--${k})"></span><i style="left:calc(${tw}% - 1px)"></i></div>
+      <span class="t">${esc(o.tlabel)}</span></div>`;
+  }).join("");
+  $("#trend").innerHTML = TREND.map(([n, a, b]) => `<tr><td>${esc(n)}</td><td class="a">${a}</td><td class="b">${b}</td></tr>`).join("");
+}
+
+/* Document viewer: renders the formal Markdown documents inside the page */
+const viewer = $("#viewer");
+let curDoc = null, lastFocus = null;
+if (window.mermaid) { try { mermaid.initialize({ startOnLoad: false, theme: "neutral", securityLevel: "strict", fontFamily: "IBM Plex Sans, sans-serif" }); } catch (e) {} }
+function openDoc(id, anchor) {
+  const d = docById[id]; if (!d) return;
+  if (viewer.hidden) lastFocus = document.activeElement;
+  curDoc = id;
+  $("#v-title").textContent = d.title;
+  const art = $("#v-doc");
+  art.innerHTML = window.marked ? marked.parse(d.md) : `<pre>${esc(d.md)}</pre>`;
+  art.querySelectorAll("a[href]").forEach(a => {
+    const href = a.getAttribute("href");
+    if (/^https?:/.test(href)) { a.target = "_blank"; a.rel = "noopener"; }
+    else if (/^[\w-]+\.md(#.*)?$/.test(href) || href.startsWith("#")) a.dataset.internal = href;
+    else { a.classList.add("repo-only"); a.title = "Available in the GitHub repository"; a.dataset.internal = "none"; }
+  });
+  const nodes = [];
+  art.querySelectorAll("pre code.language-mermaid").forEach(code => {
+    const div = document.createElement("div"); div.className = "mermaid"; div.textContent = code.textContent;
+    code.parentElement.replaceWith(div); nodes.push(div);
+  });
+  viewer.hidden = false;
+  document.body.style.overflow = "hidden";
+  const i = DOCS.findIndex(x => x.id === id);
+  $("#v-prev").disabled = i <= 0; $("#v-next").disabled = i >= DOCS.length - 1;
+  $("#v-scroll").scrollTop = 0;
+  if (nodes.length && window.mermaid) { try { mermaid.run({ nodes }); } catch (e) {} }
+  if (anchor) { const t = art.querySelector("#" + CSS.escape(anchor)); if (t) t.scrollIntoView(); }
+  $("#v-close").focus();
+}
+function closeDoc() {
+  viewer.hidden = true; document.body.style.overflow = "";
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+$("#v-close").addEventListener("click", closeDoc);
+$("#v-prev").addEventListener("click", () => { const i = DOCS.findIndex(x => x.id === curDoc); if (i > 0) openDoc(DOCS[i - 1].id); });
+$("#v-next").addEventListener("click", () => { const i = DOCS.findIndex(x => x.id === curDoc); if (i < DOCS.length - 1) openDoc(DOCS[i + 1].id); });
+viewer.addEventListener("click", e => {
+  if (e.target === viewer) { closeDoc(); return; }
+  const a = e.target.closest("a[data-internal]"); if (!a) return;
+  e.preventDefault();
+  const href = a.dataset.internal;
+  if (href === "none") return;
+  if (href.startsWith("#")) { const t = $("#v-doc").querySelector("#" + CSS.escape(href.slice(1))); if (t) t.scrollIntoView({ behavior: "smooth" }); return; }
+  const [file, anchor] = href.split("#");
+  openDoc(file.replace(/\.md$/, ""), anchor);
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !viewer.hidden) closeDoc(); });
+
+/* Shared clicks */
+document.addEventListener("click", e => {
+  if (e.target.closest("#viewer")) return;
+  const dd = e.target.closest("[data-doc]");
+  if (dd) { openDoc(dd.dataset.doc, dd.dataset.anchor); return; }
+  const go = e.target.closest("[data-goto]");
+  if (go) { show(go.dataset.goto); return; }
+  const gr = e.target.closest("[data-goto-risk]");
+  if (gr) { show("risks"); selectRisk(gr.dataset.gotoRisk); return; }
+  const rb = e.target.closest("[data-risk]");
+  if (rb) { selectRisk(rb.dataset.risk); return; }
+  const cb = e.target.closest("[data-ctrl]");
+  if (cb) openControl(cb.dataset.ctrl);
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Enter") { const tr = e.target.closest("tr[data-risk]"); if (tr) selectRisk(tr.dataset.risk); }
+});
+
+/* ===== Presenter mode and ANU guide ===== */
+const TIPS = {
+  overview: [["Start with the five steps, then open any document to show the formal evidence.", ".steps"], ["Use the 60-second summary when asked what this project is.", "#pitch"]],
+  scope: [["We covered everything customers rely on, not just one office.", "#scope .intro"], ["Every exclusion has a reason. Auditors always test those.", "#scope-table"]],
+  risks: [["Likelihood × impact. 12 or more must be treated.", "#risks .formula"], ["Play the heat map to show risks moving as treatments land.", "#heat"], ["Invite them to score a risk with the calculator.", "#c-out"]],
+  soa: [["Each square is one of the 93 Annex A controls. Select one to show its justification.", "#soa-strip"], ["Search by keyword, such as backup or password.", "#soa .filters"]],
+  audit: [["Major: absent or systemic. Minor: an isolated lapse.", "#audit .bands"], ["The grading exercise is a good way to involve the interviewer.", "#q-list"]],
+  documents: [["Every stage has a formal document. Open any of them from this list.", "#doc-rows"], ["This table maps each activity to its ISO clause and evidence.", "#work-rows"]],
+  review: [["Five of six objectives met or on track. Training slipped and was corrected.", "#objectives"], ["Leadership approved certification and funded the remaining treatments.", ".decisions"]]
+};
+const TOUR = [
+  { tab: "overview", sel: "#overview .sec-head", text: "Hello, I'm ANU. This is an ISO 27001 implementation for Halcyon Ledger, a simulated payments company that needed certification to win three enterprise customers." },
+  { tab: "overview", sel: "#problem", text: "The problem: controls existed, but nobody owned the risks and there was no evidence. £4.2m of deals were on hold until that changed." },
+  { tab: "overview", sel: ".steps", text: "Certification took five steps: define the scope, assess the risks, select controls, audit the ISMS, and review it with leadership." },
+  { tab: "overview", sel: "#tiles", text: "The results: risks above appetite went from 6 to 0, 91 of 93 controls apply, and the audit found only 3 minor issues." },
+  { tab: "scope", sel: "#scope .intro", text: "Step 1 is scope: what the ISMS protects. It covers the whole product, both offices, the cloud and key suppliers." },
+  { tab: "scope", sel: "#scope-table", text: "Everything excluded has a documented reason, because auditors always test exclusions." },
+  { tab: "risks", sel: "#risks .formula", text: "Step 2 is risk. Each risk is scored likelihood × impact, from 1 to 25. A score of 12 or more must be treated.", up: true },
+  { tab: "risks", sel: "#heat", text: "Each number is a risk. As each treatment is delivered, the risk moves to a lower score.", act: "play" },
+  { tab: "risks", sel: "#risk-detail", text: "Select any risk to see the scenario, the treatment, the owner and the controls used." },
+  { tab: "soa", sel: "#soa-strip", text: "Step 3 is the Statement of Applicability. Each square is one of the 93 Annex A controls, with its justification and status." },
+  { tab: "audit", sel: "#ncs", text: "Step 4 is the internal audit. No major nonconformities and three minor ones, each with a root cause and corrective action." },
+  { tab: "review", sel: "#objectives", text: "Step 5 is management review. Five of six objectives were met or on track." },
+  { tab: "review", sel: ".decisions", text: "Leadership approved certification, which was achieved in October 2026. Every stage has a formal document behind it. Any questions?" }
+];
+
+const bot = $("#bot"), bubble = $("#bubble"), txt = $("#b-txt"), ctrls = $("#b-ctrls"), bar = $("#b-bar");
+const guide = document.querySelector(".guide");
+let tourStep = -1, typeTimer = null, tipIdx = 0, curTab = "overview", flyTimer = null, justDragged = false, drag = null;
+
+function say(text, buttons, progress) {
+  bubble.hidden = false;
+  clearInterval(typeTimer);
+  ctrls.innerHTML = buttons;
+  bar.parentElement.hidden = progress == null;
+  if (progress != null) bar.style.width = progress + "%";
+  if (REDUCED) { txt.textContent = text; return; }
+  let i = 0; txt.textContent = ""; bot.classList.add("talking");
+  typeTimer = setInterval(() => {
+    i += 2; txt.textContent = text.slice(0, i);
+    if (i >= text.length) { clearInterval(typeTimer); bot.classList.remove("talking"); }
+  }, 20);
+}
+function clearSpot() { document.querySelectorAll(".spot").forEach(e => e.classList.remove("spot")); }
+function greet() {
+  say("Hello, I'm ANU, your presentation guide. I can take you through the case study section by section. You can drag me anywhere.",
+    `<button class="btn primary" data-b="tour">Start the tour</button><button class="btn" data-b="tip">Show a tip</button>`);
+}
+function tip() {
+  document.body.classList.add("presenting");
+  const list = TIPS[curTab] || TIPS.overview;
+  const [t, sel] = list[tipIdx % list.length]; tipIdx++;
+  clearSpot();
+  const el = $(sel);
+  if (el) { el.classList.add("spot"); el.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "center" }); flyTo(el); }
+  say(t, `<button class="btn" data-b="tip">Next tip</button><button class="btn primary" data-b="tour">Start the tour</button>`);
+}
+function tourGo(i) {
+  if (i < 0) i = 0;
+  if (i >= TOUR.length) { tourEnd(); return; }
+  tourStep = i; clearSpot();
+  document.body.classList.add("presenting");
+  const s = TOUR[i];
+  show(s.tab);
+  setTimeout(() => {
+    const el = $(s.sel);
+    if (el) { el.classList.add("spot"); el.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: s.up ? "start" : "center" }); flyTo(el); }
+    if (s.act === "play") { stopPlay(); setMonth(0); setTimeout(() => $("#hm-play").click(), 700); }
+  }, 60);
+  const last = i === TOUR.length - 1;
+  say(s.text,
+    `${i > 0 ? `<button class="btn" data-b="back">Back</button>` : ""}<button class="btn primary" data-b="next">${last ? "Finish" : "Next"}</button><button class="btn" data-b="end">End tour</button><span class="prog">${i + 1} / ${TOUR.length}</span>`,
+    (i + 1) / TOUR.length * 100);
+}
+function tourEnd() {
+  tourStep = -1; clearSpot();
+  say("That completes the tour. Select me at any time for a tip on the current section.", `<button class="btn" data-b="tour">Restart tour</button><button class="btn" data-b="hide">Close</button>`);
+}
+function exitGuide() {
+  tourStep = -1; clearSpot(); clearTimeout(flyTimer); clearInterval(typeTimer); bot.classList.remove("talking");
+  bubble.hidden = true;
+  document.body.classList.remove("presenting");
+  if (!guide.classList.contains("moved")) return;
+  const g = guide.getBoundingClientRect();
+  guide.classList.add("flying");
+  placeGuide(innerWidth - g.width - 16, innerHeight - g.height - 16);
+  setTimeout(() => { guide.classList.remove("flying", "moved", "left"); guide.style.left = ""; guide.style.top = ""; }, REDUCED ? 0 : 750);
+}
+ctrls.addEventListener("click", e => {
+  const b = e.target.closest("[data-b]"); if (!b) return;
+  ({ tour: () => tourGo(0), tip, next: () => tourGo(tourStep + 1), back: () => tourGo(tourStep - 1), end: exitGuide, hide: exitGuide })[b.dataset.b]();
+});
+$("#b-close").addEventListener("click", exitGuide);
+bot.addEventListener("click", () => {
+  if (justDragged) { justDragged = false; return; }
+  if (!bubble.hidden && tourStep < 0) { tip(); return; }
+  if (bubble.hidden) { tourStep >= 0 ? tourGo(tourStep) : tip(); }
+});
+document.addEventListener("keydown", e => {
+  if (tourStep < 0 || !viewer.hidden || e.target.closest("input, textarea, select")) return;
+  if (e.key === "ArrowRight") tourGo(tourStep + 1);
+  if (e.key === "ArrowLeft") tourGo(tourStep - 1);
+  if (e.key === "Escape") exitGuide();
+});
+window.onTabChange = tab => { curTab = tab; tipIdx = 0; if (tourStep < 0 && !bubble.hidden && document.body.classList.contains("presenting")) tip(); };
+
+function placeGuide(x, y) {
+  const r = guide.getBoundingClientRect(), pad = 8;
+  x = Math.max(pad, Math.min(x, innerWidth - r.width - pad));
+  y = Math.max(pad, Math.min(y, innerHeight - r.height - pad));
+  guide.classList.add("moved");
+  guide.style.left = x + "px"; guide.style.top = y + "px";
+  guide.classList.toggle("left", x + r.width / 2 < innerWidth / 2);
+}
+function keepGuideOnScreen() { if (guide.classList.contains("moved")) { const r = guide.getBoundingClientRect(); placeGuide(r.left, r.top); } }
+function flyTo(el) {
+  clearTimeout(flyTimer);
+  flyTimer = setTimeout(() => {
+    if (!guide.classList.contains("moved")) { const c = guide.getBoundingClientRect(); placeGuide(c.left, c.top); void guide.offsetWidth; }
+    const r = el.getBoundingClientRect(), g = guide.getBoundingClientRect();
+    const top = document.querySelector("header.site").getBoundingClientRect().bottom + 8, W = innerWidth, H = innerHeight;
+    let x, y;
+    if (W - r.right >= g.width + 16) { x = r.right + 12; y = Math.max(top, r.top); }
+    else if (r.left >= g.width + 16) { x = r.left - g.width - 12; y = Math.max(top, r.top); }
+    else {
+      x = Math.min(r.right, W) - g.width;
+      if (H - r.bottom >= g.height + 12) y = r.bottom + 12;
+      else if (r.top - top >= g.height + 12) y = r.top - g.height - 12;
+      else y = H - g.height - 8;
+    }
+    guide.classList.add("flying");
+    placeGuide(x, y);
+    setTimeout(() => guide.classList.remove("flying"), 750);
+  }, REDUCED ? 50 : 650);
+}
+bot.addEventListener("pointerdown", e => {
+  if (e.button !== 0) return;
+  const r = guide.getBoundingClientRect();
+  drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, ox: r.left, oy: r.top, moved: false };
+  bot.setPointerCapture(e.pointerId);
+});
+bot.addEventListener("pointermove", e => {
+  if (!drag || e.pointerId !== drag.id) return;
+  const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+  if (!drag.moved && Math.hypot(dx, dy) < 6) return;
+  drag.moved = true; bot.classList.add("dragging");
+  placeGuide(drag.ox + dx, drag.oy + dy);
+});
+function endDrag(e) {
+  if (!drag || e.pointerId !== drag.id) return;
+  if (drag.moved) justDragged = true;
+  bot.classList.remove("dragging"); drag = null;
+}
+bot.addEventListener("pointerup", endDrag);
+bot.addEventListener("pointercancel", endDrag);
+addEventListener("resize", keepGuideOnScreen);
+if (window.ResizeObserver) new ResizeObserver(keepGuideOnScreen).observe(guide);
+
+$("#present-start").addEventListener("click", () => tourGo(0));
+setTimeout(greet, REDUCED ? 0 : 800);
+
+/* Start */
+renderOverview(); renderTimeline(); renderScope();
+renderHeat(); renderRiskDetail(); renderRiskRows(); renderCalc();
+renderStrip(); renderSoa(); renderAudit(); renderQuiz(); renderReview();
+const h = (location.hash || "").slice(1);
+if (TABS.includes(h)) show(h, false);
+</script>
