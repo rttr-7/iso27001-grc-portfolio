@@ -52,14 +52,20 @@ header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
 .brand { display: grid; gap: 2px; min-width: 0; }
 .brand h1 { font-size: 1.7rem; line-height: 1.1; }
 .brand .by { font-size: 0.84rem; color: var(--muted); }
+.author { font-weight: 700; font-style: italic; color: var(--ink); white-space: nowrap; }
 .head-tools { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .cert { display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600; color: var(--low); background: var(--low-bg); padding: 5px 11px; border-radius: 999px; white-space: nowrap; }
+.cred { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid #c9d5e5; padding: 4px 11px; border-radius: 999px; white-space: nowrap; text-decoration: none; }
+.cred:hover { background: #e2e9f2; }
 .cert::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 nav.tabs { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; margin-bottom: -1px; }
 nav.tabs::-webkit-scrollbar { display: none; }
 nav.tabs button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 9px 14px 11px; cursor: pointer; color: var(--muted); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
 nav.tabs button:hover { color: var(--text); }
 nav.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+nav.tabs.fade-r { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent); }
+nav.tabs.fade-l { -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px); mask-image: linear-gradient(90deg, transparent, #000 48px); }
+nav.tabs.fade-l.fade-r { -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent); }
 
 main { padding-block: 32px 64px; }
 section.tab { display: grid; gap: 30px; }
@@ -249,6 +255,13 @@ details.gloss-box[open] summary { margin-bottom: 12px; }
 .gloss dd { margin: 0; color: var(--muted); font-size: 0.88rem; }
 .pitch { font-size: 1rem; line-height: 1.7; max-width: 75ch; font-style: italic; }
 .notice { font-size: 0.82rem; color: var(--muted); }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 6px 0 0; border-block: 1px solid var(--line); }
+.facts > div { padding: 10px 16px 10px 0; min-width: 0; }
+.facts > div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+.facts dt { font: 600 0.7rem/1.2 var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 4px 0 0; font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+.more { justify-self: start; background: none; border: 0; padding: 0; color: var(--accent); font-weight: 600; font-size: 0.86rem; cursor: pointer; }
+.more:hover { text-decoration: underline; }
 
 /* Document viewer */
 .viewer { position: fixed; inset: 0; z-index: 50; background: rgba(15,20,30,0.45); display: flex; justify-content: center; padding: calc(16px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
@@ -285,8 +298,14 @@ main { padding-block-end: 160px; }
 .guide > * { pointer-events: auto; }
 .guide.moved { right: auto; bottom: auto; }
 .guide.left { flex-direction: row; }
-.bot { width: 92px; height: 92px; padding: 0; border: 0; background: none; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; flex: none; filter: drop-shadow(0 8px 10px rgba(31,58,95,0.25)); }
-.bot svg { width: 100%; height: 100%; display: block; pointer-events: none; }
+.bot { width: 92px; height: 92px; padding: 0; border: 0; background: none; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; flex: none; filter: drop-shadow(0 8px 10px rgba(31,58,95,0.25)); transition: opacity 0.25s; }
+.bot svg { width: 100%; height: 100%; display: block; pointer-events: none; transform-origin: 50% 92%; transition: transform 0.2s ease-out; }
+.bot.tracking .pupils { animation: none !important; transform: translate(var(--px, 0px), var(--py, 0px)); transition: transform 0.12s ease-out; }
+@media (hover: hover) {
+  .bot:hover svg { transform: scale(1.06); }
+  .bot:hover .eyes { animation: none !important; transform: scaleY(0.55); transition: transform 0.12s; }
+}
+.nudge { align-self: center; margin-bottom: 18px; background: var(--accent); color: #ffffff; border: 0; border-radius: 6px; padding: 7px 11px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; cursor: pointer; box-shadow: 0 8px 20px -8px rgba(15,25,40,0.45); }
 .bot.dragging { cursor: grabbing; }
 .bot .eyes, .bot .pupils { transform-box: fill-box; transform-origin: center; }
 .bot .tilt { transform-box: view-box; transform-origin: 60px 104px; }
@@ -309,6 +328,15 @@ main { padding-block-end: 160px; }
   .bot .pupils { animation: look 6s ease-in-out infinite; }
   .bot .tilt { animation: tilt 5s ease-in-out infinite; }
   .bot.talking .beak { animation: beak 0.17s ease-in-out infinite alternate; }
+  .bot.hop svg { animation: hop 0.5s cubic-bezier(0.3, 1.5, 0.5, 1); }
+  .bot.land svg { animation: land 0.35s ease-out; }
+  .bot.dragging svg { animation: wiggle 0.22s ease-in-out infinite alternate; }
+  .bot.dragging .eyes { animation: none; transform: scale(1.12); }
+  .bubble:not([hidden]), .nudge:not([hidden]) { animation: pop 0.22s ease-out; }
+  @keyframes hop { 30% { transform: translateY(-14px) scale(0.96, 1.06); } 60% { transform: translateY(0) scale(1.08, 0.92); } 100% { transform: none; } }
+  @keyframes land { 40% { transform: scale(1.12, 0.86); } 100% { transform: none; } }
+  @keyframes wiggle { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+  @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(0.97); } }
   .guide.flying { transition: left 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), top 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
   @keyframes float { 50% { transform: translateY(-6px); } }
   @keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
@@ -317,7 +345,55 @@ main { padding-block-end: 160px; }
   @keyframes beak { to { transform: scaleY(1.45); } }
 }
 @media (max-width: 560px) {
-  .bot { width: 70px; height: 70px; }
+  /* Phone: compact header that shrinks further on scroll */
+  .head-row { padding-block: 10px 6px; gap: 6px 12px; }
+  .brand h1 { font-size: 1.35rem; }
+  .brand .by { font-size: 0.76rem; line-height: 1.35; }
+  .cert, .cred { font-size: 0.72rem; padding: 3px 8px; gap: 5px; }
+  .cert::before { width: 6px; height: 6px; }
+  .cred .wide { display: none; }
+  .head-tools { gap: 6px 8px; }
+  header.site.compact .brand .by, header.site.compact .head-tools { display: none; }
+  header.site.compact .brand h1 { font-size: 1.1rem; }
+  header.site.compact .head-row { padding-block: 8px 2px; }
+  nav.tabs button { padding: 10px 12px 12px; }
+  main { padding-block: 22px 110px; }
+  /* Phone: overview reads as an executive summary, not a long article */
+  h2 { font-size: 1.5rem; }
+  .story-block { padding-block: 20px; gap: 10px; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .facts > div { padding: 9px 12px 9px 0; }
+  .facts > div:nth-child(even) { padding-left: 12px; border-left: 1px solid var(--line); }
+  .facts > div:nth-child(odd) { padding-left: 0; border-left: 0; }
+  .facts > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .steps { grid-template-columns: 1fr; gap: 0; border: 1px solid var(--line); border-radius: var(--radius); }
+  .steps button { grid-template-columns: 26px 1fr auto; column-gap: 10px; row-gap: 1px; align-items: center; border: 0; border-radius: 0; padding: 11px 14px; }
+  .steps button + button { border-top: 1px solid var(--line); }
+  .steps button::before { content: counter(step); grid-row: span 2; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #ffffff; display: grid; place-items: center; letter-spacing: 0; font-size: 0.78rem; }
+  .steps button::after { content: "›"; grid-column: 3; grid-row: 1 / span 2; color: var(--muted); font-size: 1.3rem; }
+  .steps b { font-size: 1.02rem; grid-column: 2; }
+  .steps span { font-size: 0.8rem; grid-column: 2; }
+  .tiles { grid-template-columns: 1fr 1fr; }
+  .tile { padding: 14px; gap: 4px; }
+  .tile .big { font-size: 1.35rem; }
+  .tile .big small { display: block; font-size: 0.78rem; margin-top: 2px; }
+  .tile .sub { display: none; }
+  .tiles .tile + .tile { border-top: 0; }
+  .tiles .tile:nth-child(even) { border-left: 1px solid var(--line); }
+  .tiles .tile:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .panel { padding: 16px; }
+  .viewer { padding: 0; }
+  .viewer .sheet { width: 100%; border-radius: 0; }
+  .viewer .bar { padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px; }
+  .viewer .scroll { padding: 20px 16px 48px; }
+  /* Phone: ANU docks to the bottom as a sheet instead of floating over content */
+  .bot { width: 64px; height: 64px; }
+  .guide.scrolling:not(.open) .bot { opacity: 0.4; }
+  .guide.open { left: max(8px, env(safe-area-inset-left, 0px)); right: max(8px, env(safe-area-inset-right, 0px)); bottom: calc(8px + env(safe-area-inset-bottom, 0px)); top: auto; flex-direction: column; align-items: flex-end; gap: 0; }
+  .guide.open .bot { width: 52px; height: 52px; margin: 0 8px -8px 0; position: relative; z-index: 1; }
+  .guide.open .bubble { width: 100%; margin: 0; max-height: 46vh; overflow-y: auto; }
+  body.guide-open main { padding-bottom: 50vh; }
+  .spot { scroll-margin-top: var(--head-h, 0px); }
   .bubble { width: calc(100vw - 32px - 80px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)); margin-bottom: 18px; }
   .nc .reg div { grid-template-columns: 1fr; gap: 2px; }
   .intro > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
@@ -331,10 +407,11 @@ main { padding-block-end: 160px; }
     <div class="head-row">
       <div class="brand">
         <h1>Halcyon Ledger ISMS</h1>
-        <span class="by">ISO/IEC 27001:2022 implementation case study · Amay Chivate</span>
+        <span class="by">ISO/IEC 27001:2022 implementation case study · <b class="author">Amay Chivate</b></span>
       </div>
       <div class="head-tools">
-        <span class="cert">Certified · 16 Oct 2026</span>
+        <span class="cert" title="Halcyon Ledger (fictional) ISO/IEC 27001 certification date">Certified · 16 Oct 2026</span>
+        <a class="cred" href="amay-chivate-iso27001-lead-auditor-certificate.pdf" target="_blank" rel="noopener" title="TÜV NORD certificate of achievement: PR373 ISO/IEC 27001:2022 Lead Auditor training course (CQI/IRCA certified), 22–30 Aug 2026, issued 6 Oct 2026"><span class="wide">ISO 27001 </span>Lead Auditor course<span class="wide"> · Aug 2026</span> <span aria-hidden="true">↗</span></a>
       </div>
     </div>
     <nav class="tabs" role="tablist" aria-label="Sections">
@@ -354,8 +431,15 @@ main { padding-block-end: 160px; }
 <!-- OVERVIEW -->
 <section class="tab" id="overview" role="tabpanel" aria-labelledby="t-overview">
   <div class="sec-head">
-    <span class="eyebrow">Portfolio case study · Amay Chivate</span>
-    <h2>Taking a payments company from no security management system to ISO/IEC 27001 certification in 11 months</h2>
+    <span class="eyebrow">Case study · ISO/IEC 27001:2022</span>
+    <h2>ISO/IEC 27001 certification for a payments company in 11 months</h2>
+    <p class="lede">End-to-end ISMS implementation, from scoping to certification audit.</p>
+    <dl class="facts">
+      <div><dt>Organisation</dt><dd>Halcyon Ledger Ltd (fictional)</dd></div>
+      <div><dt>Sector</dt><dd>Payments, 210 staff</dd></div>
+      <div><dt>Period</dt><dd>Nov 2025 – Oct 2026</dd></div>
+      <div><dt>Outcome</dt><dd>Certified 16 Oct 2026</dd></div>
+    </dl>
     <div class="actions">
       <button class="btn primary" data-doc="00-case-study-brief"><span class="ic">▤</span> Read the case study</button>
       <button class="btn" id="present-start">Present it</button>
@@ -364,27 +448,27 @@ main { padding-block-end: 160px; }
 
   <div class="story">
     <div class="story-block" id="problem">
-      <span class="eyebrow">The problem</span>
+      <span class="eyebrow">01 · Challenge</span>
       <h3>Security existed, but no one could prove it was managed</h3>
-      <p>Halcyon Ledger, a fictional 210-person payments company, had security tools but no risk owners, no measurements and no evidence an auditor could rely on. Three enterprise customers refused to sign without ISO 27001, leaving £4.2m of annual revenue on hold.</p>
-      <div><button class="btn" data-doc="00-case-study-brief" data-anchor="2-problem-statement">Read the problem statement</button></div>
+      <p>No risk owners, no measurements and no audit evidence. Three enterprise customers required ISO 27001 before signing, putting £4.2m of annual revenue on hold.</p>
+      <button class="more" data-doc="00-case-study-brief" data-anchor="2-problem-statement">Problem statement →</button>
     </div>
 
     <div class="story-block">
-      <span class="eyebrow">What we did</span>
-      <h3>Built and tested an ISMS in five steps</h3>
+      <span class="eyebrow">02 · Approach</span>
+      <h3>Five steps, each with a formal deliverable</h3>
       <div class="steps">
-        <button data-goto="scope"><b>Define the scope</b><span>The whole HalcyonPay service: both offices, the cloud and key suppliers.</span></button>
-        <button data-goto="risks"><b>Assess the risks</b><span>47 risks scored; treatment planned for the 12 significant ones.</span></button>
-        <button data-goto="soa"><b>Select controls</b><span>All 93 Annex A controls reviewed and justified.</span></button>
-        <button data-goto="audit"><b>Audit the ISMS</b><span>Every clause tested with real samples; findings corrected.</span></button>
-        <button data-goto="review"><b>Review with leadership</b><span>Results reviewed and certification approved.</span></button>
+        <button data-goto="scope"><b>Define the scope</b><span>Product, offices, cloud and suppliers</span></button>
+        <button data-goto="risks"><b>Assess the risks</b><span>47 scored, 12 treated</span></button>
+        <button data-goto="soa"><b>Select controls</b><span>93 Annex A controls justified</span></button>
+        <button data-goto="audit"><b>Audit the ISMS</b><span>Every clause sampled</span></button>
+        <button data-goto="review"><b>Leadership review</b><span>Certification approved</span></button>
       </div>
     </div>
 
     <div class="story-block">
-      <span class="eyebrow">What we achieved</span>
-      <h3>Certified on 16 October 2026</h3>
+      <span class="eyebrow">03 · Results</span>
+      <h3>Results at certification</h3>
       <div class="tiles" id="tiles"></div>
     </div>
   </div>
@@ -670,7 +754,7 @@ main { padding-block-end: 160px; }
 </section>
 
 </main>
-<footer><div class="wrap"><span>Portfolio case study by Amay Chivate</span><span>Simulated organisation · ISO/IEC 27001:2022</span></div></footer>
+<footer><div class="wrap"><span>Portfolio case study by <b class="author">Amay Chivate</b></span><span>Simulated organisation · ISO/IEC 27001:2022</span></div></footer>
 
 <!-- Document viewer -->
 <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="v-title" hidden>
@@ -710,6 +794,7 @@ main { padding-block-end: 160px; }
       </g>
     </svg>
   </button>
+  <button class="nudge" id="nudge" hidden>Tap me for a guided tour</button>
   <div class="bubble" id="bubble" role="dialog" aria-label="Presentation guide" hidden>
     <div class="who"><span>ANU · Presentation guide</span><button class="x" id="b-close" aria-label="Close guide">✕</button></div>
     <p class="txt" id="b-txt"></p>
@@ -868,9 +953,25 @@ function show(tab, push = true) {
   TABS.forEach(t => { $("#" + t).hidden = t !== tab; $("#t-" + t).setAttribute("aria-selected", t === tab); });
   if (push) { try { history.replaceState(null, "", "#" + tab); } catch (e) {} }
   window.scrollTo({ top: 0 });
+  centerTab($("#t-" + tab));
   if (window.onTabChange) window.onTabChange(tab);
 }
 document.querySelectorAll("nav.tabs button").forEach(b => b.addEventListener("click", () => show(b.dataset.tab)));
+/* On narrow screens the tab bar scrolls: keep the active tab in view and fade the edges that have more tabs */
+const tabsNav = $("nav.tabs");
+function centerTab(b) {
+  if (tabsNav.scrollWidth <= tabsNav.clientWidth) return;
+  const n = tabsNav.getBoundingClientRect(), r = b.getBoundingClientRect();
+  tabsNav.scrollTo({ left: tabsNav.scrollLeft + r.left - n.left - (n.width - r.width) / 2, behavior: REDUCED ? "auto" : "smooth" });
+}
+function tabFade() {
+  const max = tabsNav.scrollWidth - tabsNav.clientWidth;
+  tabsNav.classList.toggle("fade-l", tabsNav.scrollLeft > 2);
+  tabsNav.classList.toggle("fade-r", tabsNav.scrollLeft < max - 2);
+}
+tabsNav.addEventListener("scroll", tabFade, { passive: true });
+addEventListener("resize", tabFade);
+tabFade();
 
 /* Overview */
 function renderOverview() {
@@ -1217,23 +1318,83 @@ const TOUR = [
 ];
 
 const bot = $("#bot"), bubble = $("#bubble"), txt = $("#b-txt"), ctrls = $("#b-ctrls"), bar = $("#b-bar");
-const guide = document.querySelector(".guide");
-let tourStep = -1, typeTimer = null, tipIdx = 0, curTab = "overview", flyTimer = null, justDragged = false, drag = null;
+const guide = document.querySelector(".guide"), nudge = $("#nudge"), header = $("header.site");
+const MOBILE = window.matchMedia ? matchMedia("(max-width: 560px)") : { matches: false };
+let tourStep = -1, typeTimer = null, tipIdx = 0, curTab = "overview", flyTimer = null, justDragged = false, drag = null, greeted = false, fullText = "";
 
+/* Short one-off reactions (hop, land) restart even if already running */
+const reactTimers = {};
+function react(name, ms) {
+  bot.classList.remove(name); void bot.offsetWidth; bot.classList.add(name);
+  clearTimeout(reactTimers[name]); reactTimers[name] = setTimeout(() => bot.classList.remove(name), ms);
+}
+/* Pupils follow the cursor, taps and scrolling, then drift back to the idle animation */
+let lookTimer = null, lookRaf = 0, lookPt = null;
+function setLook(px, py) {
+  bot.style.setProperty("--px", px.toFixed(2) + "px"); bot.style.setProperty("--py", py.toFixed(2) + "px");
+  bot.classList.add("tracking");
+  clearTimeout(lookTimer); lookTimer = setTimeout(() => bot.classList.remove("tracking"), 2500);
+}
+function lookAt(x, y) {
+  lookPt = [x, y];
+  if (lookRaf) return;
+  lookRaf = requestAnimationFrame(() => {
+    lookRaf = 0;
+    const r = bot.getBoundingClientRect();
+    const dx = lookPt[0] - (r.left + r.width / 2), dy = lookPt[1] - (r.top + r.height * 0.42);
+    const d = Math.hypot(dx, dy) || 1, k = Math.min(1, d / 160);
+    setLook(dx / d * 4.5 * k, dy / d * 3.5 * k);
+  });
+}
+document.addEventListener("pointermove", e => { if (e.pointerType === "mouse") lookAt(e.clientX, e.clientY); }, { passive: true });
+document.addEventListener("pointerdown", e => lookAt(e.clientX, e.clientY), { passive: true });
+let lastY = scrollY, scrollTimer = null;
+addEventListener("scroll", () => {
+  const dy = scrollY - lastY; lastY = scrollY;
+  if (Math.abs(dy) > 2) setLook(0, dy > 0 ? 3.5 : -3.5);
+  guide.classList.add("scrolling");
+  clearTimeout(scrollTimer); scrollTimer = setTimeout(() => guide.classList.remove("scrolling"), 450);
+  if (MOBILE.matches) { if (scrollY > 80) header.classList.add("compact"); else if (scrollY < 20) header.classList.remove("compact"); }
+  else header.classList.remove("compact");
+}, { passive: true });
+
+/* On phones ANU docks to the bottom of the screen while talking instead of flying over content */
+function dock() {
+  clearTimeout(flyTimer);
+  guide.classList.remove("moved", "left", "flying");
+  guide.style.left = ""; guide.style.top = "";
+}
+function finishTyping() {
+  if (!typeTimer) return;
+  clearInterval(typeTimer); typeTimer = null;
+  txt.textContent = fullText; bot.classList.remove("talking");
+}
 function say(text, buttons, progress) {
+  greeted = true; nudge.hidden = true;
   bubble.hidden = false;
-  clearInterval(typeTimer);
+  guide.classList.add("open"); document.body.classList.add("guide-open");
+  if (MOBILE.matches) dock();
+  react("hop", 500);
+  clearInterval(typeTimer); typeTimer = null;
   ctrls.innerHTML = buttons;
   bar.parentElement.hidden = progress == null;
   if (progress != null) bar.style.width = progress + "%";
+  fullText = text;
   if (REDUCED) { txt.textContent = text; return; }
   let i = 0; txt.textContent = ""; bot.classList.add("talking");
   typeTimer = setInterval(() => {
     i += 2; txt.textContent = text.slice(0, i);
-    if (i >= text.length) { clearInterval(typeTimer); bot.classList.remove("talking"); }
+    if (i >= text.length) finishTyping();
   }, 20);
 }
+txt.addEventListener("click", finishTyping);
 function clearSpot() { document.querySelectorAll(".spot").forEach(e => e.classList.remove("spot")); }
+function spotlight(el, block) {
+  el.classList.add("spot");
+  if (MOBILE.matches) { document.documentElement.style.setProperty("--head-h", header.getBoundingClientRect().height + 12 + "px"); block = "start"; }
+  el.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block });
+  flyTo(el);
+}
 function greet() {
   say("Hello, I'm ANU, your presentation guide. I can take you through the case study section by section. You can drag me anywhere.",
     `<button class="btn primary" data-b="tour">Start the tour</button><button class="btn" data-b="tip">Show a tip</button>`);
@@ -1244,7 +1405,7 @@ function tip() {
   const [t, sel] = list[tipIdx % list.length]; tipIdx++;
   clearSpot();
   const el = $(sel);
-  if (el) { el.classList.add("spot"); el.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "center" }); flyTo(el); }
+  if (el) spotlight(el, "center");
   say(t, `<button class="btn" data-b="tip">Next tip</button><button class="btn primary" data-b="tour">Start the tour</button>`);
 }
 function tourGo(i) {
@@ -1256,7 +1417,7 @@ function tourGo(i) {
   show(s.tab);
   setTimeout(() => {
     const el = $(s.sel);
-    if (el) { el.classList.add("spot"); el.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: s.up ? "start" : "center" }); flyTo(el); }
+    if (el) spotlight(el, s.up ? "start" : "center");
     if (s.act === "play") { stopPlay(); setMonth(0); setTimeout(() => $("#hm-play").click(), 700); }
   }, 60);
   const last = i === TOUR.length - 1;
@@ -1269,9 +1430,10 @@ function tourEnd() {
   say("That completes the tour. Select me at any time for a tip on the current section.", `<button class="btn" data-b="tour">Restart tour</button><button class="btn" data-b="hide">Close</button>`);
 }
 function exitGuide() {
-  tourStep = -1; clearSpot(); clearTimeout(flyTimer); clearInterval(typeTimer); bot.classList.remove("talking");
+  tourStep = -1; clearSpot(); clearTimeout(flyTimer); clearInterval(typeTimer); typeTimer = null; bot.classList.remove("talking");
   bubble.hidden = true;
-  document.body.classList.remove("presenting");
+  guide.classList.remove("open");
+  document.body.classList.remove("presenting", "guide-open");
   if (!guide.classList.contains("moved")) return;
   const g = guide.getBoundingClientRect();
   guide.classList.add("flying");
@@ -1285,6 +1447,8 @@ ctrls.addEventListener("click", e => {
 $("#b-close").addEventListener("click", exitGuide);
 bot.addEventListener("click", () => {
   if (justDragged) { justDragged = false; return; }
+  react("hop", 500);
+  if (!greeted) { greet(); return; }
   if (!bubble.hidden && tourStep < 0) { tip(); return; }
   if (bubble.hidden) { tourStep >= 0 ? tourGo(tourStep) : tip(); }
 });
@@ -1294,7 +1458,7 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowLeft") tourGo(tourStep - 1);
   if (e.key === "Escape") exitGuide();
 });
-window.onTabChange = tab => { curTab = tab; tipIdx = 0; if (tourStep < 0 && !bubble.hidden && document.body.classList.contains("presenting")) tip(); };
+window.onTabChange = tab => { curTab = tab; tipIdx = 0; react("hop", 500); if (tourStep < 0 && !bubble.hidden && document.body.classList.contains("presenting")) tip(); };
 
 function placeGuide(x, y) {
   const r = guide.getBoundingClientRect(), pad = 8;
@@ -1307,6 +1471,7 @@ function placeGuide(x, y) {
 function keepGuideOnScreen() { if (guide.classList.contains("moved")) { const r = guide.getBoundingClientRect(); placeGuide(r.left, r.top); } }
 function flyTo(el) {
   clearTimeout(flyTimer);
+  if (MOBILE.matches) return;
   flyTimer = setTimeout(() => {
     if (!guide.classList.contains("moved")) { const c = guide.getBoundingClientRect(); placeGuide(c.left, c.top); void guide.offsetWidth; }
     const r = el.getBoundingClientRect(), g = guide.getBoundingClientRect();
@@ -1326,7 +1491,7 @@ function flyTo(el) {
   }, REDUCED ? 50 : 650);
 }
 bot.addEventListener("pointerdown", e => {
-  if (e.button !== 0) return;
+  if (e.button !== 0 || (MOBILE.matches && !bubble.hidden)) return;
   const r = guide.getBoundingClientRect();
   drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, ox: r.left, oy: r.top, moved: false };
   bot.setPointerCapture(e.pointerId);
@@ -1340,8 +1505,18 @@ bot.addEventListener("pointermove", e => {
 });
 function endDrag(e) {
   if (!drag || e.pointerId !== drag.id) return;
-  if (drag.moved) justDragged = true;
-  bot.classList.remove("dragging"); drag = null;
+  bot.classList.remove("dragging");
+  if (drag.moved) {
+    justDragged = true; react("land", 350);
+    // Phones: snap to the nearest side so ANU does not sit over the text
+    if (MOBILE.matches && bubble.hidden) {
+      const r = guide.getBoundingClientRect();
+      guide.classList.add("flying");
+      placeGuide(r.left + r.width / 2 < innerWidth / 2 ? 0 : innerWidth, r.top);
+      setTimeout(() => guide.classList.remove("flying"), 750);
+    }
+  }
+  drag = null;
 }
 bot.addEventListener("pointerup", endDrag);
 bot.addEventListener("pointercancel", endDrag);
@@ -1349,7 +1524,14 @@ addEventListener("resize", keepGuideOnScreen);
 if (window.ResizeObserver) new ResizeObserver(keepGuideOnScreen).observe(guide);
 
 $("#present-start").addEventListener("click", () => tourGo(0));
-setTimeout(greet, REDUCED ? 0 : 800);
+nudge.addEventListener("click", greet);
+// Laptops open with the greeting; phones get a small nudge so the first screen stays readable
+setTimeout(() => {
+  if (greeted) return;
+  if (!MOBILE.matches) { greet(); return; }
+  nudge.hidden = false; react("hop", 500);
+  setTimeout(() => { nudge.hidden = true; }, 6000);
+}, REDUCED ? 0 : 800);
 
 /* Start */
 renderOverview(); renderTimeline(); renderScope();
