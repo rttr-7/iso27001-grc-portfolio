@@ -1,6 +1,6 @@
 # Information Security · GRC · ISO/IEC 27001 Portfolio
 
-**Amay Chivate** · ISO/IEC 27001 Lead Auditor
+**Amay Chivate** · [✓ ISO/IEC 27001:2022 Lead Auditor · TÜV NORD Certificate of Achievement (CQI/IRCA) · View certificate ↗](docs/amay-chivate-iso27001-lead-auditor-certificate.pdf)
 
 I build and audit information security management systems. This repository shows how I work: real ISMS artefacts written for a simulated company, mapped clause by clause to ISO/IEC 27001:2022.
 
@@ -57,11 +57,34 @@ A simulated 210-person B2B payments SaaS company goes from no ISMS to certificat
 └── PROJECT-GUIDE.md                   Plain-English walkthrough and FAQ
 ```
 
-To rebuild the website after editing a document, the CSV data or the template:
+## Run it locally
 
-```
-python3 dashboard/build.py
-```
+You need Python 3.8 or later. No packages to install: the build script uses only the standard library.
+
+1. Clone the repository and move into it:
+
+   ```
+   git clone https://github.com/rttr-7/iso27001-grc-portfolio.git
+   cd iso27001-grc-portfolio
+   ```
+
+2. Build the dashboard. This reads the Markdown documents and the CSV data, puts them into `dashboard/template.html`, and writes the finished page to `docs/index.html`:
+
+   ```
+   python3 dashboard/build.py
+   ```
+
+   On Windows, use `py dashboard/build.py` if `python3` is not recognised.
+
+3. Open the dashboard. Either open `docs/index.html` straight in your browser, or serve it locally:
+
+   ```
+   python3 -m http.server 8000 --directory docs
+   ```
+
+   then go to <http://localhost:8000>. Press `Ctrl+C` to stop the server.
+
+Run step 2 again after you edit a document, the CSV data or the template, then refresh the page. Commit the updated `docs/index.html` so GitHub Pages serves the new version.
 
 ## Planned additions
 
