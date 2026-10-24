@@ -254,6 +254,10 @@ details.gloss-box[open] summary { margin-bottom: 12px; }
 .gloss dt { font-weight: 600; color: var(--ink); }
 .gloss dd { margin: 0; color: var(--muted); font-size: 0.88rem; }
 .pitch { font-size: 1rem; line-height: 1.7; max-width: 75ch; font-style: italic; }
+.overview-video { margin: 28px auto 8px; width: 100%; max-width: 880px; text-align: center; }
+.overview-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: var(--radius); background: var(--sunk); }
+.overview-video figcaption { font-size: 0.82rem; color: var(--muted); margin-top: 8px; }
+@media (max-width: 560px) { .overview-video { margin: 20px auto 4px; } .overview-video figcaption { font-size: 0.78rem; } }
 .notice { font-size: 0.82rem; color: var(--muted); }
 .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 6px 0 0; border-block: 1px solid var(--line); }
 .facts > div { padding: 10px 16px 10px 0; min-width: 0; }
@@ -296,9 +300,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 main { padding-block-end: 160px; }
 .guide { position: fixed; z-index: 40; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 10px; pointer-events: none; }
 .guide > * { pointer-events: auto; }
-.guide.moved { right: auto; bottom: auto; }
-.guide.left { flex-direction: row; }
-.bot { width: 92px; height: 92px; padding: 0; border: 0; background: none; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; flex: none; filter: drop-shadow(0 8px 10px rgba(31,58,95,0.25)); transition: opacity 0.25s; }
+.bot { width: 92px; height: 92px; padding: 0; border: 0; background: none; cursor: pointer; touch-action: manipulation; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; flex: none; filter: drop-shadow(0 8px 10px rgba(31,58,95,0.25)); transition: opacity 0.25s; }
 .bot svg { width: 100%; height: 100%; display: block; pointer-events: none; transform-origin: 50% 92%; transition: transform 0.2s ease-out; }
 .bot.tracking .pupils { animation: none !important; transform: translate(var(--px, 0px), var(--py, 0px)); transition: transform 0.12s ease-out; }
 @media (hover: hover) {
@@ -306,7 +308,6 @@ main { padding-block-end: 160px; }
   .bot:hover .eyes { animation: none !important; transform: scaleY(0.55); transition: transform 0.12s; }
 }
 .nudge { align-self: center; margin-bottom: 18px; background: var(--accent); color: #ffffff; border: 0; border-radius: 6px; padding: 7px 11px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; cursor: pointer; box-shadow: 0 8px 20px -8px rgba(15,25,40,0.45); }
-.bot.dragging { cursor: grabbing; }
 .bot .eyes, .bot .pupils { transform-box: fill-box; transform-origin: center; }
 .bot .tilt { transform-box: view-box; transform-origin: 60px 104px; }
 .bot .beak { transform-box: fill-box; transform-origin: 50% 0%; }
@@ -320,24 +321,20 @@ main { padding-block-end: 160px; }
 .bubble .prog { margin-left: auto; font: 500 0.76rem var(--font-mono); color: var(--muted); }
 .bubble .bar { height: 3px; background: var(--sunk); overflow: hidden; }
 .bubble .bar span { display: block; height: 100%; background: var(--accent); transition: width 0.3s; }
-.spot { position: relative; z-index: 2; outline: 3px solid var(--accent); outline-offset: 6px; border-radius: var(--radius); }
+.spot { scroll-margin-top: var(--head-h, 0px); position: relative; z-index: 2; outline: 3px solid var(--accent); outline-offset: 6px; border-radius: var(--radius); }
 @media (prefers-reduced-motion: no-preference) {
   .bot { animation: float 4.5s ease-in-out infinite; }
-  .bot.dragging { animation: none; }
   .bot .eyes { animation: blink 5s infinite; }
   .bot .pupils { animation: look 6s ease-in-out infinite; }
   .bot .tilt { animation: tilt 5s ease-in-out infinite; }
   .bot.talking .beak { animation: beak 0.17s ease-in-out infinite alternate; }
   .bot.hop svg { animation: hop 0.5s cubic-bezier(0.3, 1.5, 0.5, 1); }
   .bot.land svg { animation: land 0.35s ease-out; }
-  .bot.dragging svg { animation: wiggle 0.22s ease-in-out infinite alternate; }
-  .bot.dragging .eyes { animation: none; transform: scale(1.12); }
   .bubble:not([hidden]), .nudge:not([hidden]) { animation: pop 0.22s ease-out; }
   @keyframes hop { 30% { transform: translateY(-14px) scale(0.96, 1.06); } 60% { transform: translateY(0) scale(1.08, 0.92); } 100% { transform: none; } }
   @keyframes land { 40% { transform: scale(1.12, 0.86); } 100% { transform: none; } }
   @keyframes wiggle { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
   @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(0.97); } }
-  .guide.flying { transition: left 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), top 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
   @keyframes float { 50% { transform: translateY(-6px); } }
   @keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
   @keyframes look { 0%, 30%, 100% { transform: translateX(0); } 40%, 55% { transform: translateX(-3px); } 65%, 85% { transform: translateX(3px); } }
@@ -393,7 +390,6 @@ main { padding-block-end: 160px; }
   .guide.open .bot { width: 52px; height: 52px; margin: 0 8px -8px 0; position: relative; z-index: 1; }
   .guide.open .bubble { width: 100%; margin: 0; max-height: 46vh; overflow-y: auto; }
   body.guide-open main { padding-bottom: 50vh; }
-  .spot { scroll-margin-top: var(--head-h, 0px); }
   .bubble { width: calc(100vw - 32px - 80px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)); margin-bottom: 18px; }
   .nc .reg div { grid-template-columns: 1fr; gap: 2px; }
   .intro > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
@@ -445,6 +441,13 @@ main { padding-block-end: 160px; }
       <button class="btn" id="present-start">Present it</button>
     </div>
   </div>
+
+  <figure class="overview-video" id="intro-video">
+    <video id="case-video" controls playsinline preload="metadata" poster="halcyon-ledger-case-study.jpg" aria-label="22-second summary of the Halcyon Ledger ISMS case study">
+      <source src="halcyon-ledger-case-study.mp4" type="video/mp4">
+    </video>
+    <figcaption>The case study in 22 seconds: the challenge, the risk treatment, the controls, the audit and the result.</figcaption>
+  </figure>
 
   <div class="story">
     <div class="story-block" id="problem">
@@ -773,7 +776,7 @@ main { padding-block-end: 160px; }
 
 <!-- Presenter guide -->
 <div class="guide" aria-live="polite">
-  <button class="bot" id="bot" aria-label="ANU, presentation guide: select for a tip">
+  <button class="bot" id="bot" aria-label="ANU, presentation guide: select to watch the video or take the tour">
     <svg viewBox="0 0 120 120" aria-hidden="true">
       <defs><linearGradient id="hoot-body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f3a5f"/><stop offset="1" stop-color="#3d5f8f"/></linearGradient></defs>
       <g class="tilt">
@@ -794,7 +797,7 @@ main { padding-block-end: 160px; }
       </g>
     </svg>
   </button>
-  <button class="nudge" id="nudge" hidden>Tap me for a guided tour</button>
+  <button class="nudge" id="nudge" hidden>Tap me to watch the video</button>
   <div class="bubble" id="bubble" role="dialog" aria-label="Presentation guide" hidden>
     <div class="who"><span>ANU · Presentation guide</span><button class="x" id="b-close" aria-label="Close guide">✕</button></div>
     <p class="txt" id="b-txt"></p>
@@ -1292,15 +1295,6 @@ document.addEventListener("keydown", e => {
 });
 
 /* ===== Presenter mode and ANU guide ===== */
-const TIPS = {
-  overview: [["Start with the five steps, then open any document to show the formal evidence.", ".steps"], ["Use the 60-second summary when asked what this project is.", "#pitch"]],
-  scope: [["We covered everything customers rely on, not just one office.", "#scope .intro"], ["Every exclusion has a reason. Auditors always test those.", "#scope-table"]],
-  risks: [["Likelihood × impact. 12 or more must be treated.", "#risks .formula"], ["Play the heat map to show risks moving as treatments land.", "#heat"], ["Invite them to score a risk with the calculator.", "#c-out"]],
-  soa: [["Each square is one of the 93 Annex A controls. Select one to show its justification.", "#soa-strip"], ["Search by keyword, such as backup or password.", "#soa .filters"]],
-  audit: [["Major: absent or systemic. Minor: an isolated lapse.", "#audit .bands"], ["The grading exercise is a good way to involve the interviewer.", "#q-list"]],
-  documents: [["Every stage has a formal document. Open any of them from this list.", "#doc-rows"], ["This table maps each activity to its ISO clause and evidence.", "#work-rows"]],
-  review: [["Five of six objectives met or on track. Training slipped and was corrected.", "#objectives"], ["Leadership approved certification and funded the remaining treatments.", ".decisions"]]
-};
 const TOUR = [
   { tab: "overview", sel: "#overview .sec-head", text: "Hello, I'm ANU. This is an ISO 27001 implementation for Halcyon Ledger, a simulated payments company that needed certification to win three enterprise customers." },
   { tab: "overview", sel: "#problem", text: "The problem: controls existed, but nobody owned the risks and there was no evidence. $4.2m of deals were on hold until that changed." },
@@ -1320,7 +1314,7 @@ const TOUR = [
 const bot = $("#bot"), bubble = $("#bubble"), txt = $("#b-txt"), ctrls = $("#b-ctrls"), bar = $("#b-bar");
 const guide = document.querySelector(".guide"), nudge = $("#nudge"), header = $("header.site");
 const MOBILE = window.matchMedia ? matchMedia("(max-width: 560px)") : { matches: false };
-let tourStep = -1, typeTimer = null, tipIdx = 0, curTab = "overview", flyTimer = null, justDragged = false, drag = null, greeted = false, fullText = "";
+let tourStep = -1, typeTimer = null, curTab = "overview", greeted = false, fullText = "";
 
 /* Short one-off reactions (hop, land) restart even if already running */
 const reactTimers = {};
@@ -1358,12 +1352,6 @@ addEventListener("scroll", () => {
   else header.classList.remove("compact");
 }, { passive: true });
 
-/* On phones ANU docks to the bottom of the screen while talking instead of flying over content */
-function dock() {
-  clearTimeout(flyTimer);
-  guide.classList.remove("moved", "left", "flying");
-  guide.style.left = ""; guide.style.top = "";
-}
 function finishTyping() {
   if (!typeTimer) return;
   clearInterval(typeTimer); typeTimer = null;
@@ -1373,7 +1361,6 @@ function say(text, buttons, progress) {
   greeted = true; nudge.hidden = true;
   bubble.hidden = false;
   guide.classList.add("open"); document.body.classList.add("guide-open");
-  if (MOBILE.matches) dock();
   react("hop", 500);
   clearInterval(typeTimer); typeTimer = null;
   ctrls.innerHTML = buttons;
@@ -1391,27 +1378,30 @@ txt.addEventListener("click", finishTyping);
 function clearSpot() { document.querySelectorAll(".spot").forEach(e => e.classList.remove("spot")); }
 function spotlight(el, block) {
   el.classList.add("spot");
-  if (MOBILE.matches) { document.documentElement.style.setProperty("--head-h", header.getBoundingClientRect().height + 12 + "px"); block = "start"; }
+  document.documentElement.style.setProperty("--head-h", header.getBoundingClientRect().height + 12 + "px"); block = "start";
   el.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block });
-  flyTo(el);
 }
 function greet() {
-  say("Hello, I'm ANU, your presentation guide. I can take you through the case study section by section. You can drag me anywhere.",
-    `<button class="btn primary" data-b="tour">Start the tour</button><button class="btn" data-b="tip">Show a tip</button>`);
-}
-function tip() {
-  document.body.classList.add("presenting");
-  const list = TIPS[curTab] || TIPS.overview;
-  const [t, sel] = list[tipIdx % list.length]; tipIdx++;
+  if (curTab !== "overview") show("overview", false);
+  const v = $("#intro-video");
   clearSpot();
-  const el = $(sel);
-  if (el) spotlight(el, "center");
-  say(t, `<button class="btn" data-b="tip">Next tip</button><button class="btn primary" data-b="tour">Start the tour</button>`);
+  if (v) spotlight(v, "center");
+  say("Hello, I'm ANU. Before the tour, here is the whole case study in 22 seconds. Press play, then I can take you through it section by section.",
+    `<button class="btn primary" data-b="play">Play video</button><button class="btn" data-b="tour">Start the tour</button>`);
 }
+function playVideo() {
+  const v = $("#case-video"); if (!v) return;
+  v.currentTime = 0; v.play().catch(() => {});
+  say("Playing the video. When it ends, I can take you through each section.", `<button class="btn primary" data-b="tour">Start the tour</button><button class="btn" data-b="hide">Close</button>`);
+}
+$("#case-video").addEventListener("ended", () => {
+  if (!bubble.hidden && tourStep < 0) say("That was the case study in 22 seconds. Shall I take you through it section by section?", `<button class="btn primary" data-b="tour">Start the tour</button><button class="btn" data-b="play">Replay video</button><button class="btn" data-b="hide">Close</button>`);
+});
 function tourGo(i) {
   if (i < 0) i = 0;
   if (i >= TOUR.length) { tourEnd(); return; }
   tourStep = i; clearSpot();
+  $("#case-video").pause();
   document.body.classList.add("presenting");
   const s = TOUR[i];
   show(s.tab);
@@ -1427,30 +1417,22 @@ function tourGo(i) {
 }
 function tourEnd() {
   tourStep = -1; clearSpot();
-  say("That completes the tour. Select me at any time for a tip on the current section.", `<button class="btn" data-b="tour">Restart tour</button><button class="btn" data-b="hide">Close</button>`);
+  say("That completes the tour. Select me at any time to watch the video again or restart the tour.", `<button class="btn" data-b="video">Watch the video</button><button class="btn" data-b="tour">Restart tour</button><button class="btn" data-b="hide">Close</button>`);
 }
 function exitGuide() {
-  tourStep = -1; clearSpot(); clearTimeout(flyTimer); clearInterval(typeTimer); typeTimer = null; bot.classList.remove("talking");
+  tourStep = -1; clearSpot(); clearInterval(typeTimer); typeTimer = null; bot.classList.remove("talking");
   bubble.hidden = true;
   guide.classList.remove("open");
   document.body.classList.remove("presenting", "guide-open");
-  if (!guide.classList.contains("moved")) return;
-  const g = guide.getBoundingClientRect();
-  guide.classList.add("flying");
-  placeGuide(innerWidth - g.width - 16, innerHeight - g.height - 16);
-  setTimeout(() => { guide.classList.remove("flying", "moved", "left"); guide.style.left = ""; guide.style.top = ""; }, REDUCED ? 0 : 750);
 }
 ctrls.addEventListener("click", e => {
   const b = e.target.closest("[data-b]"); if (!b) return;
-  ({ tour: () => tourGo(0), tip, next: () => tourGo(tourStep + 1), back: () => tourGo(tourStep - 1), end: exitGuide, hide: exitGuide })[b.dataset.b]();
+  ({ tour: () => tourGo(0), play: playVideo, video: greet, next: () => tourGo(tourStep + 1), back: () => tourGo(tourStep - 1), end: exitGuide, hide: exitGuide })[b.dataset.b]();
 });
 $("#b-close").addEventListener("click", exitGuide);
 bot.addEventListener("click", () => {
-  if (justDragged) { justDragged = false; return; }
   react("hop", 500);
-  if (!greeted) { greet(); return; }
-  if (!bubble.hidden && tourStep < 0) { tip(); return; }
-  if (bubble.hidden) { tourStep >= 0 ? tourGo(tourStep) : tip(); }
+  if (bubble.hidden) { tourStep >= 0 ? tourGo(tourStep) : greet(); }
 });
 document.addEventListener("keydown", e => {
   if (tourStep < 0 || !viewer.hidden || e.target.closest("input, textarea, select")) return;
@@ -1458,70 +1440,7 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowLeft") tourGo(tourStep - 1);
   if (e.key === "Escape") exitGuide();
 });
-window.onTabChange = tab => { curTab = tab; tipIdx = 0; react("hop", 500); if (tourStep < 0 && !bubble.hidden && document.body.classList.contains("presenting")) tip(); };
-
-function placeGuide(x, y) {
-  const r = guide.getBoundingClientRect(), pad = 8;
-  x = Math.max(pad, Math.min(x, innerWidth - r.width - pad));
-  y = Math.max(pad, Math.min(y, innerHeight - r.height - pad));
-  guide.classList.add("moved");
-  guide.style.left = x + "px"; guide.style.top = y + "px";
-  guide.classList.toggle("left", x + r.width / 2 < innerWidth / 2);
-}
-function keepGuideOnScreen() { if (guide.classList.contains("moved")) { const r = guide.getBoundingClientRect(); placeGuide(r.left, r.top); } }
-function flyTo(el) {
-  clearTimeout(flyTimer);
-  if (MOBILE.matches) return;
-  flyTimer = setTimeout(() => {
-    if (!guide.classList.contains("moved")) { const c = guide.getBoundingClientRect(); placeGuide(c.left, c.top); void guide.offsetWidth; }
-    const r = el.getBoundingClientRect(), g = guide.getBoundingClientRect();
-    const top = document.querySelector("header.site").getBoundingClientRect().bottom + 8, W = innerWidth, H = innerHeight;
-    let x, y;
-    if (W - r.right >= g.width + 16) { x = r.right + 12; y = Math.max(top, r.top); }
-    else if (r.left >= g.width + 16) { x = r.left - g.width - 12; y = Math.max(top, r.top); }
-    else {
-      x = Math.min(r.right, W) - g.width;
-      if (H - r.bottom >= g.height + 12) y = r.bottom + 12;
-      else if (r.top - top >= g.height + 12) y = r.top - g.height - 12;
-      else y = H - g.height - 8;
-    }
-    guide.classList.add("flying");
-    placeGuide(x, y);
-    setTimeout(() => guide.classList.remove("flying"), 750);
-  }, REDUCED ? 50 : 650);
-}
-bot.addEventListener("pointerdown", e => {
-  if (e.button !== 0 || (MOBILE.matches && !bubble.hidden)) return;
-  const r = guide.getBoundingClientRect();
-  drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, ox: r.left, oy: r.top, moved: false };
-  bot.setPointerCapture(e.pointerId);
-});
-bot.addEventListener("pointermove", e => {
-  if (!drag || e.pointerId !== drag.id) return;
-  const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
-  if (!drag.moved && Math.hypot(dx, dy) < 6) return;
-  drag.moved = true; bot.classList.add("dragging");
-  placeGuide(drag.ox + dx, drag.oy + dy);
-});
-function endDrag(e) {
-  if (!drag || e.pointerId !== drag.id) return;
-  bot.classList.remove("dragging");
-  if (drag.moved) {
-    justDragged = true; react("land", 350);
-    // Phones: snap to the nearest side so ANU does not sit over the text
-    if (MOBILE.matches && bubble.hidden) {
-      const r = guide.getBoundingClientRect();
-      guide.classList.add("flying");
-      placeGuide(r.left + r.width / 2 < innerWidth / 2 ? 0 : innerWidth, r.top);
-      setTimeout(() => guide.classList.remove("flying"), 750);
-    }
-  }
-  drag = null;
-}
-bot.addEventListener("pointerup", endDrag);
-bot.addEventListener("pointercancel", endDrag);
-addEventListener("resize", keepGuideOnScreen);
-if (window.ResizeObserver) new ResizeObserver(keepGuideOnScreen).observe(guide);
+window.onTabChange = tab => { curTab = tab; react("hop", 500); };
 
 $("#present-start").addEventListener("click", () => tourGo(0));
 nudge.addEventListener("click", greet);
