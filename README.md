@@ -14,7 +14,7 @@ New to ISO 27001? Read the **[Project Guide](PROJECT-GUIDE.md)** for a plain-Eng
 
 ## Featured case study
 
-### [ISO/IEC 27001:2022 ISMS implementation: Halcyon Ledger Ltd](01-iso27001-isms-implementation/)
+### [ISO/IEC 27001:2022 ISMS implementation: Halcyon Ledger Inc.](01-iso27001-isms-implementation/)
 
 A simulated 210-person B2B payments SaaS company goes from no ISMS to certification in 11 months.
 
@@ -39,7 +39,7 @@ A simulated 210-person B2B payments SaaS company goes from no ISMS to certificat
 | Risk management (ISO/IEC 27005) | 5x5 method, acceptance criteria, register, treatment plan, residual-risk sign-off |
 | Control selection (Annex A / ISO/IEC 27002) | Full SoA with risk, legal and contractual justifications |
 | Auditing (ISO 19011, ISO/IEC 27007) | Audit plan, sampling, clause checklist, NC grading, requirement-evidence-gap findings |
-| Regulatory mapping | UK/EU GDPR, DORA third-party flow-down, payment services obligations |
+| Regulatory mapping | CCPA/CPRA, GLBA, bank third-party flow-down, payment services obligations |
 | Cloud security governance | AWS shared responsibility, IaC guardrails, immutable backups, JIT access |
 | Communicating with leadership | Management review report, KPIs, objectives, decisions and budget asks |
 
@@ -50,7 +50,7 @@ A simulated 210-person B2B payments SaaS company goes from no ISMS to certificat
 ├── 01-iso27001-isms-implementation/   Case study: 10 formal ISMS documents (Markdown)
 │   └── data/                          Risk register and Statement of Applicability (CSV)
 ├── dashboard/                         Source code for the interactive dashboard
-│   ├── template.html                  Page layout, styles and behaviour
+│   ├── template.html                  Page layout, styles and behavior
 │   └── build.py                       Combines the template with the documents and data
 ├── docs/                              Built website, published by GitHub Pages
 │   └── index.html
@@ -74,7 +74,7 @@ You need Python 3.8 or later. No packages to install: the build script uses only
    python3 dashboard/build.py
    ```
 
-   On Windows, use `py dashboard/build.py` if `python3` is not recognised.
+   On Windows, use `py dashboard/build.py` if `python3` is not recognized.
 
 3. Open the dashboard. Either open `docs/index.html` straight in your browser, or serve it locally:
 
@@ -88,12 +88,12 @@ Run step 2 again after you edit a document, the CSV data or the template, then r
 
 ## Planned additions
 
-- [ ] ISO 27001 to SOC 2 and DORA control mapping
-- [ ] GDPR data protection impact assessment (DPIA) for a new product feature
+- [ ] ISO 27001 to SOC 2 and bank third-party control mapping
+- [ ] privacy impact assessment (PIA) for a new product feature
 - [ ] Supplier security assessment questionnaire and scoring model
 - [ ] Incident response tabletop exercise pack
 - [ ] Topic-specific policy set (access control, cryptography, secure development)
 
 ---
 
-> **Disclaimer:** Halcyon Ledger Ltd is a fictional company. All data is simulated for demonstration. No training-provider course material is reproduced here.
+> **Disclaimer:** Halcyon Ledger Inc. is a fictional company. All data is simulated for demonstration. No training-provider course material is reproduced here.

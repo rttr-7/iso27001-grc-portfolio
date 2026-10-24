@@ -15,7 +15,7 @@ Halcyon Ledger is a simulated payments company that needed ISO 27001 certificati
 | 1. Scope | The boundary: which services, offices, people and systems are protected | You can't protect what you haven't defined, and the scope appears on the certificate | The whole service customers rely on is covered, not just one office |
 | 2. Risk | A list of what could go wrong, each scored as likelihood × impact (1–25) | ISO 27001 is risk-based: controls are chosen because of real risks | 6 risks scored 12 or more; after treatment, none did |
 | 3. Controls | Reviewing all 93 Annex A controls and recording which apply, why, and their status | It proves nothing important was overlooked | 91 of 93 apply, each linked to a risk, law, contract or good practice |
-| 4. Internal audit | The organisation checking itself before the certification body arrives | It finds problems early, while they are cheap to fix | No major findings and 3 minor ones, each fixed at the root cause |
+| 4. Internal audit | The organization checking itself before the certification body arrives | It finds problems early, while they are cheap to fix | No major findings and 3 minor ones, each fixed at the root cause |
 | 5. Management review | Top management reviews the results and makes decisions | Security must be owned by leadership, not just IT | Leadership confirmed the ISMS works and funded the remaining treatments |
 
 ## Frequently asked questions
@@ -42,10 +42,10 @@ Three minor nonconformities: contractors who missed security training, an obsole
 ISO 27001 requires it (Clause 9.2), and a certification body will not certify without a completed audit cycle and management review. It also proves controls actually operate rather than just existing on paper. The full reasoning is in [section 8 of the case study brief](01-iso27001-isms-implementation/00-case-study-brief.md#8-why-an-internal-audit-was-needed).
 
 **Is the company real?**
-No. Halcyon Ledger is fictional, so a complete ISMS can be shown without using any organisation's confidential information. The methods and document formats are the same as those used in a real implementation.
+No. Halcyon Ledger is fictional, so a complete ISMS can be shown without using any organization's confidential information. The methods and document formats are the same as those used in a real implementation.
 
 ## Where to start
 
-- **Interactive dashboard:** the Overview tab summarises the problem, the work and the results. ANU, the guide in the corner, offers a guided tour of every section.
+- **Interactive dashboard:** the Overview tab summarizes the problem, the work and the results. ANU, the guide in the corner, offers a guided tour of every section.
 - **Case study brief:** [00-case-study-brief.md](01-iso27001-isms-implementation/00-case-study-brief.md) explains the problem statement, approach and outcomes.
 - **Formal documents:** the [`01-iso27001-isms-implementation`](01-iso27001-isms-implementation/) folder holds each deliverable written as a real ISMS document.

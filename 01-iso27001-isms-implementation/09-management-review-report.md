@@ -2,7 +2,7 @@
 
 > **Document ID:** ISMS-MR-001 · **Meeting date:** 11 August 2026 · **Chair:** CEO · **Minutes:** ISMS Manager · **Classification:** Confidential
 
-Top management concluded that **the ISMS is suitable, adequate and effective**, and approved going ahead with the Stage 1 certification audit on 25 August 2026. Five of six information security objectives were met or on track. Two investments were approved: **£85k for an additional security engineer** and **£40k for a public bug bounty**.
+Top management concluded that **the ISMS is suitable, adequate and effective**, and approved going ahead with the Stage 1 certification audit on 25 August 2026. Five of six information security objectives were met or on track. Two investments were approved: **$85k for an additional security engineer** and **$40k for a public bug bounty**.
 
 **Attendees:** CEO (chair), CTO, CFO, COO, Head of People, VP Engineering, Head of Information Security (ISMS Manager), DPO. **Apologies:** none. **Quorum:** met.
 
@@ -14,9 +14,9 @@ This is the first formal management review. The 7 monthly Steering Group meeting
 
 | Change | Effect on the ISMS | Decision |
 | --- | --- | --- |
-| Two new EU banking customers signed with DORA flow-down clauses | Incident notice within 4 hours of classification for major ICT incidents (stricter than the 24 hours in the standard contract) | Update the incident plan and SOC runbook by 30 Sep 2026 |
-| EMI partner requested quarterly penetration-test summaries | Extra reporting duty | Accept; add to the supplier reporting calendar |
-| Planned launch of HalcyonPay in Ireland (Q1 2027) | Same platform; new legal entity possible | Assess scope impact by 31 Dec 2026 |
+| Two new US banking customers signed with bank third-party flow-down clauses | Incident notice within 4 hours of classification for major ICT incidents (stricter than the 24 hours in the standard contract) | Update the incident plan and SOC runbook by 30 Sep 2026 |
+| Bank partner requested quarterly penetration-test summaries | Extra reporting duty | Accept; add to the supplier reporting calendar |
+| Planned launch of HalcyonPay in Canada (Q1 2027) | Same platform; new legal entity possible | Assess scope impact by 31 Dec 2026 |
 | Climate change (Amd 1:2024) | Reassessed: still low relevance; no interested-party requirement | No change; review again in 2027 |
 
 ## 3. Information security objectives (Clause 6.2)
@@ -65,7 +65,7 @@ All 3 audit nonconformities were closed and verified as effective on 5 August 20
 ## 5. Feedback from interested parties (9.3.2 e)
 
 - **Customers:** 64 security questionnaires answered in H1 2026, with average turnaround cut from 12 days to 4 days by the trust portal. The 3 stalled enterprise deals are waiting only for the certificate.
-- **EMI partner:** Q2 attestation accepted with no findings.
+- **Bank partner:** Q2 attestation accepted with no findings.
 - **Staff:** the pulse survey shows 82% "know how to report a security concern" (up from 49%).
 - **Cyber insurer:** renewal premium reduced 15% after evidence of MFA, EDR and immutable backups.
 
@@ -82,7 +82,7 @@ Full detail: [06-risk-register-and-treatment-plan.md](06-risk-register-and-treat
 1. Automate KPI collection into the GRC tool (OFI-2).
 2. Move DLP from audit mode to blocking (OFI-5).
 3. Single supplier record per vendor (OFI-4).
-4. Map ISO 27001 controls to SOC 2 Type II and DORA requirements, so one set of evidence covers all three.
+4. Map ISO 27001 controls to SOC 2 Type II and bank third-party requirements, so one set of evidence covers all three.
 5. Consider ISO/IEC 27701 (privacy) extension in 2027.
 
 ## 8. Decisions and outputs (Clause 9.3.3)
@@ -91,22 +91,22 @@ Full detail: [06-risk-register-and-treatment-plan.md](06-risk-register-and-treat
 | --- | --- | --- |
 | D-1 | The ISMS is suitable, adequate and effective; proceed to the Stage 1 audit on 25-26 Aug 2026 | Conclusion |
 | D-2 | SoA v1.2 and RTP v1.2 confirmed as approved | Change to the ISMS |
-| D-3 | Approve £85k for an additional security engineer (closes R-12) | Resources |
-| D-4 | Approve £40k for a public bug bounty in year 1 (closes R-04) | Resources |
-| D-5 | Update incident procedure for 4-hour DORA notice to EU banking customers | Change to the ISMS |
+| D-3 | Approve $85k for an additional security engineer (closes R-12) | Resources |
+| D-4 | Approve $40k for a public bug bounty in year 1 (closes R-04) | Resources |
+| D-5 | Update incident procedure for 4-hour bank third-party notice to US banking customers | Change to the ISMS |
 | D-6 | Objectives for 2027 to be proposed by the ISMS Manager by 30 Nov 2026, including SOC 2 Type II alignment | Improvement |
-| D-7 | Assess ISMS scope impact of the Ireland launch | Change to the ISMS |
+| D-7 | Assess ISMS scope impact of the Canada launch | Change to the ISMS |
 
 ## 9. Action log
 
 | Action | Owner | Due | Status |
 | --- | --- | --- | --- |
 | Recruit additional security engineer | Head of Security | 31 Jan 2027 | 🔄 In progress |
-| Launch bug bounty programme | VP Engineering | 15 Dec 2026 | 🔄 In progress |
-| Update incident plan and SOC runbook for DORA 4-hour notice | Head of Security | 30 Sep 2026 | ✅ Done |
+| Launch bug bounty program | VP Engineering | 15 Dec 2026 | 🔄 In progress |
+| Update incident plan and SOC runbook for bank third-party 4-hour notice | Head of Security | 30 Sep 2026 | ✅ Done |
 | Move DLP to blocking mode for Restricted data | Head of IT | 31 Dec 2026 | 🔄 In progress |
 | Automate KPI dashboard | Head of Security | 31 Dec 2026 | 🔄 In progress |
-| Scope impact assessment for Ireland | ISMS Manager | 31 Dec 2026 | ⏳ Not started |
+| scope impact assessment for Canada | ISMS Manager | 31 Dec 2026 | ⏳ Not started |
 | Propose 2027 objectives | ISMS Manager | 30 Nov 2026 | ⏳ Not started |
 
 **Next management review:** February 2027, then every 6 months.

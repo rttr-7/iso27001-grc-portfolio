@@ -3,8 +3,8 @@ Control,Control name,Applicable,Justification,Implementation summary,Status
 5.2,Information security roles and responsibilities,Yes,BP,"RACI in ISMS Manual; role descriptions for ISMS Manager, risk owners and control owners",Implemented
 5.3,Segregation of duties,Yes,R-08,Two-person approval for production data fixes and payout releases; no self-approval in GitHub,Implemented
 5.4,Management responsibilities,Yes,BP,Managers confirm policy acceptance at onboarding; security objectives in leadership OKRs,Implemented
-5.5,Contact with authorities,Yes,L,"Contact list for ICO, UODO, NCSC, CERT Polska and police in incident plan",Implemented
-5.6,Contact with special interest groups,Yes,BP,Membership of CiSP (NCSC) and a fintech security forum,Implemented
+5.5,Contact with authorities,Yes,L,"Contact list for state attorneys general, FTC, CISA, FBI and police in incident plan",Implemented
+5.6,Contact with special interest groups,Yes,BP,Membership of FS-ISAC and a fintech security forum,Implemented
 5.7,Threat intelligence,Yes,"R-01, R-02",Managed SOC threat feeds; monthly threat brief to Steering Group,Implemented
 5.8,Information security in project management,Yes,BP,Security review gate in product discovery template; risk check for new suppliers and features,Implemented
 5.9,Inventory of information and other associated assets,Yes,"R, BP","Asset inventory in GRC tool synced from Jamf, Intune and AWS Config; owners assigned",Implemented
@@ -20,23 +20,23 @@ Control,Control name,Applicable,Justification,Implementation summary,Status
 5.19,Information security in supplier relationships,Yes,R-07,Supplier Security Procedure; suppliers tiered by data access; due diligence before contract,Implemented
 5.20,Addressing information security within supplier agreements,Yes,"R-07, C",Standard security schedule and DPA in supplier contracts; 24-hour breach notice,Implemented
 5.21,Managing information security in the ICT supply chain,Yes,"R-07, C",Sub-processor list published; software bill of materials for HalcyonPay; dependency scanning,Partially implemented
-5.22,"Monitoring, review and change management of supplier services",Yes,R-07,"Annual review of Tier 1 suppliers (AWS, EMI partner, OCR vendor, SOC); SOC 2 reports reviewed",Implemented
+5.22,"Monitoring, review and change management of supplier services",Yes,R-07,"Annual review of Tier 1 suppliers (AWS, bank partner, OCR vendor, SOC); SOC 2 reports reviewed",Implemented
 5.23,Information security for use of cloud services,Yes,R-03,Cloud Security Standard; AWS Organizations guardrails; SaaS approval process,Implemented
 5.24,Information security incident management planning and preparation,Yes,"R-02, L",Incident Response Plan; managed SOC 24x7; on-call rota; tabletop exercise twice a year,Implemented
 5.25,Assessment and decision on information security events,Yes,L,Severity matrix (SEV1-SEV4) in incident plan; triage by SOC and Head of Security,Implemented
-5.26,Response to information security incidents,Yes,"L, C","Playbooks for ransomware, account takeover, data leak; customer notice within 24 hours (DORA clauses)",Implemented
+5.26,Response to information security incidents,Yes,"L, C","Playbooks for ransomware, account takeover, data leak; customer notice within 24 hours (bank third-party clauses)",Implemented
 5.27,Learning from information security incidents,Yes,BP,Blameless post-incident review for every SEV1/SEV2; actions tracked in Jira,Implemented
 5.28,Collection of evidence,Yes,L,Evidence handling procedure; log retention 13 months; forensic retainer with SOC provider,Implemented
 5.29,Information security during disruption,Yes,R-05,Business Continuity Plan keeps security controls active in DR region,Implemented
-5.30,ICT readiness for business continuity,Yes,"R-05, C","Warm standby in AWS eu-west-1; RTO 4h, RPO 15 min; failover test every 6 months",Implemented
-5.31,"Legal, statutory, regulatory and contractual requirements",Yes,"L, C","Legal and regulatory register (GDPR, DORA flow-down, EMI agent obligations, employment law)",Implemented
-5.32,Intellectual property rights,Yes,L,Licence management for software; open-source licence scanning in CI,Implemented
+5.30,ICT readiness for business continuity,Yes,"R-05, C","Warm standby in AWS us-west-2; RTO 4h, RPO 15 min; failover test every 6 months",Implemented
+5.31,"Legal, statutory, regulatory and contractual requirements",Yes,"L, C","Legal and regulatory register (CCPA/CPRA, GLBA, bank third-party flow-down, state money-transmitter obligations, employment law)",Implemented
+5.32,Intellectual property rights,Yes,L,Licence management for software; open-source license scanning in CI,Implemented
 5.33,Protection of records,Yes,"R-11, L",Records retention schedule; WORM storage for financial and audit records,Implemented
-5.34,Privacy and protection of PII,Yes,"R-11, L",Privacy programme led by DPO; records of processing; DPIAs for new features,Implemented
+5.34,Privacy and protection of PII,Yes,"R-11, L",Privacy program led by DPO; records of processing; PIAs for new features,Implemented
 5.35,Independent review of information security,Yes,BP,Annual internal audit by an independent auditor; annual external penetration test,Implemented
 5.36,"Compliance with policies, rules and standards for information security",Yes,BP,Quarterly control checks by control owners; continuous checks in GRC tool,Implemented
 5.37,Documented operating procedures,Yes,BP,"Runbooks in Confluence for operations, backups, on-call and incident handling",Implemented
-6.1,Screening,Yes,"R-08, R-12, L","Background checks before start (right to work, references, criminal record for privileged roles), in line with UK and Polish law",Implemented
+6.1,Screening,Yes,"R-08, R-12, L","Background checks before start (I-9 work eligibility, references, criminal record for privileged roles), in line with federal and state law",Implemented
 6.2,Terms and conditions of employment,Yes,L,Security and confidentiality clauses in employment and contractor agreements,Implemented
 6.3,"Information security awareness, education and training",Yes,"R-01, R-02",Onboarding training; annual refresher; monthly phishing simulations; secure coding for engineers,Partially implemented
 6.4,Disciplinary process,Yes,BP,Disciplinary policy covers security breaches; agreed with HR and Legal,Implemented
@@ -44,11 +44,11 @@ Control,Control name,Applicable,Justification,Implementation summary,Status
 6.6,Confidentiality or non-disclosure agreements,Yes,"L, C","NDAs for staff, contractors and suppliers; reviewed yearly by Legal",Implemented
 6.7,Remote working,Yes,R-10,Remote Working Policy; managed devices only; VPN-less zero-trust access through Okta,Implemented
 6.8,Information security event reporting,Yes,BP,#security-report Slack channel and phish-report button; reporting covered in training,Implemented
-7.1,Physical security perimeters,Yes,BP,Leeds and Krakow offices in managed buildings with controlled entrances,Implemented
+7.1,Physical security perimeters,Yes,BP,Austin and Raleigh offices in managed buildings with controlled entrances,Implemented
 7.2,Physical entry,Yes,BP,Badge access; visitor log and escort; badges removed at leaving,Implemented
 7.3,"Securing offices, rooms and facilities",Yes,BP,Locked network cabinet; no servers in offices,Implemented
 7.4,Physical security monitoring,Yes,BP,CCTV at building entrances (landlord); access logs reviewed monthly,Implemented
-7.5,Protecting against physical and environmental threats,Yes,BP,Fire and flood protection by landlord; production protected by AWS data centre controls,Implemented
+7.5,Protecting against physical and environmental threats,Yes,BP,Fire and flood protection by landlord; production protected by AWS data center controls,Implemented
 7.6,Working in secure areas,Yes,BP,Network cabinet access limited to IT; rules posted,Implemented
 7.7,Clear desk and clear screen,Yes,BP,Clear Desk Policy; automatic screen lock after 5 minutes through MDM,Implemented
 7.8,Equipment siting and protection,Yes,BP,Network equipment in locked cabinet with UPS,Implemented

@@ -10,7 +10,7 @@ The first full internal audit covered **all clauses 4-10 and a risk-based sample
 | --- | --- |
 | Objective | Confirm that the ISMS conforms to ISO/IEC 27001:2022 and Halcyon's own requirements, and is effectively implemented and maintained (Clause 9.2.1) |
 | Criteria | ISO/IEC 27001:2022 (incl. Amd 1:2024); ISMS Manual; Information Security Policy; SoA v1.1; legal register |
-| Scope | Full ISMS scope (see [03-isms-scope.md](03-isms-scope.md)); Leeds on-site, Kraków remote |
+| Scope | Full ISMS scope (see [03-isms-scope.md](03-isms-scope.md)); Austin on-site, Raleigh remote |
 | Method | Interviews, document review, system observation, sampling (ISO 19011:2018 guidance) |
 | Independence | Auditor reports to the CEO and has no operational ISMS role (Clause 9.2.2) |
 | Sampling | Annex A controls chosen by risk: every control linked to a Critical or High risk, plus a rotating sample |
@@ -24,7 +24,7 @@ The first full internal audit covered **all clauses 4-10 and a risk-based sample
 | 19 Jun | Secure development, change (8.25-8.32) | VP Engineering |
 | 22 Jun | Suppliers and privacy (5.19-5.22, 5.34) | DPO, Procurement |
 | 23 Jun | Incident and continuity (5.24-5.30) | Head of Security, SOC provider |
-| 24 Jun | Kraków (remote): endpoints, awareness, physical (6.3, 7.x, 8.1) | Kraków site lead |
+| 24 Jun | Raleigh (remote): endpoints, awareness, physical (6.3, 7.x, 8.1) | Raleigh site lead |
 | 26 Jun | Auditor review; closing meeting | Steering Group |
 
 ## 2. Clause checklist (Clauses 4-10)
@@ -37,7 +37,7 @@ The first full internal audit covered **all clauses 4-10 and a risk-based sample
 | 4.2 | Are interested parties, their requirements, and which requirements the ISMS addresses identified? | Interested parties register | Register of 10 parties; mapped to contracts and legal register | ✅ C |
 | 4.3 | Is the scope documented, with boundaries, interfaces and dependencies? | Scope document | ISMS-SCO-001; exclusions justified | ✅ C |
 | 4.4 | Is the ISMS established, with its processes and their interactions? | ISMS Manual, process map | ISMS Manual v1.0 with process map | ✅ C |
-| 5.1 | Does top management show leadership: resources, integration with business processes, communication? | Steering Group minutes, budget | 7 sets of monthly minutes; £310k budget approved | ✅ C |
+| 5.1 | Does top management show leadership: resources, integration with business processes, communication? | Steering Group minutes, budget | 7 sets of monthly minutes; $310k budget approved | ✅ C |
 | 5.2 | Is there an approved policy that includes objectives (or a framework for them) and commitments to requirements and improvement? | Signed policy | POL-01 v1.0 signed by CEO 12 Dec 2025; on intranet | ✅ C |
 | 5.3 | Are roles, responsibilities and authorities assigned and communicated? | RACI, job descriptions | RACI in ISMS Manual; role descriptions sampled for 5 roles | ✅ C |
 | 6.1.1 | Are risks and opportunities for the ISMS itself addressed? | ISMS risk and opportunity log | Log exists, 8 entries | ✅ C |
@@ -45,7 +45,7 @@ The first full internal audit covered **all clauses 4-10 and a risk-based sample
 | 6.1.3 | Is there a treatment plan, an SoA with justifications, and owner approval of residual risk? | RTP, SoA, approvals | RTP v1.1, SoA v1.1; residual approvals for 7 of 12 significant risks | 💡 OFI-1 |
 | 6.2 | Are objectives measurable, monitored, communicated and planned (what, who, when, how evaluated)? | Objectives plan | 6 objectives with targets, owners and dates | ✅ C |
 | 6.3 | Are changes to the ISMS planned? | Change records | Change log in GRC tool | ✅ C |
-| 7.1 | Are resources determined and provided? | Budget, headcount | Budget, SOC contract, GRC tool licence | ✅ C |
+| 7.1 | Are resources determined and provided? | Budget, headcount | Budget, SOC contract, GRC tool license | ✅ C |
 | 7.2 | Is competence determined and evidenced? | Training records, CVs | Records for security team and control owners | ✅ C |
 | 7.3 | Are people aware of the policy, their contribution and the effects of non-conformity? | Training completion, interviews | 31 of 40 sampled staff completed onboarding training on time | 🟠 Min NC-01 |
 | 7.4 | Are internal and external communications defined? | Communication plan | Communication matrix in ISMS Manual | ✅ C |
@@ -53,8 +53,8 @@ The first full internal audit covered **all clauses 4-10 and a risk-based sample
 | 8.1 | Are processes planned and controlled, including outsourced processes? | Procedures, supplier controls | SOC and OCR vendor controls defined and monitored | ✅ C |
 | 8.2 | Are risk assessments done at planned intervals and on significant change? | Assessment records | Jan 2026 assessment; new supplier triggered reassessment in May | ✅ C |
 | 8.3 | Is the risk treatment plan implemented and results retained? | RTP status, evidence | 10 of 12 treatments complete with evidence | ✅ C |
-| 9.1 | Is it defined what is monitored, how, when, by whom, and when results are analysed? | KPI definitions, dashboard | 14 KPIs defined; dashboard compiled by hand from 5 sources | 💡 OFI-2 |
-| 9.2 | Is there an audit programme, with independent auditors and reported results? | Audit programme | 3-year programme approved; this audit | ✅ C |
+| 9.1 | Is it defined what is monitored, how, when, by whom, and when results are analyzed? | KPI definitions, dashboard | 14 KPIs defined; dashboard compiled by hand from 5 sources | 💡 OFI-2 |
+| 9.2 | Is there an audit program, with independent auditors and reported results? | Audit program | 3-year program approved; this audit | ✅ C |
 | 9.3 | Does management review cover all inputs (9.3.2 a-g) and produce decisions? | Review minutes | Not yet held; scheduled for 11 Aug 2026 | ✅ C (planned) |
 | 10.1 | Is continual improvement evident? | Improvement log | 23 improvements logged since Feb 2026 | ✅ C |
 | 10.2 | Are nonconformities reacted to, root causes found, and corrective action effectiveness reviewed? | NC log | 4 NCs from control checks, all with root cause analysis | ✅ C |
@@ -71,10 +71,10 @@ The first full internal audit covered **all clauses 4-10 and a risk-based sample
 | 5.23 | Are cloud services governed? | AWS SCPs reviewed; SaaS approval records for 6 new tools | ✅ C |
 | 5.24 / 5.26 | Is incident response planned and tested? | Plan v1.2; tabletop in Apr 2026; 3 real incidents handled per playbook | ✅ C |
 | 5.30 | Is ICT continuity tested? | DR failover test on 12 May 2026 met RTO (3h 10m) and RPO (6 min) | ✅ C |
-| 5.34 | Are PII obligations met? | Records of processing complete; 2 DPIAs reviewed | ✅ C |
+| 5.34 | Are PII obligations met? | Records of processing complete; 2 PIAs reviewed | ✅ C |
 | 6.1 | Is pre-employment screening done? | 15 new starters sampled; all screened before start | ✅ C |
 | 6.3 | Is awareness training completed? | See NC-01 | 🟠 Min NC-01 |
-| 7.7 | Are clear desk and clear screen in place? | Leeds walk-round: 2 unlocked screens out of 60 desks; MDM lock confirmed | ✅ C |
+| 7.7 | Are clear desk and clear screen in place? | Austin walk-round: 2 unlocked screens out of 60 desks; MDM lock confirmed | ✅ C |
 | 8.2 | Is privileged access controlled? | No standing AWS admin; 30 just-in-time sessions all had a ticket | ✅ C |
 | 8.5 | Is MFA enforced? | Okta policy: FIDO2 for engineers; customer-admin MFA at 100% | ✅ C |
 | 8.8 | Are vulnerabilities fixed on time? | 34 of 35 critical findings fixed within 7 days | ✅ C |
@@ -100,7 +100,7 @@ The first full internal audit covered **all clauses 4-10 and a risk-based sample
 
 | ID | Grade | Requirement | Finding (statement, evidence) | Root cause | Correction and corrective action | Owner | Due | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| NC-01 | Minor | Clause 7.3; Annex A 6.3 | 9 of 40 sampled staff had not completed onboarding security training within the required 30 days. All 9 were Kraków contractors onboarded Feb-Apr 2026 | Contractors were onboarded through the agency, not the HR system, so they never received the training assignment | Correction: 9 people trained by 3 Jul. Corrective action: all contractors moved into the HR system; training assigned automatically; weekly overdue report to managers | Head of People | 31 Jul 2026 | ✅ Closed, verified 5 Aug |
+| NC-01 | Minor | Clause 7.3; Annex A 6.3 | 9 of 40 sampled staff had not completed onboarding security training within the required 30 days. All 9 were Raleigh contractors onboarded Feb-Apr 2026 | Contractors were onboarded through the agency, not the HR system, so they never received the training assignment | Correction: 9 people trained by 3 Jul. Corrective action: all contractors moved into the HR system; training assigned automatically; weekly overdue report to managers | Head of People | 31 Jul 2026 | ✅ Closed, verified 5 Aug |
 | NC-02 | Minor | Clause 7.5.3 | Two superseded versions of the Customer Data Export Procedure were still on a shared drive, and Customer Success used v0.9 (no encryption step) | No rule to withdraw obsolete copies when Confluence is updated | Correction: old copies removed. Corrective action: Confluence is the single source; shared-drive policy documents redirect to it; quarterly document-register check | ISMS Manager | 17 Jul 2026 | ✅ Closed, verified 5 Aug |
 | NC-03 | Minor | Annex A 8.32 | 2 of 25 emergency production changes (CHG-1184, CHG-1207) had no retrospective approval within 2 working days, as the change procedure requires | Retrospective approval relied on engineers remembering; no reminder or tracking | Correction: both changes reviewed and approved. Corrective action: an automated Jira rule flags unapproved emergency changes after 24 hours and escalates to the VP Engineering | VP Engineering | 24 Jul 2026 | ✅ Closed, verified 5 Aug |
 | OFI-1 | OFI | 6.1.3 f | Residual-risk approvals were recorded by email for 5 risks | - | Record all approvals in the GRC tool | ISMS Manager | 14 Jul 2026 | ✅ Done |

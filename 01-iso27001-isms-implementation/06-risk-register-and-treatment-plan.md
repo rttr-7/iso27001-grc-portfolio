@@ -18,9 +18,9 @@ The full register holds 47 risks. The 35 rated Low were accepted by their owners
 | R-09 | API keys or database passwords are committed to GitHub and leaked | Secrets, production | VP Engineering | 4 | 3 | 12 | 🟧 High |
 | R-08 | A privileged engineer alters payment instructions directly in the production database | Payment instructions | CTO | 2 | 5 | 10 | 🟨 Medium |
 | R-07 | The OCR sub-processor is breached, exposing customer invoices | Invoice images | DPO | 3 | 3 | 9 | 🟨 Medium |
-| R-11 | Personal data is kept longer than allowed, breaching GDPR storage limits | Customer and supplier personal data | DPO | 3 | 3 | 9 | 🟨 Medium |
+| R-11 | Personal data is kept longer than allowed, breaching privacy-law retention limits | Customer and supplier personal data | DPO | 3 | 3 | 9 | 🟨 Medium |
 | R-12 | Loss of a key security engineer leaves monitoring and incident response uncovered | Security operations | Head of Security | 3 | 3 | 9 | 🟨 Medium |
-| R-05 | A prolonged outage of the AWS London region stops payouts beyond the SLA | Platform availability | CTO | 2 | 4 | 8 | 🟨 Medium |
+| R-05 | A prolonged outage of the AWS N. Virginia region stops payouts beyond the SLA | Platform availability | CTO | 2 | 4 | 8 | 🟨 Medium |
 | R-10 | A laptop holding customer exports is lost or stolen | Endpoints | Head of IT | 4 | 2 | 8 | 🟨 Medium |
 
 ## Risk treatment plan
@@ -29,7 +29,7 @@ The full register holds 47 risks. The 35 rated Low were accepted by their owners
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | R-01 | Modify | Out-of-band call-back for any bank-detail change; Confirmation of Payee check; 24-hour hold on payouts to changed details; MFA enforced for all customer admins; anomaly alerts | 5.14, 5.17, 8.5, 8.16 | COO | 31 Mar 2026 | ✅ Complete | 2 × 4 = 8 🟨 |
 | R-02 | Modify | EDR on all endpoints; phishing-resistant MFA (FIDO2 keys) for engineers; just-in-time AWS access with no standing admin; immutable backups with AWS Backup Vault Lock; quarterly restore test | 8.2, 8.5, 8.7, 8.13, 8.18 | CTO | 30 Apr 2026 | ✅ Complete | 1 × 5 = 5 🟩 |
-| R-03 | Modify | S3 Block Public Access at organisation level; all infrastructure as code (Terraform) with policy checks; AWS Security Hub and Config rules alerting the SOC | 5.23, 8.9, 8.16, 8.27 | CTO | 31 Mar 2026 | ✅ Complete | 1 × 4 = 4 🟩 |
+| R-03 | Modify | S3 Block Public Access at organization level; all infrastructure as code (Terraform) with policy checks; AWS Security Hub and Config rules alerting the SOC | 5.23, 8.9, 8.16, 8.27 | CTO | 31 Mar 2026 | ✅ Complete | 1 × 4 = 4 🟩 |
 | R-04 | Modify | Static and dynamic testing in CI; tenant-isolation test suite; secure coding training; annual penetration test; public bug bounty | 8.8, 8.25, 8.26, 8.28, 8.29 | VP Engineering | 15 Dec 2026 | 🔄 In progress (bug bounty launching) | 2 × 4 = 8 🟨 |
 | R-06 | Modify | HR system drives Okta joiner-mover-leaver automatically; same-day deprovisioning; quarterly access reviews by managers | 5.15, 5.18, 6.5 | Head of People | 30 Apr 2026 | ✅ Complete | 2 × 2 = 4 🟩 |
 | R-09 | Modify | GitHub secret scanning with push protection; all secrets moved to AWS Secrets Manager; automatic key rotation | 5.17, 8.4, 8.24 | VP Engineering | 31 Mar 2026 | ✅ Complete | 2 × 2 = 4 🟩 |
@@ -37,7 +37,7 @@ The full register holds 47 risks. The 35 rated Low were accepted by their owners
 | R-07 | Share and modify | Supplier security review; DPA with 24-hour breach notice; invoice images deleted by the vendor after 30 days | 5.19, 5.20, 5.21, 5.22 | DPO | 31 May 2026 | ✅ Complete | 2 × 3 = 6 🟩 |
 | R-11 | Modify | Retention schedule agreed with Legal; automated deletion jobs; yearly retention audit | 5.33, 5.34, 8.10 | DPO | 30 Jun 2026 | ✅ Complete | 2 × 2 = 4 🟩 |
 | R-12 | Share | 24x7 managed SOC contract; written runbooks; cross-training plan; one additional hire | 5.24, 6.1, 6.3 | Head of Security | 31 Jan 2027 | 🔄 In progress (hire approved) | 2 × 3 = 6 🟩 |
-| R-05 | Modify | Warm standby in AWS Ireland; RTO 4 hours, RPO 15 minutes; failover tested every 6 months | 5.29, 5.30, 8.14 | CTO | 30 Jun 2026 | ✅ Complete | 2 × 2 = 4 🟩 |
+| R-05 | Modify | Warm standby in AWS Oregon; RTO 4 hours, RPO 15 minutes; failover tested every 6 months | 5.29, 5.30, 8.14 | CTO | 30 Jun 2026 | ✅ Complete | 2 × 2 = 4 🟩 |
 | R-10 | Modify | Full-disk encryption; remote wipe through Jamf and Intune; data exports blocked to unmanaged devices | 7.9, 8.1, 8.12 | Head of IT | 28 Feb 2026 | ✅ Complete | 4 × 1 = 4 🟩 |
 
 ## Before and after

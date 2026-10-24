@@ -1,12 +1,12 @@
-# 00 - Case Study Brief: Halcyon Ledger Ltd
+# 00 - Case Study Brief: Halcyon Ledger Inc.
 
-> **Engagement:** ISO/IEC 27001:2022 ISMS implementation and internal audit · **Organisation:** Halcyon Ledger Ltd (simulated) · **Period:** November 2025 to October 2026 · **Prepared by:** Amay Chivate
+> **Engagement:** ISO/IEC 27001:2022 ISMS implementation and internal audit · **Organization:** Halcyon Ledger Inc. (simulated) · **Period:** November 2025 to October 2026 · **Prepared by:** Amay Chivate
 
 Halcyon Ledger had security tools but no system for managing information security. That gap was costing it enterprise revenue and leaving its biggest risks unowned. In 11 months, it implemented an ISO/IEC 27001:2022 ISMS, tested it with a full internal audit, and achieved certification.
 
 ## 1. Background
 
-Halcyon Ledger is a 210-person UK and Polish company. Its cloud platform, HalcyonPay, automates supplier invoice processing and payouts for 1,400 mid-market businesses, handling about 2.1 million payments a year. It holds supplier bank details, invoices and payment instructions for its customers, which makes it an attractive target for fraud and ransomware.
+Halcyon Ledger is a 210-person US company. Its cloud platform, HalcyonPay, automates supplier invoice processing and payouts for 1,400 mid-market businesses, handling about 2.1 million payments a year. It holds supplier bank details, invoices and payment instructions for its customers, which makes it an attractive target for fraud and ransomware.
 
 Full profile: [01 - Company profile](01-company-profile.md)
 
@@ -16,11 +16,11 @@ Full profile: [01 - Company profile](01-company-profile.md)
 
 | Symptom | Evidence | Business impact |
 | --- | --- | --- |
-| Enterprise deals stalled | 3 enterprise customers required ISO 27001 before signing | £4.2m of annual recurring revenue on hold |
+| Enterprise deals stalled | 3 enterprise customers required ISO 27001 before signing | $4.2m of annual recurring revenue on hold |
 | Slow customer due diligence | Security questionnaires took an average of 12 days to answer | Longer sales cycles; lost smaller deals |
 | No risk ownership | No risk register, no risk owners, no acceptance criteria | Serious risks such as payment fraud were known but untreated |
 | Rising threats | Payment-fraud and ransomware attacks rising across the sector | Exposure to large financial loss and loss of the payment partnership |
-| Regulatory pressure | EU banking customers passing DORA requirements down to suppliers; GDPR obligations | Contract and compliance risk |
+| Regulatory pressure | US bank customers passing third-party risk requirements down to suppliers; state privacy-law obligations | Contract and compliance risk |
 | Rapid growth | Headcount up 35% in a year; onboarding and access removal inconsistent | Leavers keeping access; untrained staff |
 | Thin security team | 3 security staff for 210 employees and 22 contractors | Monitoring and response depended on individuals |
 
@@ -30,10 +30,10 @@ Full profile: [01 - Company profile](01-company-profile.md)
 
 | Option considered | Why it was or was not chosen |
 | --- | --- |
-| **ISO/IEC 27001 certification** | **Chosen.** Explicitly requested by the stalled customers; internationally recognised in the UK and EU; risk-based, so effort goes where the real risks are; certifiable by an accredited body |
-| SOC 2 Type II only | Valued by US customers, but the stalled UK and EU customers asked for ISO 27001 by name |
+| **ISO/IEC 27001 certification** | **Chosen.** Explicitly requested by the stalled customers; internationally recognized, including by US enterprise buyers; risk-based, so effort goes where the real risks are; certifiable by an accredited body |
+| SOC 2 Type II only | Valued by many US customers, but the stalled enterprise customers asked for ISO 27001 by name |
 | Self-assessment questionnaire | No independent assurance; would not satisfy enterprise procurement |
-| Do nothing | Loses £4.2m in deals and leaves the main risks untreated |
+| Do nothing | Loses $4.2m in deals and leaves the main risks untreated |
 
 The existing SOC 2 Type I report was kept, and the ISMS was designed so the same evidence can support a later SOC 2 Type II.
 
@@ -55,7 +55,7 @@ Full scope and exclusions: [03 - ISMS scope](03-isms-scope.md) · [04 - Context 
 
 ## 6. Approach
 
-The programme followed the Plan-Do-Check-Act cycle that ISO/IEC 27001 is built on.
+The program followed the Plan-Do-Check-Act cycle that ISO/IEC 27001 is built on.
 
 | Phase | What was done | Output |
 | --- | --- | --- |
@@ -82,7 +82,7 @@ Putting controls in place is not enough. Halcyon had to prove they **worked**, a
 1. **It is a requirement.** Clause 9.2 requires internal audits at planned intervals. A certification body will not recommend certification until at least one full audit cycle and a management review are complete.
 2. **Controls must operate, not just exist.** Policies written in February only count if people follow them. The audit tested real samples: 40 staff training records, 20 leavers, 25 emergency changes, 15 payee bank-detail changes.
 3. **Independence.** The people who built the controls should not be the ones judging them. The audit was run by an auditor with no operational role in the ISMS.
-4. **Lower cost of failure.** A major nonconformity found by the certification body at Stage 2 would delay certification by months and keep the £4.2m in deals on hold. Finding the same issue internally costs a few weeks.
+4. **Lower cost of failure.** A major nonconformity found by the certification body at Stage 2 would delay certification by months and keep the $4.2m in deals on hold. Finding the same issue internally costs a few weeks.
 5. **Input to management review.** Top management needs objective evidence to decide whether the ISMS is ready (Clause 9.3).
 
 **Audit design**
@@ -127,13 +127,13 @@ All three were closed and verified as effective on 5 August 2026, before the cer
 | --- | --- |
 | Engineers saw security as slowing them down | Controls built into the existing CI/CD pipeline, so checks run automatically instead of adding manual approval steps |
 | A three-person security team | Risk and control ownership spread across department heads; a managed SOC for 24/7 monitoring |
-| Two countries with different employment law | Screening and HR controls checked against both UK and Polish requirements |
+| Two states with different employment law | Screening and HR controls checked against both Texas and North Carolina requirements |
 | Contractors outside normal HR processes | Found by the internal audit and fixed at the root cause |
 
 ## 12. Lessons learned
 
 1. **Scope for the customer, not for the audit.** A wide scope took more work but is what made the certificate valuable.
-2. **Risk ownership changes behaviour.** Once department heads owned named risks, treatment moved faster than any security-team request.
+2. **Risk ownership changes behavior.** Once department heads owned named risks, treatment moved faster than any security-team request.
 3. **Audit with real samples.** Every nonconformity came from testing samples, not from reading policies.
 4. **Fix the root cause, not the symptom.** Training the 9 contractors fixed the finding; moving contractors into the HR system stopped it recurring.
 
@@ -151,8 +151,8 @@ In this simulated engagement I acted as **ISMS implementation lead and internal 
 
 | # | Document | ISO/IEC 27001 |
 | --- | --- | --- |
-| 01 | [Company profile](01-company-profile.md) | Organisation and governance |
-| 02 | [Implementation roadmap](02-implementation-roadmap.md) | Programme plan |
+| 01 | [Company profile](01-company-profile.md) | Organization and governance |
+| 02 | [Implementation roadmap](02-implementation-roadmap.md) | Program plan |
 | 03 | [ISMS scope](03-isms-scope.md) | 4.3 |
 | 04 | [Context and interested parties](04-context-and-interested-parties.md) | 4.1, 4.2 |
 | 05 | [Risk assessment methodology](05-risk-assessment-methodology.md) | 6.1.2 |
@@ -163,4 +163,4 @@ In this simulated engagement I acted as **ISMS implementation lead and internal 
 
 ---
 
-*Halcyon Ledger Ltd is a fictional organisation. All names, figures and findings are simulated to demonstrate how ISO/IEC 27001 is applied in practice.*
+*Halcyon Ledger Inc. is a fictional organization. All names, figures and findings are simulated to demonstrate how ISO/IEC 27001 is applied in practice.*

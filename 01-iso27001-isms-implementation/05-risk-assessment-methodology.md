@@ -45,11 +45,11 @@ flowchart LR
 
 | Score | Level | Financial | Customers and service | Legal and regulatory | Reputation |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Negligible | < £10k | Outage < 1 hour; no data affected | None | No external awareness |
-| 2 | Minor | £10k-£100k | Outage 1-4 hours; < 10 customers affected | Minor contract breach | Local customer complaints |
-| 3 | Moderate | £100k-£500k | Outage 4-24 hours; < 100 customers | Reportable GDPR breach, no fine | Trade press coverage |
-| 4 | Major | £500k-£2m | Outage 1-3 days; data of > 100 customers exposed | Regulatory investigation; partner breach notice | National press; key customers leave |
-| 5 | Severe | > £2m | Outage > 3 days; mass payment fraud | Fine or loss of the EMI partnership | Lasting brand damage; threat to the business |
+| 1 | Negligible | < $10k | Outage < 1 hour; no data affected | None | No external awareness |
+| 2 | Minor | $10k-$100k | Outage 1-4 hours; < 10 customers affected | Minor contract breach | Local customer complaints |
+| 3 | Moderate | $100k-$500k | Outage 4-24 hours; < 100 customers | Reportable state-law breach, no fine | Trade press coverage |
+| 4 | Major | $500k-$2m | Outage 1-3 days; data of > 100 customers exposed | Regulatory investigation; partner breach notice | National press; key customers leave |
+| 5 | Severe | > $2m | Outage > 3 days; mass payment fraud | Fine or loss of the bank partnership | Lasting brand damage; threat to the business |
 
 ## Risk matrix (score = likelihood × impact)
 
@@ -72,6 +72,6 @@ flowchart LR
 
 ## Why the results are consistent, valid and comparable (Clause 6.1.2 b)
 
-- Each scale uses measurable thresholds (£, hours, customer counts) rather than words like "high", so two assessors scoring the same scenario should land within one point of each other.
+- Each scale uses measurable thresholds ($, hours, customer counts) rather than words like "high", so two assessors scoring the same scenario should land within one point of each other.
 - The ISMS Manager facilitates every assessment, so the method is applied the same way each time.
 - Scores are recorded in the GRC tool with their rationale, so a reassessment can be compared line by line with the previous one.

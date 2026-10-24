@@ -1,8 +1,8 @@
-# ISO/IEC 27001:2022 ISMS Implementation: Halcyon Ledger Ltd
+# ISO/IEC 27001:2022 ISMS Implementation: Halcyon Ledger Inc.
 
 **A full, end-to-end ISMS implementation for a simulated 210-person payments SaaS company, from gap analysis to certification in 11 months.**
 
-> Halcyon Ledger Ltd is a **fictional** company created for this case study. All names, figures and findings are simulated to show how the standard is applied in practice.
+> Halcyon Ledger Inc. is a **fictional** company created for this case study. All names, figures and findings are simulated to show how the standard is applied in practice.
 
 ▶️ **[Open the interactive dashboard](https://rttr-7.github.io/iso27001-grc-portfolio/)**
 
@@ -11,7 +11,7 @@
 | | |
 | --- | --- |
 | Standard | ISO/IEC 27001:2022 incl. Amendment 1:2024 (climate change) |
-| Organisation | B2B payments SaaS · 210 staff · UK and Poland · AWS hosted |
+| Organization | B2B payments SaaS · 210 staff · US (Texas and North Carolina) · AWS hosted |
 | Timeline | Nov 2025 kickoff → Oct 2026 certificate |
 | Risks | 47 assessed · 12 significant (2 Critical, 4 High, 6 Medium) → 0 above appetite after treatment |
 | SoA | 93 controls · 91 applicable · 2 justified exclusions · 86 implemented, 5 partial |
@@ -23,7 +23,7 @@
 | # | Artefact | ISO clause | What it shows |
 | --- | --- | --- | --- |
 | 00 | [Case study brief](00-case-study-brief.md) | - | Problem statement, why ISO 27001, why the audit, results and lessons learned |
-| 01 | [Company profile](01-company-profile.md) | - | The simulated organisation and ISMS governance |
+| 01 | [Company profile](01-company-profile.md) | - | The simulated organization and ISMS governance |
 | 02 | [Implementation roadmap](02-implementation-roadmap.md) | All | PDCA phases, Gantt chart, mandatory documents map |
 | 03 | [ISMS scope](03-isms-scope.md) | 4.3 | Scope statement, boundaries, interfaces, exclusions |
 | 04 | [Context and interested parties](04-context-and-interested-parties.md) | 4.1, 4.2 | Issues (incl. climate change), stakeholders, legal register |

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Halcyon Ledger ISMS — brag</title>
+<style>
+  :root {
+    --paper:#ffffff; --sunk:#f6f7f9; --ink:#000000; --text:#1c1f24; --muted:#5d6470; --line:#dfe2e7;
+    --accent:#1f3a5f;
+    --crit:#8f1d14; --crit-bg:#f7dcd8; --high-bg:#fbe5cf; --med-bg:#fbf0c9; --low:#1d5b33; --low-bg:#dcefe1;
+    --na:#555c68; --na-bg:#eceef1;
+    --serif:"Times New Roman", Times, serif;
+    --sans:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  html, body { margin:0; padding:0; background:#fff; }
+  #root { position:relative; width:1920px; height:1080px; overflow:hidden; background:var(--paper); font-family:var(--sans); color:var(--text); }
+  .scene { position:absolute; inset:0; opacity:0; }
+  .tag { position:absolute; left:96px; top:72px; font-size:26px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+  .serif { font-family:var(--serif); font-weight:700; color:var(--ink); letter-spacing:0; }
+
+  /* scene 1 */
+  #s1 .big { position:absolute; left:96px; top:250px; font-size:420px; line-height:1; color:var(--accent); }
+  #s1 .l2 { position:absolute; left:104px; top:700px; font-size:76px; line-height:1.1; }
+  #s1 .l3 { position:absolute; left:104px; top:820px; font-size:40px; color:var(--muted); }
+  #s1 .rule { position:absolute; left:104px; top:670px; width:0; height:6px; background:var(--accent); }
+
+  /* scene 2 */
+  #s2 .h { position:absolute; left:96px; top:240px; width:820px; font-size:92px; line-height:1.05; }
+  #s2 .h2 { position:absolute; left:96px; top:560px; width:820px; font-size:92px; line-height:1.05; color:var(--accent); }
+  #s2 .counter { position:absolute; left:96px; top:830px; display:flex; align-items:baseline; gap:28px; }
+  #s2 .counter .n { font-size:150px; line-height:1; position:relative; width:150px; height:150px; }
+  #s2 .counter .n span { position:absolute; left:0; top:0; }
+  #s2 .counter .lab { font-size:34px; color:var(--muted); line-height:1.25; }
+  #grid { position:absolute; left:1060px; top:190px; width:620px; height:620px; }
+  .cell { position:absolute; width:116px; height:116px; border-radius:4px; border:1px solid rgba(0,0,0,.06); }
+  .axis { position:absolute; font-size:24px; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; }
+  .dot { position:absolute; width:46px; height:46px; border-radius:50%; background:var(--crit); border:4px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+
+  /* scene 3 */
+  #s3 .big { position:absolute; left:0; width:1920px; text-align:center; top:130px; font-size:300px; line-height:1; color:var(--accent); }
+  #s3 .sub { position:absolute; left:0; width:1920px; text-align:center; top:450px; font-size:72px; }
+  #ctrl { position:absolute; left:0; top:640px; width:1920px; height:200px; }
+  .c { position:absolute; width:42px; height:42px; border-radius:3px; background:var(--accent); opacity:0; }
+  .c.x { background:var(--na-bg); border:2px dashed var(--na); box-sizing:border-box; }
+  #s3 .cap { position:absolute; left:0; width:1920px; text-align:center; top:880px; font-size:40px; color:var(--muted); }
+  #s3 .cap b { color:var(--na); font-weight:600; }
+
+  /* scene 4 */
+  #s4 { background:var(--sunk); }
+  .stat { position:absolute; top:260px; width:640px; }
+  #s4 .st1 { left:200px; } #s4 .st2 { left:1080px; }
+  .stat .n { font-size:420px; line-height:1; }
+  .stat .t { font-size:64px; margin-top:6px; }
+  .stat .d { font-size:34px; color:var(--muted); margin-top:14px; }
+  #s4 .foot { position:absolute; left:0; width:1920px; text-align:center; top:900px; font-size:56px; }
+
+  /* scene 5 */
+  #s5 { background:var(--accent); color:#fff; }
+  #s5 .cert { position:absolute; left:140px; top:190px; font-size:300px; line-height:1; color:#fff; }
+  #s5 .d { position:absolute; left:150px; top:540px; font-size:64px; color:#e6edf6; }
+  #s5 .who { position:absolute; left:150px; top:690px; font-size:52px; color:#fff; font-weight:600; }
+  #s5 .who small { display:block; font-size:38px; font-weight:400; color:#c7d4e6; margin-top:10px; }
+  #s5 .url { position:absolute; left:150px; top:880px; font-size:38px; color:#e6edf6; font-family:Menlo, Consolas, monospace; }
+  #s5 .sim { position:absolute; left:150px; top:960px; font-size:28px; letter-spacing:.12em; text-transform:uppercase; color:#aebfd6; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1920" data-height="1080" data-start="0" data-duration="22.37">
+
+  <!-- S1 hook -->
+  <section id="s1" class="scene clip" data-start="0" data-duration="3.55">
+    <div class="tag">Halcyon Ledger Inc. · simulated case study</div>
+    <div class="big serif" id="s1big">$4.2m</div>
+    <div class="rule" id="s1rule"></div>
+    <div class="l2 serif" id="s1l2">of annual recurring revenue on hold</div>
+    <div class="l3" id="s1l3">3 enterprise customers required ISO 27001 before signing</div>
+  </section>
+
+  <!-- S2 risk -->
+  <section id="s2" class="scene clip" data-start="3.55" data-duration="5.18">
+    <div class="tag">Risk assessment · ISO/IEC 27001 clause 6.1</div>
+    <div class="h serif" id="s2h">Six risks exceeded appetite.</div>
+    <div class="h2 serif" id="s2h2">Treatment brought all of them within it.</div>
+    <div class="counter">
+      <div class="n serif"><span id="n6" style="color:var(--crit)">6</span><span id="n0" style="color:var(--low);opacity:0">0</span></div>
+      <div class="lab">risks above appetite<br>(score 12 or more)</div>
+    </div>
+    <div id="grid"></div>
+  </section>
+
+  <!-- S3 controls -->
+  <section id="s3" class="scene clip" data-start="8.73" data-duration="4.91">
+    <div class="tag">Statement of Applicability · Annex A</div>
+    <div class="big serif" id="s3big">91 of 93</div>
+    <div class="sub serif" id="s3sub">Annex A controls apply</div>
+    <div id="ctrl"></div>
+    <div class="cap" id="s3cap"><b>2 excluded, with evidence</b></div>
+  </section>
+
+  <!-- S4 audit -->
+  <section id="s4" class="scene clip" data-start="13.64" data-duration="3.83">
+    <div class="tag">Internal audit · clause 9.2</div>
+    <div class="stat st1" id="st1"><div class="n serif" style="color:var(--low)">0</div><div class="t serif">major</div><div class="d">nonconformities</div></div>
+    <div class="stat st2" id="st2"><div class="n serif" style="color:var(--accent)">3</div><div class="t serif">minor</div><div class="d">nonconformities</div></div>
+    <div class="foot serif" id="s4foot">All closed with root cause analysis</div>
+  </section>
+
+  <!-- S5 outro -->
+  <section id="s5" class="scene clip" data-start="17.47" data-duration="4.9">
+    <div class="cert serif" id="s5cert">Certified.</div>
+    <div class="d" id="s5d">16 Oct 2026 · 11 months from no ISMS</div>
+    <div class="who" id="s5who">Amay Chivate<small>ISO/IEC 27001:2022 Lead Auditor</small></div>
+    <div class="url" id="s5url">rttr-7.github.io/iso27001-grc-portfolio</div>
+    <div class="sim">Simulated case study · real method</div>
+  </section>
+
+  <!-- audio -->
+  <audio id="music" data-start="0" data-duration="22.37" data-track-index="1" data-volume="0.45" data-fade-out="1.5" src="assets/music/happy-beats-business-moves-vol-10-by-ende-dot-app.mp3"></audio>
+  <audio id="sfx1" data-start="0.3" data-duration="0.5" data-track-index="2" data-volume="0.6" src="assets/sfx/impactSoft_medium_001.ogg"></audio>
+  <audio id="sfx2" data-start="3.55" data-duration="0.5" data-track-index="3" data-volume="0.55" src="assets/sfx/impactSoft_medium_004.ogg"></audio>
+  <audio id="sfx3" data-start="6.28" data-duration="0.5" data-track-index="4" data-volume="0.5" src="assets/sfx/bong_001.ogg"></audio>
+  <audio id="sfx4" data-start="8.73" data-duration="0.5" data-track-index="5" data-volume="0.55" src="assets/sfx/impactSoft_medium_001.ogg"></audio>
+  <audio id="k1" data-start="9.29" data-duration="0.3" data-track-index="6" data-volume="0.5" src="assets/sfx/click_002.ogg"></audio>
+  <audio id="k2" data-start="9.83" data-duration="0.3" data-track-index="7" data-volume="0.5" src="assets/sfx/click_003.ogg"></audio>
+  <audio id="k3" data-start="10.38" data-duration="0.3" data-track-index="8" data-volume="0.5" src="assets/sfx/click_002.ogg"></audio>
+  <audio id="k4" data-start="10.93" data-duration="0.3" data-track-index="9" data-volume="0.5" src="assets/sfx/click_003.ogg"></audio>
+  <audio id="k5" data-start="11.47" data-duration="0.3" data-track-index="10" data-volume="0.5" src="assets/sfx/click_002.ogg"></audio>
+  <audio id="sfx5" data-start="13.64" data-duration="0.5" data-track-index="11" data-volume="0.55" src="assets/sfx/impactSoft_medium_004.ogg"></audio>
+  <audio id="sfx6" data-start="18.01" data-duration="0.5" data-track-index="12" data-volume="0.7" src="assets/sfx/bong_001.ogg"></audio>
+
+  <script src="assets/gsap.min.js"></script>
+  <script>
+    // ---- build-time DOM (deterministic) ----
+    // Risk heat map: 5x5, likelihood (x) by impact (y, top = 5). Cell score = L x I.
+    var grid = document.getElementById("grid");
+    var CELL = 116, GAP = 6, STEP = CELL + GAP;
+    function pos(L, I) { return { x: 50 + (L - 1) * STEP, y: 20 + (5 - I) * STEP }; }
+    for (var I = 5; I >= 1; I--) {
+      for (var L = 1; L <= 5; L++) {
+        var s = L * I, d = document.createElement("div");
+        d.className = "cell";
+        d.style.background = s >= 12 ? "var(--crit-bg)" : s >= 8 ? "var(--high-bg)" : s >= 4 ? "var(--med-bg)" : "var(--low-bg)";
+        var p = pos(L, I); d.style.left = p.x + "px"; d.style.top = p.y + "px";
+        grid.appendChild(d);
+      }
+    }
+    var ax = document.createElement("div"); ax.className = "axis"; ax.textContent = "Likelihood →"; ax.style.left = "50px"; ax.style.top = "650px"; grid.appendChild(ax);
+    var ay = document.createElement("div"); ay.className = "axis"; ay.textContent = "Impact ↑"; ay.style.left = "-30px"; ay.style.top = "0px"; grid.appendChild(ay);
+
+    var before = [[4,3],[3,4],[4,4],[5,3],[3,5],[5,4]];
+    var after  = [[2,3],[3,2],[2,2],[1,4],[4,1],[2,4]];
+    var dots = before.map(function (b) {
+      var d = document.createElement("div"); d.className = "dot";
+      var p = pos(b[0], b[1]); d.style.left = (p.x + CELL/2 - 23) + "px"; d.style.top = (p.y + CELL/2 - 23) + "px"; d.style.opacity = 0;
+      grid.appendChild(d); return d;
+    });
+
+    // Annex A: 93 cells, 31 x 3. Two are exclusions (last two of the grid).
+    var ctrl = document.getElementById("ctrl"), cells = [];
+    for (var i = 0; i < 93; i++) {
+      var c = document.createElement("div"); c.className = "c" + (i >= 91 ? " x" : "");
+      c.style.left = (115 + (i % 31) * 50) + "px"; c.style.top = (Math.floor(i / 31) * 50) + "px";
+      ctrl.appendChild(c); cells.push(c);
+    }
+
+    // ---- timeline ----
+    var tl = gsap.timeline({ paused: true });
+    function sceneInOut(id, t0, dur) {
+      tl.set("#" + id, { opacity: 0 }, 0);
+      tl.to("#" + id, { opacity: 1, duration: 0.3, ease: "power1.out" }, t0);
+      tl.to("#" + id, { opacity: 0, duration: 0.25, ease: "power1.in" }, t0 + dur - 0.25);
+    }
+    sceneInOut("s1", 0, 3.55);
+    sceneInOut("s2", 3.55, 5.18);
+    sceneInOut("s3", 8.73, 4.91);
+    sceneInOut("s4", 13.64, 3.83);
+    tl.set("#s5", { opacity: 0 }, 0);
+    tl.to("#s5", { opacity: 1, duration: 0.3, ease: "power1.out" }, 17.47);
+
+    // S1 hook  (0 - 3.55)
+    tl.from("#s1big", { y: 80, opacity: 0, scale: 0.94, duration: 0.55, ease: "power3.out" }, 0.3);
+    tl.to("#s1rule", { width: 360, duration: 0.5, ease: "power2.out" }, 0.9);
+    tl.from("#s1l2", { y: 30, opacity: 0, duration: 0.45, ease: "power2.out" }, 0.9);
+    tl.from("#s1l3", { y: 20, opacity: 0, duration: 0.45, ease: "power2.out" }, 1.6);
+
+    // S2 risk  (3.55 - 8.73)
+    tl.from("#s2h", { y: 40, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.75);
+    tl.from("#n6", { opacity: 0, duration: 0.4 }, 3.9);
+    dots.forEach(function (d, i) {
+      tl.fromTo(d, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 4.0 + i * 0.1);
+    });
+    // beat-locked: 6.28s - treatment moves every risk below appetite
+    dots.forEach(function (d, i) {
+      var p0 = pos(before[i][0], before[i][1]), p1 = pos(after[i][0], after[i][1]);
+      tl.to(d, { x: p1.x - p0.x, y: p1.y - p0.y, backgroundColor: "#1d5b33", duration: 0.7, ease: "power3.inOut" }, 6.28 + i * 0.04);
+    });
+    tl.to("#n6", { opacity: 0, duration: 0.25 }, 6.4);
+    tl.to("#n0", { opacity: 1, duration: 0.35 }, 6.55);
+    tl.from("#s2h2", { y: 40, opacity: 0, duration: 0.5, ease: "power2.out" }, 6.35);
+
+    // S3 controls  (8.73 - 13.64)
+    tl.from("#s3big", { y: 60, opacity: 0, duration: 0.5, ease: "power3.out" }, 8.9);
+    tl.from("#s3sub", { y: 24, opacity: 0, duration: 0.45, ease: "power2.out" }, 9.2);
+    // beat-grid: fill waves at 9.29, 9.83, 10.38, 10.93, 11.47
+    var waveT = [9.29, 9.83, 10.38, 10.93, 11.47];
+    cells.slice(0, 91).forEach(function (c, i) {
+      var w = Math.floor(i / 19);               // 5 waves of ~19 cells
+      tl.to(c, { opacity: 1, duration: 0.12 }, waveT[Math.min(w, 4)] + (i % 19) * 0.018);
+    });
+    tl.to(cells[91], { opacity: 1, duration: 0.2 }, 12.2);
+    tl.to(cells[92], { opacity: 1, duration: 0.2 }, 12.3);
+    tl.from("#s3cap", { y: 16, opacity: 0, duration: 0.4, ease: "power2.out" }, 12.3);
+
+    // S4 audit  (13.64 - 17.47)
+    tl.from("#st1", { y: 60, opacity: 0, duration: 0.5, ease: "power3.out" }, 13.9);
+    tl.from("#st2", { y: 60, opacity: 0, duration: 0.5, ease: "power3.out" }, 14.45);
+    tl.from("#s4foot", { y: 20, opacity: 0, duration: 0.45, ease: "power2.out" }, 15.2);
+
+    // S5 outro  (17.47 - 22.37)
+    // beat-locked: 18.01s strong cue
+    tl.from("#s5cert", { y: 70, opacity: 0, scale: 0.95, duration: 0.55, ease: "power3.out" }, 18.01);
+    tl.from("#s5d", { y: 20, opacity: 0, duration: 0.45, ease: "power2.out" }, 18.7);
+    tl.from("#s5who", { y: 20, opacity: 0, duration: 0.45, ease: "power2.out" }, 19.6);
+    tl.from("#s5url", { y: 14, opacity: 0, duration: 0.45, ease: "power2.out" }, 20.4);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["root"] = tl;
+  </script>
+</div>
+</body>
+</html>

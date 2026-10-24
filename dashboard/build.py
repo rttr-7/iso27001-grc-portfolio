@@ -27,8 +27,8 @@ assert len(rows) == 93, f"expected 93 Annex A controls, found {len(rows)}"
 # Short titles and clause references for the document list
 SHORT = {
     "00-case-study-brief": ("Case study brief", "Problem statement, objectives, approach and results"),
-    "01-company-profile": ("Company profile", "Organisation and ISMS governance"),
-    "02-implementation-roadmap": ("Implementation roadmap", "Programme plan · all clauses"),
+    "01-company-profile": ("Company profile", "Organization and ISMS governance"),
+    "02-implementation-roadmap": ("Implementation roadmap", "Program plan · all clauses"),
     "03-isms-scope": ("ISMS scope", "Clause 4.3"),
     "04-context-and-interested-parties": ("Context and interested parties", "Clauses 4.1, 4.2"),
     "05-risk-assessment-methodology": ("Risk assessment methodology", "Clause 6.1.2"),
