@@ -10,9 +10,9 @@ Explore the risk heat map before and after treatment, all 93 Annex A controls, a
 
 ### 🎬 The case study in 22 seconds
 
-[![Halcyon Ledger ISMS case study video: $4.2m on hold, risks treated, 91 of 93 controls, 0 major findings, certified](docs/halcyon-ledger-case-study.jpg)](docs/halcyon-ledger-case-study.mp4)
+![Halcyon Ledger ISMS case study: $4.2m on hold, risks treated, 91 of 93 controls, 0 major findings, certified](docs/halcyon-ledger-case-study.gif)
 
-*Select the image to play the video. It follows the case study from the stalled deals to certification.*
+*From the stalled deals to certification. [Watch the full video with music](docs/halcyon-ledger-case-study.mp4).*
 
 New to ISO 27001? Read the **[Project Guide](PROJECT-GUIDE.md)** for a plain-English walkthrough and FAQ.
 
